@@ -41,5 +41,6 @@ function fish_greeting
     fortune
   else
     echo FOTD: Create something beautiful.
+    echo FOTY: Create something profitable.
   end
 end
