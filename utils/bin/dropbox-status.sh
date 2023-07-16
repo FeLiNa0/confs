@@ -23,11 +23,11 @@ tree "$DROPBOX_LOCATION" | tail --lines=1
 # %Tc - print timestamp in current locale (status change timestamp?)
 # %t - print timestamp in C locale (???)
 # %p - print absolute filepath
-FIND_FLAGS="$DROPBOX_LOCATION -mmin +60 -printf '%T@\t%Tc\t%-10p\n'"
+FIND_FLAGS="-mmin +60 -printf %T@\t%Tc\t%-10p\n"
 echo
 echo "Last 10 recently modified directories"
-find "$FIND_FLAGS" -type d | sort -n | tail -n10
+find "$DROPBOX_LOCATION" $FIND_FLAGS -type d | sort -n | tail -n10
 
 echo
 echo "Last 10 recently modified files"
-find "$FIND_FLAGS" -type f | sort -n | tail -n10
+find "$DROPBOX_LOCATION" $FIND_FLAGS -type f | sort -n | tail -n10
