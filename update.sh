@@ -207,7 +207,7 @@ copy_confs_for polybar .config/polybar/config \
 copy_confs_for x11 \
   .xinitrc .xbindkeysrc bin/calculator.sh
 
-copy_confs_for_host x11_keyboard_layout bin/set-keyboard-layout.sh
+copy_confs_for_host x11_keyboard_layout bin/set-keyboard-layout.sh .gitconfig
 
 copy_confs_for starship_rust_portable_shell_prompt \
   .config/starship.toml
@@ -216,7 +216,7 @@ copy_confs_for "{ba,z,tc,c}sh" \
   .bashrc .bashrc_ps1 .bash_profile .tryalias.sh .aliases bin/trimdir.py bin/gitinfo.sh bin/projectname.sh bin/projectroot.sh bin/real-deal-turbo-charged-cd.sh
 
 copy_confs_for git \
-    bin/git-show-commits-not-in-branch.sh bin/git-remove-branches-gone-in-remote.sh bin/git-push-new-branch.sh bin/gitdiff.sh .git-template/HEAD .gitconfig
+    bin/git-show-commits-not-in-branch.sh bin/git-remove-branches-gone-in-remote.sh bin/git-push-new-branch.sh bin/gitdiff.sh .git-template/HEAD
 
 copy_confs_for utils \
   bin/cpufreq.sh bin/systemload.sh bin/mem.sh bin/screenshot.sh bin/screenshot-select.sh bin/pip-update-outdated.sh \
