@@ -9,10 +9,13 @@ import sys
 from os.path import expanduser, join, normcase, normpath, split
 from string import punctuation as punc
 
+ABBREVIATIONS = {
+  "~/src/": "⚡",
+}
 
 def shorten_name(dirname):
     # type: (str) -> str
-    return dirname[0:2] if dirname[0:1] in punc else dirname[0:1]
+    return dirname[0:3] if dirname[0:1] in punc else dirname[0:2]
 
 
 def trimdir(input_path):
@@ -24,6 +27,10 @@ def trimdir(input_path):
     home = expanduser("~")
     if normalized_path.startswith(home):
         normalized_path = normalized_path.replace(home, "~")
+
+    for longcut, shortcut in ABBREVIATIONS.items():
+        if normalized_path.startswith(longcut):
+            normalized_path = normalized_path.replace(longcut, shortcut)
 
     # Shorten each component of the normalized_path
     dirname, basename = split(normalized_path)

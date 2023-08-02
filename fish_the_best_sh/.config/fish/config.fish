@@ -129,14 +129,18 @@ end
 if command -v kubectl > /dev/null
     abbr k kubectl
     abbr kx kubectx
+    abbr ka 'kubectl apply'
     abbr kc 'kubectl config'
     # List and detail resources
     abbr kg 'kubectl get'
+    abbr kga 'kubectl get applications'
+    abbr kgcm 'kubectl get configmap'
+    abbr kgi 'kubectl get ingress'
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
-    abbr kga 'kubectl get applications'
     abbr kd 'kubectl describe'
     abbr kdl 'kubectl delete'
+    abbr krr 'kubectl rollout restart'
     # Debugging pods
     abbr kl 'kubectl logs'
     abbr kcp 'kubectl cp'
@@ -272,9 +276,9 @@ end
 if status is-interactive
   echo 'Bienvenido a FISH, la shell amigable e interactiva :)'
   echo 'Bienvenue dans FISH, le shell amical et interactif :)'
-  echo '    ^                     ^    '
-  echo '   / \       _____       / \   '
-  echo '__/   \__----     ----__/   \__'
+  echo '    ^                                ^    '
+  echo '   / \       ________________       / \   '
+  echo '__/   \__----                ----__/   \__'
   echo 'Mater artium necessitas.'
 
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
