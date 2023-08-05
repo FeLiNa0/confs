@@ -159,14 +159,14 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
-set $ws2 "2"
+# set $ws2 "2"
 set $wsqubes "2:Q"
 set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws4 "4:4PF"
+set $ws5 "5:5UD"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
+set $ws8 "8:GETTHEMTOSIGNONTHELINEWHICHISDOTTED"
 set $ws9 "9"
 set $ws10 "10"
 set $wsTODO "22:TODO"
@@ -218,7 +218,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# resize window (you can also use the mouse for that
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -251,14 +251,14 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command qubes-i3status
-        position bottom
+        # status_command i3status-rs
+        status_command custom-qubes-i3status
+        position top
 	separator_symbol "  "
 	strip_workspace_numbers yes
-        # status_command i3status-rs
         colors {
-            background #d2d2d2
-            statusline #333333
+            background #000000
+            statusline #ffffff
 
             #class               #border #backgr #text
             focused_workspace    #3874d8 #63a0ff #333333
@@ -275,6 +275,7 @@ exec --no-startup-id qubes-qube-manager
 exec --no-startup-id redshift -l30:-100 -t 3500K:1500K
 # Faster keyboard rate
 exec --no-startup-id xset r rate 125 42
+exec feh --bg-tile ./mostfamouscatgirl.png
 
 # Default layout
 workspace_layout stacking

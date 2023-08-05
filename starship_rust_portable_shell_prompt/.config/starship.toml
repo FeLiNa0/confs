@@ -44,7 +44,7 @@ style = "bold underline fg:blue"
 [directory]
 style = "bright-white bold"
 truncation_length = 2
-truncation_symbol = " "
+truncation_symbol = "⋮ "
 [directory.substitutions]
 "powerflex_edge_" = ""
 "powerflex_cloud_" = ""
