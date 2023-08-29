@@ -90,7 +90,7 @@ format = '[\[$status $common meaning\]]($style) '
 threshold = 25
 
 [character]
-success_symbol = "[\\$](bold white)"
+success_symbol = "[>](bold white)"
 error_symbol = "[X](bold red)"
 
 [cmd_duration]
@@ -108,6 +108,7 @@ style = "fg:#88ddff"
 "gke_edf-re-powerflex-dev-16b1_us-west2_gke-dev-powerflex-cluster" = "gke-dev"
 "gke_powerflex-small-scale-dev-7fa9_us-west2_powerflex-small-scale-cluster" = "smallscale-dev"
 "powerflex-0001-25-powerflex-leghorn" = "foghorn-leghorn-hq"
+"kind-timekeeper" = "timekeeper"
 
 [git_commit]
 commit_hash_length = 4

@@ -163,7 +163,7 @@ end
 
 -- Based on https://github.com/erf/vis-title/blob/master/init.luoa
 function set_title(fname)
-    local full_title = 'vis ' .. fname .. ' ' .. run_command('hostname')
+    local full_title = 'vis ' .. run_command('basename "' .. fname .. '"') .. ' ' .. run_command('projectname.sh || true') .. ' ' .. run_command('trimdir.py "$PWD" || echo "$PWD"') .. ' ' .. run_command('hostname')
     vis:command(string.format(":!printf '\\033]0;%s\\007'", full_title))
 end
 
@@ -193,11 +193,13 @@ end
 -- PURTT COLORS
 purty_colors_now = function(a, b, c, d)
     local light_mode = 1;
+    local intro_string = ' VIS ' .. vis.VERSION
     if light_mode then
         vis:command('set theme default-16')
-        vis:info('welcome to the light side of the force, General')
+        vis:info('welcome to the light side of the force, General. ' .. intro_string)
         return null
     else
+        vis:info('welcome to the dark side of the force, soldier. ' .. intro_string)
         local lexers = vis.lexers
         
         -- Basic Style

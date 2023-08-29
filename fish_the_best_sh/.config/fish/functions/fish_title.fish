@@ -18,5 +18,5 @@ function fish_info
 end
 
 function fish_title
-  printf "⛢🐱 %s %s%s %s %s" (ssh_info) (title_get_project) (trimdir.py (pwd) || pwd) (fish_info)
+  printf "ꕀ🐱ꕀ %s %s%s %s %s" (ssh_info) (title_get_project) (trimdir.py (pwd) || pwd) (fish_info)
 end
