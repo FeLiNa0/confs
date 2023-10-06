@@ -253,9 +253,9 @@ if command -v ag > /dev/null 2>&1
 end
 
 function miniconda_fish_init
-  # set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
+  set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
   # set --local CONDA_BIN "/opt/miniconda3/bin/conda"
-  set --local CONDA_BIN "/usr/bin/conda"
+  # set --local CONDA_BIN "/usr/bin/conda"
   if ! command -v "$CONDA_BIN" > /dev/null
     return 1
   end
