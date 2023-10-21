@@ -1,5 +1,5 @@
-format = "$time$shell$hostname$username$jobs$all$git_status$character"
-right_format = "$battery$status$cmd_duration$directory$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
+format = "$time$shell$hostname$username$jobs$all$directory$git_status$character"
+right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
 add_newline = false
 
 [line_break]
@@ -18,7 +18,7 @@ disabled = false
 format = "[$user]($style) @ "
 
 [shell]
-fish_indicator = "fish"
+fish_indicator = "  "
 unknown_indicator = "sh? "
 bash_indicator = "bash "
 zsh_indicator = "zsh "
@@ -42,8 +42,8 @@ format = " [$symbol($output)]($style)"
 style = "bold underline fg:blue"
 
 [directory]
-style = "bright-white bold"
-truncation_length = 3
+style = "bright-white"
+truncation_length = 1
 truncation_symbol = ""
 [directory.substitutions]
 "powerflex_edge_" = ""

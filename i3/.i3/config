@@ -358,9 +358,9 @@ bindsym $mod+m bar mode toggle
 bar {
 	i3bar_command i3bar
 	status_command i3status-rs --threads 2
-	font pango:Purista, MonoLisa, FontAwesome, PowerlineSymbols bold 15
-	position bottom
-	tray_padding 10
+	font pango:Purista, MonoLisa, FontAwesome, PowerlineSymbols 14
+	position top
+	tray_padding 20
 
   # mode hide
   # hidden_state hide
@@ -385,8 +385,8 @@ bar {
 
 
 client.focused #ff1694 #ff1694 #ffffff #662b9c
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused #222222 #222222 #888888 #292d2e
+client.focused_inactive #111111 #5f676a #ffffff #484e50
+client.unfocused #020202 #020202 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
