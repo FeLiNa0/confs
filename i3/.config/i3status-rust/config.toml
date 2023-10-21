@@ -5,11 +5,6 @@ theme = "semi-native"
 icons = "awesome6"
 
 [[block]]
-block = "time"
-format = " $timestamp.datetime(f:'%s') "
-interval = 5
-
-[[block]]
 block = "external_ip"
 format = " $ip $region_code $country_flag "
 
@@ -78,6 +73,17 @@ device_kind = "source"
 # timezone = "US/Eastern"
 # timezone = "Europe/Paris"
 # timezone = "America/Argentina/Buenos_Aires"
+
+[[block]]
+block = "time"
+format = " $timestamp.datetime(f:'%s') "
+interval = 5
+
+[[block]]
+block = "time"
+interval = 15
+timezone = "UTC"
+format = " $timestamp.datetime(f:'%R') "
 
 [[block]]
 block = "time"

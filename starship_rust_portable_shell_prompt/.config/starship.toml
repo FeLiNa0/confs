@@ -1,5 +1,5 @@
-format = "$shell$hostname$username$time$directory$jobs$all$git_branch$git_status$status$cmd_duration$battery$character"
-right_format = "${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
+format = "$time$shell$hostname$username$jobs$all$git_status$character"
+right_format = "$battery$status$cmd_duration$directory$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
 add_newline = false
 
 [line_break]
@@ -8,7 +8,7 @@ disabled = true
 
 [hostname]
 disabled = false
-ssh_only = false
+ssh_only = true
 ssh_symbol = 'SSH '
 style = 'bold red'
 format = "[$hostname $ssh_symbol]($style)"
@@ -18,7 +18,7 @@ disabled = false
 format = "[$user]($style) @ "
 
 [shell]
-fish_indicator = ""
+fish_indicator = "fish"
 unknown_indicator = "sh? "
 bash_indicator = "bash "
 zsh_indicator = "zsh "
@@ -27,7 +27,7 @@ powershell_indicator = "psh "
 # format = '[($indicator )]($style)'
 # format = '([$indicator]($style) )'
 format = '[$indicator]($style)'
-style = "white"
+style = ""
 disabled = false
 
 [custom.git_metrics_main_added_deleted]
@@ -60,6 +60,7 @@ truncation_symbol = ""
 [time]
 disabled = false
 style = "dimmed white"
+time_format = "%h %d %R"
 format = "[$time]($style) "
 
 [git_branch]
@@ -84,7 +85,7 @@ stashed = "S"
 [status]
 # Show exit code of last command
 disabled = false
-format = '[\[$status $common meaning\]]($style) '
+format = '[\[$status\]]($style) '
 
 [[battery.display]]
 threshold = 25
@@ -94,19 +95,19 @@ success_symbol = "[\\$](bold white)"
 error_symbol = "[X](bold red)"
 
 [cmd_duration]
-min_time = 60_000
-show_milliseconds = false
+min_time = 1000
+show_milliseconds = true
 format = "[$duration]($style) "
 
 [kubernetes]
 disabled = false
-format = ' [$symbol$context( \($namespace\))]($style)'
+format = ' [ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
 [kubernetes.context_aliases]
 "0007-04-hugoroguh" = "0007-04"
 "1337-77-hugo" = "1337-77"
 "gke_edf-re-powerflex-dev-16b1_us-west2_gke-dev-powerflex-cluster" = "gke-dev"
-"gke_powerflex-small-scale-dev-7fa9_us-west2_powerflex-small-scale-cluster" = "smallscale-dev"
+"gke_powerflex-small-scale-dev-7fa9_us-west2_powerflex-small-scale-cluster" = "ss-dev"
 "powerflex-0001-25-powerflex-leghorn" = "foghorn-leghorn-hq"
 
 [git_commit]

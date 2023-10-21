@@ -287,6 +287,7 @@ exec --no-startup-id /opt/dropbox/dropboxd
 
 exec --no-startup-id kitty fish -c welcome-shell.sh
 exec --no-startup-id evolution
+exec --no-startup-id protonmail-bridge
 exec --no-startup-id firefox
 # Systemd does this
 # exec --no-startup-id protonvpn-cli connect --cc US
@@ -358,7 +359,7 @@ bar {
 	i3bar_command i3bar
 	status_command i3status-rs --threads 2
 	font pango:Purista, MonoLisa, FontAwesome, PowerlineSymbols bold 15
-	position top
+	position bottom
 	tray_padding 10
 
   # mode hide

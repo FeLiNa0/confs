@@ -137,6 +137,7 @@ if command -v kubectl > /dev/null
     abbr kga 'kubectl get applications'
     abbr kd 'kubectl describe'
     abbr kdl 'kubectl delete'
+    abbr krr 'kubectl rollout restart'
     # Debugging pods
     abbr kl 'kubectl logs'
     abbr kcp 'kubectl cp'
