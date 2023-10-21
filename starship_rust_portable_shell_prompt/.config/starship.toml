@@ -18,7 +18,7 @@ disabled = false
 format = "[$user]($style) @ "
 
 [shell]
-fish_indicator = "  "
+fish_indicator = ""
 unknown_indicator = "sh? "
 bash_indicator = "bash "
 zsh_indicator = "zsh "
