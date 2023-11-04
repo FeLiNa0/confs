@@ -78,7 +78,9 @@ vis.events.subscribe(vis.events.INIT, function()
     backup.set_directory(os.getenv("HOME") .. "/tmp/vis-backups")
     backup.get_fname = backup.entire_path_with_double_percentage_signs_and_timestamp
     
-    lint.linters["python"] = {"black --check -", "isort --check -", "mypy --strict <(cat)"}
+	table.insert(lint.linters["python"], "pylint --from-stdin visfile")
+	table.insert(lint.linters["python"], "mypy <(cat)")
+
 end)
 
 function file_exists(name)
