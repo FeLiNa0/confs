@@ -136,15 +136,18 @@ if command -v kubectl > /dev/null
     abbr kgs 'kubectl get services'
     abbr kga 'kubectl get applications'
     abbr kd 'kubectl describe'
-    abbr kdl 'kubectl delete'
-    abbr krr 'kubectl rollout restart'
     # Debugging pods
     abbr kl 'kubectl logs'
     abbr kcp 'kubectl cp'
     abbr kex 'kubectl exec'
     abbr kpf 'kubectl port-forward'
-    abbr kubectl-stop-sync-app 'kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
-    abbr kubectl-start-sync-app 'kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
+    # Emergency/local modifications. Prefer devops. Ensure correct cluster is targeted.
+    abbr kdl 'correct-kubernetes-cluster.sh && kubectl delete'
+    abbr kr 'correct-kubernetes-cluster.sh && kubectl rollout'
+    abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
+    abbr kubectl-stop-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
+    abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
+    abbr ka 'correct-kubernetes-cluster.sh && kubectl apply'
 
     debug Setup Kubernetes abbreviations
 
@@ -186,6 +189,8 @@ end
 # almost as fast as plain alias so I'll keep it.
 load_file $HOME/.aliases --verbose
 tryalias ,, commacomma
+
+abbr grep ag
 
 # Load OCaml
 load_file $HOME/.opam/opam-init/init.fish
