@@ -68,12 +68,11 @@ addpaths $HOME/bin --verbose
 addpaths $HOME/.local/bin  --verbose
 addpaths $HOME/.cargo/bin
 addpaths /opt/cuda/bin
-addpaths /opt/asdf-vm/bin/
 
 set_global_if_unset ESHELL /bin/bash
 set_global_if_unset SHELL (command -v fish)
-set_global_if_unset EDITOR vim
-set_global_if_unset VISUAL vim
+set_global_if_unset EDITOR vis
+set_global_if_unset VISUAL vis
 
 # Caused bitsandbytes package from  oobabooga/text-generation-webui
 # to crash as it scanned through all env vars in search of CUDA stuff
@@ -90,16 +89,6 @@ set_global USE_GKE_GCLOUD_AUTH_PLUGIN True
 
 set_global_if_unset PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
 
-if test -d /opt/android-sdk/
-  # On Arch, must install aur/android-platform and aur/android-sdk-build-tools
-  set_global ANDROID_SDK_ROOT /opt/android-sdk/
-  addpaths $ANDROID_SDK_ROOT/tools
-  addpaths $ANDROID_SDK_ROOT/platform-tools
-  addpaths $ANDROID_SDK_ROOT/build-tools
-
-  debug Set Android variables and paths
-end
-
 if command -v most > /dev/null 2>&1
     set_global PAGER most
     set_global pager $PAGER
@@ -113,16 +102,12 @@ if command -v git > /dev/null
     abbr ga 'git add'
     abbr gc 'git commit'
     abbr gch 'git checkout'
-    abbr gchm 'git checkout main || git checkout master || git checkout trunk'
     abbr gs 'git status'
     abbr gst 'git stash push --'
     abbr gstp 'git stash pop'
     abbr gd 'git diff'
-    abbr gdt 'git difftool'
     abbr gl 'git log'
     abbr gcl 'git clone'
-    abbr gri 'git rebase -i'
-    abbr grim 'git rebase -i main'
     debug Setup Git abbreviations
 end
 
@@ -134,7 +119,6 @@ if command -v kubectl > /dev/null
     abbr kg 'kubectl get'
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
-    abbr kga 'kubectl get applications'
     abbr kd 'kubectl describe'
     # Debugging pods
     abbr kl 'kubectl logs'
@@ -169,11 +153,9 @@ if command -v makeanywhere > /dev/null
     function makeanywhere --wraps make --description "makeanywhere --wraps make $MAKEANYWHERE"
         "$MAKEANYWHERE" $argv
     end
-    
     function pma --wraps make --description "pma --wraps make pipenv run $MAKEANYWHERE"
         pipenv run "$MAKEANYWHERE" $argv
     end
-
     alias ma makeanywhere
 
     debug Setup makeanywhere alias
@@ -190,10 +172,8 @@ end
 load_file $HOME/.aliases --verbose
 tryalias ,, commacomma
 
+# It's POSIX + my muscle memory now
 abbr grep ag
-
-# Load OCaml
-load_file $HOME/.opam/opam-init/init.fish
 
 load_file ~/.asdf/asdf.fish --verbose
 
@@ -204,18 +184,6 @@ if test -e ~/.asdf/completions/asdf.fish
   debug Loaded ASDF fish completions
 end
 
-if command -v go > /dev/null 2>&1
-  if [ "$FAST_STARTUP" ]
-    debug SPEEDUP: Guessing GOPATH
-    set_global GOPATH "$HOME/go"
-  else
-    set_global GOPATH (go env GOPATH)
-  end
-  addpaths $GOPATH/bin --verbose
-  debug Set Go variables and paths
-end
-
-
 set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
 
 # darwin with some patches
@@ -223,30 +191,6 @@ addpaths /usr/local/opt/gettext/bin
 addpaths /Library/Frameworks/Python.framework/Versions/3.7/bin
 addpaths /usr/local/opt/openssl@1.1/bin
 addpaths /usr/local/opt/openssl/bin
-
-if test -d /usr/local/opt/openssl/
-  set_global LDFLAGS "-L/usr/local/opt/openssl/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/openssl/include"
-  set_global PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
-
-  debug Set local openssl variables
-end
-
-if test -d /usr/local/opt/gettext/lib
-  set_global LDFLAGS "-L/usr/local/opt/gettext/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/gettext/include"
-
-  debug Set local gettext variables
-end
-
-if test -d /usr/local/opt/openssl@1.1/lib
-  set_global LDFLAGS "-L/usr/local/opt/openssl@1.1/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/openssl@1.1/include"
-  set_global PKG_CONFIG_PATH "/usr/local/opt/openssl@1.1/lib/pkgconfig"
-
-  debug Set local openssl@1.1 variables
-end
-
 
 # Have fzf use ag to find files
 if command -v ag > /dev/null 2>&1
@@ -276,25 +220,10 @@ end
 # miniconda_fish_init
 
 if status is-interactive
-  echo 'Bienvenido a FISH, la shell amigable e interactiva :)'
-  echo 'Bienvenue dans FISH, le shell amical et interactif :)'
-  echo '    ^                     ^    '
-  echo '   / \       _____       / \   '
-  echo '__/   \__----     ----__/   \__'
-  echo 'Mater artium necessitas.'
-
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 200 60
-    debug Set keyboard rate
-  end
-
-  if command -v gh > /dev/null
-    if [ "$FAST_STARTUP" = true ]
-      debug SPEEDUP Skipping GitHub gh completions
-    else
-      eval (gh completion --shell fish)
-      debug Added GitHub gh completions
-    end
+    # Faster keyboard rate
+    xset r rate 125 42
+    debug Set faster keyboard rate
   end
 
   function fish_user_key_bindings
@@ -320,8 +249,6 @@ if status is-interactive
     # debug Bound Ctrl-F
   end
 
-  # Waiting for https://github.com/starship/starship/issues/3305 to be fixed
-  # Applying temp fix manually
   if command -v starship > /dev/null
     starship init fish | source
   end
@@ -330,27 +257,8 @@ if status is-interactive
   log "$TOTAL_STARTUP_TIME"ms
 
   set SHELL_TYPE ([ -n "$SSH_CLIENT" ] && echo ' SSH' || echo)
-  switch $hostname$SHELL_TYPE
-    case 'raspberrypi' '*SSH*'
-      if [ "$hostname" = raspberrypi ]
-        set HOSTNAME_SUMMARY "a Raspberry Pi"
-      else
-        set HOSTNAME_SUMMARY "SSH on $hostname (SSH_CLIENT=$SSH_CLIENT)"
-      end
-      set USER_AND_HOST_COLOR brred
-    case '*T580*' localhost
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR brcyan
-    case '*flex*'
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR bryellow
-    case '2012-iMac'
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR bryellow
-    case '*'
-      set HOSTNAME_SUMMARY "an UNKNOWN host"
-      set USER_AND_HOST_COLOR brwhite
-  end
+
+  echo 'Mater artium necessitas.'
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
@@ -384,9 +292,8 @@ function install_plugins
   if command -v kubectl > /dev/null 2>&1
     fisher install evanlucas/fish-kubectl-completions
   end
-end
 
-# Fish does lots of things by default:
-# ignore dups and blank lines in history
-# interactive cd and autocompletion
-# etc
+  if command -v gh > /dev/null 2>&1
+    gh completion --shell fish
+  end
+end
