@@ -79,7 +79,7 @@ vis.events.subscribe(vis.events.INIT, function()
     backup.get_fname = backup.entire_path_with_double_percentage_signs_and_timestamp
     
 	table.insert(lint.linters["python"], "pylint --from-stdin visfile")
-	table.insert(lint.linters["python"], "mypy <(cat)")
+	table.insert(lint.linters["python"], "mypy /dev/stdin")
 
 end)
 
