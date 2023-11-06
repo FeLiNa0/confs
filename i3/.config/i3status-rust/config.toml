@@ -2,11 +2,11 @@
 theme = "semi-native"
 
 [icons]
-icons = "awesome6"
+icons = "none"
 
 [[block]]
 block = "external_ip"
-format = " $ip $region_code $country_flag "
+format = " $region_code $country_flag "
 
 [[block]]
 block = "speedtest"
@@ -14,11 +14,11 @@ block = "speedtest"
 interval = 2000
 format = " $ping $speed_down "
 
-[[block]]
-block = "custom"
-shell = "dash"
-command = "nvidia-i3-status.sh"
-interval = 5
+# [[block]]
+# block = "custom"
+# shell = "dash"
+# command = "nvidia-i3-status.sh"
+# interval = 5
 
 [[block]]
 block = "custom"
@@ -31,16 +31,16 @@ shell = "dash"
 # -t Time to live for each packet
 # -i Wait this many seconds between sending each packet
 # -c Send this many packets
-command = '''ping -W 0.5 -t 250 -i 0.05 -c 10   8.8.8.8   | grep -o "[0-9.]\\+% packet loss, time" | sed "s/ packet loss, time/L/ ; s/ms//"'''
+command = '''ping -W 0.5 -t 250 -i 0.05 -c 10   8.8.8.8   | grep -o "[0-9.]\\+% packet loss, time" | sed "s/ packet loss, time/loss/ ; s/ms//"'''
 interval = 5
 
-[[block]]
-block = "disk_space"
-path = "/"
-info_type = "available"
-interval = 20
-warning = 20.0
-alert = 10.0
+# [[block]]
+# block = "disk_space"
+# path = "/"
+# info_type = "available"
+# interval = 20
+# warning = 20.0
+# alert = 10.0
 
 [[block]]
 block = "memory"
@@ -76,29 +76,29 @@ device_kind = "source"
 
 [[block]]
 block = "time"
-format = " $timestamp.datetime(f:'%s') "
+format = " $timestamp.datetime(f:'%s') UNIX "
 interval = 5
 
 [[block]]
 block = "time"
 interval = 15
 timezone = "UTC"
-format = " $timestamp.datetime(f:'%R') "
+format = " $timestamp.datetime(f:'%R') UTC "
 
 [[block]]
 block = "time"
 interval = 15
 format = " $timestamp.datetime(f:'%d %R') "
 
-[[block]]
-block = "battery"
-interval = 30
-device = "BAT1"
-format = " $percentage $power "
+# [[block]]
+# block = "battery"
+# interval = 30
+# device = "BAT1"
+# format = " $percentage $power "
 
 [[block]]
 block = "battery"
-interval = 30
+interval = 60
 device = "BAT0"
 format = " $percentage $power "
 

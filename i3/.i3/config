@@ -12,11 +12,6 @@
 set $mod Mod4
 
 # Window title font
-# font pango: Ubuntu Mono 12
-# font pango:monospace 11
-# font pango:DejaVu Sans Mono 10
-# font pango: Source Code Pro 10
-# font pango:Purista 15
 font pango:MonoLisa Heavy 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -45,7 +40,6 @@ bindsym $mod+v split v
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym F11 fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -54,9 +48,6 @@ bindsym $mod+e layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # Focus the parent container
 bindsym $mod+a focus parent
@@ -121,35 +112,11 @@ bindsym $mod+Shift+p move container to workspace 23:fun
 # bindsym $mod+braceright move container to workspace 24:𝄞
 bindsym $mod+Shift+bracketleft move container to workspace 24:𝄞
 
-bindsym XF86HomePage exec --no-startup-id i3empty.py next 1
-
-bindsym $mod+Mod1+1 exec --no-startup-id i3empty.py next 1
-bindsym $mod+Mod1+2 exec --no-startup-id i3empty.py next 2
-bindsym $mod+Mod1+3 exec --no-startup-id i3empty.py next 3
-bindsym $mod+Mod1+4 exec --no-startup-id i3empty.py next 4
-bindsym $mod+Mod1+5 exec --no-startup-id i3empty.py next 5
-bindsym $mod+Mod1+6 exec --no-startup-id i3empty.py next 6
-bindsym $mod+Mod1+7 exec --no-startup-id i3empty.py next 7
-bindsym $mod+Mod1+8 exec --no-startup-id i3empty.py next 8
-bindsym $mod+Mod1+9 exec --no-startup-id i3empty.py next 9
-
-bindsym $mod+Ctrl+Left exec --no-startup-id i3empty.py prev
-bindsym $mod+Ctrl+Right exec --no-startup-id i3empty.py next
-
-bindsym $mod+Shift+Ctrl+Left exec --no-startup-id i3empty.py --move prev
-bindsym $mod+Shift+Ctrl+Right exec --no-startup-id i3empty.py --move next
-
 bindsym $mod+Mod1+Left workspace prev
 bindsym $mod+Mod1+Right workspace next
 
 bindsym Ctrl+Mod1+Left workspace prev
 bindsym Ctrl+Mod1+Right workspace next
-
-bindsym $mod+Shift+Mod1+Left move container to workspace prev; workspace prev
-bindsym $mod+Shift+Mod1+Right move container to workspace next; workspace next
-
-bindsym Ctrl+Shift+Mod1+Left move container to workspace prev; workspace prev
-bindsym Ctrl+Shift+Mod1+Right move container to workspace next; workspace next
 
 # rename current workspace
 bindsym $mod+u exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -225,7 +192,6 @@ bindsym $mod+Shift+x exec --no-startup-id $terminal2
 bindsym $mod+z exec --no-startup-id $terminal2
 bindsym $mod+Shift+z exec --no-startup-id i3-sensible-terminal
 bindsym $mod+n exec --no-startup-id $browser
-# ... for business + messaging
 bindsym $mod+Shift+n exec --no-startup-id chromium --kiosk --new-window https://instagram.com
 
 bindsym $mod+l exec --no-startup-id locker.sh
@@ -240,19 +206,18 @@ bindsym Control+grave exec dunstctl history-pop
 
 # Hide borders
 hide_edge_borders none
-
-# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 0
 
 smart_gaps on
 gaps outer 2
 gaps inner 4
 
 # hide border for extremely common windows
-for_window [title="Firefox|Chromium|Chrome$"] border pixel 1
-# for_window [title="Firefox|Chromium|Chrome$"] border pixel 0
+# for_window [title="Firefox|Chromium|Chrome$"] border pixel 1
+for_window [title="Firefox|Chromium|Chrome$"] border pixel 0
 
 # popups should float
-for_window [window_role="pop-up"] floating enable
+# for_window [window_role="pop-up"] floating enable
 
 # ;)
 for_window [class="Tor Browser"] floating enable
@@ -264,47 +229,24 @@ bindsym $mod+Shift+c exec "i3-msg reload"
 bindsym $mod+Shift+r restart
 
 # Autostart applications
-# idk
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
 exec --no-startup-id udiskie --smart-tray
 exec --no-startup-id xfce4-power-manager
-# Bluetooth widget. Bluetoothd starts with or without applet running.
-# exec --no-startup-id blueman-applet
-exec --no-startup-id conky.sh
 exec --no-startup-id wallpaper.sh
 exec --no-startup-id xautolock -time 10 -locker locker.sh
-# For disabling power management, e.g. when watching a movie
-# exec --no-startup-id caffeine
 exec --no-startup-id backup.sh
-# Run Dropbox daemon to sync files
-# Arch: Install dropbox from the AUR
 exec --no-startup-id /opt/dropbox/dropboxd
-# Connect to devices on LAN
-# exec --no-startup-id kdeconnect-indicator
-# On-screen keyboard
-# exec --no-startup-id onboard
-
 exec --no-startup-id kitty fish -c welcome-shell.sh
-exec --no-startup-id 'sleep 20 ; evolution'
+exec --no-startup-id evolution
 exec --no-startup-id protonmail-bridge
 exec --no-startup-id firefox
-# Systemd does this
-# exec --no-startup-id protonvpn-cli connect --cc US
-exec --no-startup-id emacs --daemon
-exec --no-startup-id ripcord
 exec --no-startup-id teams-insiders
 exec --no-startup-id .screenlayout/select-arandr-display.sh
-
+# SOC2
 exec --no-startup-id clamtk
 exec --no-startup-id pamac-tray
-# Corporate spyware lol
 exec --no-startup-id drata-agent
-
-exec --no-startup-id "xbindkeys"
-
-# exec --no-startup-id indicator-keylock # notifications when capslock pressed
-exec --no-startup-id set-keyboard-layout.sh
+exec --no-startup-id xbindkeys
 exec --no-startup-id xrdb -merge ~/.Xresources
 
 # Notifications
@@ -313,8 +255,8 @@ exec --no-startup-id killall xfce4-notifyd; dunst
 # Night light. 36N, 115W
 exec --no-startup-id redshift -l36:-115 -t 5500K:2000K
 
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+# On-screen keyboard
+# exec --no-startup-id onboard
 
 # Default workspace
 exec --no-startup-id i3-msg workspace 21:🏠
@@ -396,11 +338,10 @@ client.urgent #2f343a #900000 #ffffff #900000
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- locker.sh --nofork
 
 # Faster keyboard rate
 exec --no-startup-id xset r rate 125 42
 
 # Default layout
 workspace_layout stacking
-
