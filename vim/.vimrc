@@ -11,26 +11,26 @@ call plug#begin()
 """""""""""""""" Load lightweight, essential, or quick-loading plugins first
 
 " Measure startup time
-Plug 'dstein64/vim-startuptime'
+" Plug 'dstein64/vim-startuptime'
 
 " Color themes
 " $ trizen -S gruvbox-dark-gtk lxappearance-gtk3
 " $ lxappearance
 " Plug 'sainnhe/gruvbox-material'
 Plug 'atelierbram/Base2Tone-vim'
-Plug 'kitten/vim-adventurous'
-Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
-Plug 'jesseleite/nvim-noirbuddy'
-Plug 'adigitoleo/vim-mellow'
+" Plug 'kitten/vim-adventurous'
+" Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
+" Plug 'jesseleite/nvim-noirbuddy'
+" Plug 'adigitoleo/vim-mellow'
 
 " Reload files edited externally
 Plug 'djoshea/vim-autoread'
 
 " Good statusline
-Plug 'vim-airline/vim-airline'
-Plug 'enricobacis/vim-airline-clock'
-let g:airline#extensions#clock#format = '%H:%M'
-let g:airline_powerline_fonts = 1
+" Plug 'vim-airline/vim-airline'
+" Plug 'enricobacis/vim-airline-clock'
+" let g:airline#extensions#clock#format = '%H:%M'
+" let g:airline_powerline_fonts = 1
 
 " Show git diff in window when writing git commit message
 Plug 'rhysd/committia.vim'
@@ -42,7 +42,7 @@ Plug 'rhysd/committia.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'neovimhaskell/haskell-vim'
+" Plug 'neovimhaskell/haskell-vim'
 
 " use ctrl-p to find files
 map <C-p> :CtrlPMixed<CR>
@@ -60,10 +60,7 @@ command! ProjectGrepper execute 'Grepper -dir repo'
 map <C-f> :ProjectGrepper<CR>
 
 " File browser.
-Plug 'francoiscabrol/ranger.vim'
-if has('nvim')
-  Plug 'rbgrouleff/bclose.vim'
-end
+" Plug 'francoiscabrol/ranger.vim'
 
 let g:ranger_replace_netrw = 1
 let g:ranger_map_keys = 0
@@ -111,8 +108,6 @@ let g:highlightedyank_highlight_duration = 10000
 " THE BEST GIT PORCELAIN IN THE VIM WORLD
 Plug 'tpope/vim-fugitive'
 
-Plug 'tpope/vim-jdaddy'
-
 " Language server protocol (LSP) for completion and other fancy IDE-like features
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['java', 'typescript', 'javascript', 'javascript.jsx', 'python', 'rust', 'json', 'yaml', 'yaml.docker-compose', 'dockerfile'] }
 let g:coc_global_extensions = ['coc-syntax', 'coc-json', 'coc-git', 'coc-java', 'coc-tsserver', 'coc-pyright', 'coc-rust-analyzer', 'coc-yaml', 'coc-docker']
@@ -137,8 +132,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-Plug 'ervandew/supertab'
 
 " Use tab for selecting completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -174,7 +167,8 @@ Plug 'tweekmonster/wstrip.vim'
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['ocaml', 'org', 'python']
 
-Plug 'ap/vim-css-color'
+" Show color of CSS colors using syntax highlighting
+" Plug 'ap/vim-css-color'
 
 """""""""""""""" Load heavy and/or extra plugins
 if $VIM_LOAD_EXTRA_PLUGINS == "true"
