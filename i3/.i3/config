@@ -305,7 +305,7 @@ bindsym $mod+m bar mode toggle
 bar {
 	i3bar_command i3bar
 	status_command i3status-rs --threads 2
-	font pango:Purista, MonoLisa, FontAwesome, PowerlineSymbols 13
+	font pango:MonoLisa, FontAwesome, PowerlineSymbols bold 12
 	position bottom
 	tray_padding 3
 

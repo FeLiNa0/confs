@@ -76,19 +76,19 @@ device_kind = "source"
 
 [[block]]
 block = "time"
-format = " $timestamp.datetime(f:'%s') UNIX "
-interval = 5
+format = " $timestamp.datetime(f:'%s')unix "
+interval = 1
 
 [[block]]
 block = "time"
 interval = 15
 timezone = "UTC"
-format = " $timestamp.datetime(f:'%R') UTC "
+format = " $timestamp.datetime(f:'%R')Z "
 
 [[block]]
 block = "time"
-interval = 15
-format = " $timestamp.datetime(f:'%d %R') "
+interval = 30
+format = " $timestamp.datetime(f:'%d %R%z') "
 
 # [[block]]
 # block = "battery"
