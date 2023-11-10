@@ -58,9 +58,6 @@ function set_global_if_unset
   end
 end
 
-debug Starting FISH debug output. Set DO_NOT_CLEAR to leave it on the screen after startup.
-set_global DO_NOT_CLEAR true
-
 load_file $HOME/.config/fish/local_env.fish
 set_global_if_unset FISH_LOGO # 🐠
 
@@ -142,7 +139,8 @@ if command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
     abbr dex 'docker exec'
-    abbr dck 'docker container kill (docker ps -q)'
+    abbr dck "docker container kill (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
+    abbr dck-all 'docker container kill (docker ps -q)'
     set_global BUILDKIT_PROGRESS plain
     set_global DOCKER_BUILDKIT 1
     debug Setup Docker abbreviations
