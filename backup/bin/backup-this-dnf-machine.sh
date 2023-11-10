@@ -27,4 +27,4 @@ rsync $RSYNC_OPTS \
 tree -L 2 -h -i -f ~/src/ > "$ROOT/src_tree_L2"
 
 set +x
-ls -1 ~/src/*/* > "$ROOT/src_ls_star_star_filenames"
+ls -1 ~/pf/*/* ~/src/*/* > "$ROOT/src_ls_star_star_filenames"

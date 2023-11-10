@@ -20,7 +20,7 @@ call plug#begin()
 Plug 'atelierbram/Base2Tone-vim'
 " Plug 'kitten/vim-adventurous'
 " Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
-" Plug 'jesseleite/nvim-noirbuddy'
+Plug 'jesseleite/nvim-noirbuddy'
 " Plug 'adigitoleo/vim-mellow'
 
 " Reload files edited externally

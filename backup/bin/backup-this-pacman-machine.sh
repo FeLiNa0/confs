@@ -28,4 +28,5 @@ rsync $RSYNC_OPTS \
 mkdir -p $ROOT/personal_dictionaries/
 cp ~/.aspell.*.pws $ROOT/personal_dictionaries/
 
-cd ~/src && echo * > "$ROOT/src_filenames" && cd -
+ls -1 ~/pf/*/* ~/src/*/* > "$ROOT/src_ls_star_star_filenames"
+
