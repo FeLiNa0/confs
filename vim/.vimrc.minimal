@@ -8,25 +8,17 @@ set nocompatible
 " Map semicolon to colon
 :nmap ; :
 
+set listchars=tab:▸⠀,trail:·,extends:»,precedes:«,nbsp:×
+
 " Foldcolumn on the right side (clickable).
 set foldcolumn=2
 
 " Close folds by default.
 set foldlevel=0
-
-" Do not fold by default.
-" set nofoldenable
+set foldlevelstart=0
 
 " Autowrite in all situations, except quiting.
 set autowrite
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
-set t_Co=256
 
 " Change dir to that of the current file
 " Benefits:
@@ -95,11 +87,7 @@ set directory=~/tmp/swap//,~/tmp//
 set backupdir=~/tmp/backup//,~/tmp//
 set undodir=~/tmp/undo//,~/tmp//
 
-" No viminfo file
-" " default?
-" set viminfo=~/.viminfo
 set history=10000
-
 
 " Save backups with a timestamp and directory info
 au BufWritePre * let &backupext = '%' . strftime('%m-%d-%H:%M')
@@ -286,9 +274,6 @@ autocmd FileType scss set iskeyword+=-
 " Folds for CSS and SCSS syntax
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
-" Options for gvim: remove toolbar
-set guioptions-=T
-
 " Set GUI Font
 set guifont=MonoLisa\ Medium:h14
 
@@ -338,15 +323,3 @@ set shell=/bin/bash
 " My .bashrc detects if interactive mode is enabled before enabling any
 " interactive shell features.
 let $BASH_ENV = $HOME . "/.bash_vim"
-
-" !makeanywhere format-fix-with-pyston PYFILES=%:p
-" !ma test-unit
-
-" Load project-specific local vim settings at $PWD/.vim.{custom,local}
-" if filereadable('.vim.custom')
-"     so .vim.custom
-" endif
-
-" if filereadable('.vimrc.local')
-"     so .vimrc.local
-" endif

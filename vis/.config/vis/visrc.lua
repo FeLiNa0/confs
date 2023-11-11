@@ -49,13 +49,26 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set autoindent')
     vis:command('set cursorline on')
 
+    vis:command('set show-newlines')
+    vis:command('set show-tabs')
+    vis:command('set show-spaces')
+    vis:command('set show-eof')
+									-- tabs example
+                                    -- spaces example
+--- lots of newlines
+
+
+
+
+
+
+
+--- lots of newlines
+
     -- Python formatting settings
     vis:command('set colorcolumn 79')
     vis:command('set tabwidth 4')
     vis:command('set expandtab on')
-    if vis.option_get then
-      vis:info('option: ' .. tostring(vis:option_get("lol")))
-    end
 end)
 
 vis.events.subscribe(vis.events.INIT, function()
