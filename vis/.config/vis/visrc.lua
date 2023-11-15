@@ -51,7 +51,6 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
 
     vis:command('set show-newlines')
     vis:command('set show-tabs')
-    vis:command('set show-spaces')
     vis:command('set show-eof')
 									-- tabs example
                                     -- spaces example
