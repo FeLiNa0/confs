@@ -5,7 +5,6 @@
 -- TODO simple version of https://github.com/rhysd/committia.vim/tree/master/autoload ?
 -- TODO rainbow indentation?
 -- TODO org-mode hierarchy support? navigate to next level, create new level, etc
--- TODO run code checks and githooks automatically or with hotkey? format on save?
 -- TODO autoreload on changes??? (IMPORTANT)
 
 
@@ -23,7 +22,8 @@ vis.events.subscribe(vis.events.INIT, function(win)
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE, '<', ':<')
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE, '>', ':>')
     
-    vis:map(vis.modes.NORMAL, '`', ':!makeanywhere format || makeanywhere format-fix')
+    vis:map(vis.modes.NORMAL, '`', ':lint')
+    vis:map(vis.modes.NORMAL, '~', ':fix')
     
     -- The famous ctrl-P for finding files
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE | vis.modes.VISUAL,

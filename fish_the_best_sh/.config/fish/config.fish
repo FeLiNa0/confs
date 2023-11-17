@@ -5,7 +5,7 @@ set LANG fr_FR.UTF-8
 
 set START_TIME (date +%s.%N)
 set FAST_STARTUP true
-set DEBUG_OUTPUT true
+set DEBUG_OUTPUT false
 
 function log
   set_color -i
@@ -112,10 +112,12 @@ if command -v kubectl > /dev/null
     abbr k kubectl
     abbr kx kubectx
     abbr kc 'kubectl config'
+    abbr kcn 'kubectl config set-context --current --namespace'
     # List and detail resources
     abbr kg 'kubectl get'
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
+    abbr kgcm 'kubectl get configmaps'
     abbr kd 'kubectl describe'
     # Debugging pods
     abbr kl 'kubectl logs'
