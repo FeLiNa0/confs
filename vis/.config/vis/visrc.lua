@@ -25,6 +25,11 @@ vis.events.subscribe(vis.events.INIT, function(win)
     vis:map(vis.modes.NORMAL, '`', ':lint')
     vis:map(vis.modes.NORMAL, '~', ':fix')
     
+    -- Type current UTC time using Python
+    vis:command_register("pt", function(argv, force, win, selection, range)
+        vis:feedkeys(':<python -c "import datetime; print(datetime.datetime.utcnow().isoformat(), end=\'\')"')
+    end)
+    
     -- The famous ctrl-P for finding files
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE | vis.modes.VISUAL,
         '<C-p>', function() vis:command(':fzf') end)
@@ -32,8 +37,10 @@ vis.events.subscribe(vis.events.INIT, function(win)
         '<C-f>', function() vis:command(':fzf') end)
     
     -- Paste from system clipboard with vis-clipboard
-    vis:map(vis.modes.NORMAL, '<C-v>', '"+p')
-    vis:map(vis.modes.INSERT, '<C-v>', '<Escape>"+pi')
+    -- vis:map(vis.modes.NORMAL, '<C-v>', '"+p')
+    -- vis:map(vis.modes.INSERT, '<C-v>', '<Escape>"+pi')
+    vis:map(vis.modes.NORMAL, '<C-v>', function() vis:feedkeys(':>vis-clipboard --paste<Enter>') end)
+    vis:map(vis.modes.INSERT, '<Escape><C-v>', function() vis:feedkeys(':>vis-clipboard --paste<Enter>') end)
     
     -- Put selection content into system clipboard
     vis:map(vis.modes.VISUAL_LINE, '<C-c>', function() vis:feedkeys(':>vis-clipboard --copy<Enter>') end)

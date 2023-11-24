@@ -14,8 +14,8 @@ set listchars=tab:▸⠀,trail:·,extends:»,precedes:«,nbsp:×
 set foldcolumn=2
 
 " Close folds by default.
-set foldlevel=0
-set foldlevelstart=0
+set foldlevel=2
+set foldlevelstart=2
 
 " Autowrite in all situations, except quiting.
 set autowrite

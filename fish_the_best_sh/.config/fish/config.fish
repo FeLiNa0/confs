@@ -118,6 +118,7 @@ if command -v kubectl > /dev/null
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
     abbr kgcm 'kubectl get configmaps'
+    abbr kgi 'kubectl get ingress'
     abbr kd 'kubectl describe'
     # Debugging pods
     abbr kl 'kubectl logs'
