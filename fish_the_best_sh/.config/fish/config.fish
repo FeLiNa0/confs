@@ -108,6 +108,11 @@ if command -v git > /dev/null
     debug Setup Git abbreviations
 end
 
+if command -v k9s > /dev/null
+    abbr k9s 'echo -ne "\033]k9s connected to cluster "(kubectl config current-context)"\007" && k9s'
+    debug Setup k9s abbrvs
+end
+
 if command -v kubectl > /dev/null
     abbr k kubectl
     abbr kx kubectx
@@ -120,6 +125,9 @@ if command -v kubectl > /dev/null
     abbr kgcm 'kubectl get configmaps'
     abbr kgi 'kubectl get ingress'
     abbr kd 'kubectl describe'
+    abbr ktop 'kubectl top'
+    abbr ktopn 'kubectl top nodes'
+    abbr ktopp 'kubectl top pods'
     # Debugging pods
     abbr kl 'kubectl logs'
     abbr kcp 'kubectl cp'

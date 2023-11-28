@@ -106,6 +106,7 @@ style = "fg:#88ddff"
 [kubernetes.context_aliases]
 'gke_.*_(powerflex-*_*)?(?P<var_cluster>[\w-]+)' = '$var_cluster'
 "kind-(?P<name>.*)" = "$name"
+"powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)" = "$name"
 
 [git_commit]
 commit_hash_length = 4
