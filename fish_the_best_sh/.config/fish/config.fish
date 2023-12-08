@@ -303,6 +303,10 @@ function install_plugins
   end
 
   if command -v gh > /dev/null 2>&1
-    gh completion --shell fish
+    gh completion --shell fish > ~/.config/fish/completions/gh.fish
+  end
+
+  if command -v omnictl > /dev/null 2>&1
+    omnictl completion fish > ~/.config/fish/completions/omnictl.fish
   end
 end
