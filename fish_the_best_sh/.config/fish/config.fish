@@ -271,21 +271,9 @@ if status is-interactive
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
-    if [ "$FAST_STARTUP" = true ] && [ "$SSH_AGENT_PID" != "" ] && [ -e "/proc/$SSH_AGENT_PID/status" ]
-        warn SPEEDUP Skipping calling keychain as SSH_AGENT_PID is already set and ssh-agent is running
-    else
-        # Timeout after 10 hours (600 minutes)
-        # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
-        eval (keychain --quick --timeout 600 --eval --agents ssh -Q --quiet --nogui id_ed25519_felina id_ed25519) &
-        debug Started ssh-agent with keychain
-        if ! [ -e "/proc/$SSH_AGENT_PID/status" ]
-          if [ (ps "$SSH_AGENT_PID" | wc -l) -ge 2 ]
-            warn Your system does not support procfs 
-          else
-            warn The SSH agent was not started!
-          end
-        end
-    end
+    # Timeout after 10 hours (600 minutes)
+    # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
+    eval (keychain --quick --timeout 600 --eval --agents ssh -Q --quiet id_ed25519)
   end
 end
 
