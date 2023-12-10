@@ -4,7 +4,7 @@ set -x
 # This downloads some configs from Omni/Sidero for dev/stg/prd
 cd ~/.kube/
 omnictl config context dev
-generate_kubeconfigs.sh '0007-04|0007-13-morley|0007-629-max|0001-31-leghorn|0007-25-nico'
+generate_kubeconfigs.sh '1337|0007-04|0007-13-morley|0007-629-max|0001-31-leghorn|0007-25-nico'
 
 # # stage not stg, thank you sidero/omni/etc
 # omnictl config context stage

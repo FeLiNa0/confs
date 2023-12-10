@@ -14,11 +14,11 @@ block = "speedtest"
 interval = 2000
 format = " $ping $speed_down "
 
-# [[block]]
-# block = "custom"
-# shell = "dash"
-# command = "nvidia-i3-status.sh"
-# interval = 5
+[[block]]
+block = "custom"
+shell = "dash"
+command = "nvidia-i3-status.sh"
+interval = 5
 
 [[block]]
 block = "custom"
