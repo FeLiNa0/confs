@@ -97,6 +97,7 @@ vis.events.subscribe(vis.events.INIT, function()
     backup.set_directory(os.getenv("HOME") .. "/tmp/vis-backups")
     backup.get_fname = backup.entire_path_with_double_percentage_signs_and_timestamp
     
+	lint.linters["yaml"] = {"yamllint -"}
 	lint.linters["python"] = {
 	   -- "black --check -", "isort --check -",
 	   "pylint --from-stdin visfile",
