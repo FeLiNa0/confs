@@ -14,7 +14,7 @@ function log
 end
 
 function debug
-  if [ "$DEBUG_OUTPUT" = true ]
+  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
     log "$argv"
   end
 end
@@ -95,15 +95,22 @@ if command -v most > /dev/null 2>&1
     alias less=$PAGER
 end
 
+# Load aliases before abbreviations
+# TODO reduce number of aliases to speed up loading time or create ~/.essential_aliases
+# I tried getting rid of tryalias with "alias tryalias alias", but it's actually
+# almost as fast as plain alias so I'll keep it.
+load_file $HOME/.aliases --verbose
+tryalias ,, commacomma
+
 if command -v git > /dev/null
     abbr ga 'git add'
     abbr gc 'git commit'
     abbr gch 'git checkout'
-    abbr gs 'git status'
+    abbr gs '_fzf_search_git_status || git status'
     abbr gst 'git stash push --'
     abbr gstp 'git stash pop'
     abbr gd 'git diff'
-    abbr gl 'git log'
+    abbr gl '_fzf_search_git_log || git log'
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
@@ -146,6 +153,13 @@ if command -v kubectl > /dev/null
     addpaths $HOME/.krew/bin
 end
 
+if true
+    abbr ff 'cd ~/pf/powerflex_edge_traffic_manager'
+    abbr cs 'cd ~/pf/powerflex_edge_ocpp_central_system'
+    abbr ev 'cd ~/pf/pfc_ev'
+    abbr scale 'cd ~/pf/small_scale'
+end
+
 if command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
@@ -174,13 +188,6 @@ function pmake --wraps make --description "pma --wraps make pipenv run"
     pipenv run make $argv
 end
 
-# Load aliases
-# TODO reduce number of aliases to speed up loading time or create ~/.essential_aliases
-# I tried getting rid of tryalias with "alias tryalias alias", but it's actually
-# almost as fast as plain alias so I'll keep it.
-load_file $HOME/.aliases --verbose
-tryalias ,, commacomma
-
 # It's POSIX + my muscle memory now
 abbr grep ag
 
@@ -204,10 +211,10 @@ addpaths /usr/local/opt/openssl/bin
 # Have fzf use ag to find files
 if command -v ag > /dev/null 2>&1
   if command -v fzf > /dev/null 2>&1
-    set_global FZF_DEFAULT_COMMAND 'ag --hidden -g ""'
+    set_global FZF_DEFAULT_COMMAND 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
     set_global FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
-    debug Set fzf variables
+    debug Set fzf will use the silver searcher ag
   end
 end
 
@@ -236,26 +243,10 @@ if status is-interactive
   end
 
   function fish_user_key_bindings
-    if command -v fzf > /dev/null 2>&1
-      # Use Ctrl-R to find command in history
-      if command -v fzf_key_bindings > /dev/null 2>&1
-          fzf_key_bindings
-      end
+    bind \cp _fzf_search_directory
 
-      # Use Ctrl-P to find files
-      bind \cp fzf
-
-      if bind -M insert > /dev/null 2>&1 2>&1
-        bind -M insert \cp fzf
-      end
-      # debug Configured interactive fzf features
-    end
-
-    # Ctrl-F is essential fish
-    # It can become unbound, e.g. if in vi-mode
-    # Right Arrow and Ctrl-E might work
+    # Ctrl-F is an essential fish command to autocomplete based on history
     bind \cf forward-char
-    # debug Bound Ctrl-F
   end
 
   if command -v starship > /dev/null
@@ -268,6 +259,17 @@ if status is-interactive
   set SHELL_TYPE ([ -n "$SSH_CLIENT" ] && echo ' SSH' || echo)
 
   echo 'Mater artium necessitas.'
+
+  set_global fzf_preview_file_cmd cat
+  # Open files in EDITOR
+  set fzf_dir_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
+
+  if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
+    echo 'Installling fzf.fish https://github.com/PatrickF1/fzf.fish'
+    echo 'It is used for git log, git status, ctrl-p (file search), and ctrl-r (history)'
+    echo '+fisher install PatrickF1/fzf.fish'
+    fisher install PatrickF1/fzf.fish
+  end
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
@@ -284,6 +286,8 @@ end
 function install_plugins
   # Done
   fisher install franciscolourenco/done
+
+  fisher install PatrickF1/fzf.fish
 
   # kubectl completion
   if command -v kubectl > /dev/null 2>&1

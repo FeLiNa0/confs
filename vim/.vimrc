@@ -28,7 +28,7 @@ autocmd Filetype * AnyFoldActivate
 Plug 'ctrlpvim/ctrlp.vim'
 map <C-p> :CtrlPMixed<CR>
 " ignore files in .gitignore, include dotfiles
-let g:ctrlp_user_command = 'find %s -ipath \*.git -prune -or -type f'
+let g:ctrlp_user_command = 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
 
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 10000

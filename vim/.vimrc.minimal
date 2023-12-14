@@ -138,11 +138,7 @@ function! SetTitleString()
         \ . ' ' .
         \ expand('%')
         \ . ' ' .
-        \ system('trimdir.py', expand('%:p:h'))
-        \ . ' ' .
         \ $USER . '@' . hostname()
-        \ . ' ' .
-        \ ' pid=' . system('echo $$')
 endfunction
 
 autocmd BufNewFile,BufRead,BufEnter * exe "call SetTitleString()"

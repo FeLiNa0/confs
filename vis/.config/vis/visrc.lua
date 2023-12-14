@@ -31,10 +31,8 @@ vis.events.subscribe(vis.events.INIT, function(win)
     end)
     
     -- The famous ctrl-P for finding files
-    vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE | vis.modes.VISUAL,
-        '<C-p>', function() vis:command(':fzf') end)
-    vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE | vis.modes.VISUAL,
-        '<C-f>', function() vis:command(':fzf') end)
+    -- Process color codes with --ansi. This slows down fzf, but I can't seem to get rid of the color codes in the output from ag/somewhereelse
+    vis:map(vis.modes.NORMAL, '<C-p>', ':fzf --ansi<Enter>')
     
     -- Paste from system clipboard with vis-clipboard
     -- vis:map(vis.modes.NORMAL, '<C-v>', '"+p')
@@ -120,6 +118,7 @@ fzf_config = {}
 fzf_config.fzf_path = "fzf"
 fzf_config.fzf_args = ""
 
+-- Use ctrl-s or ctrl-v to open the chosen file in a (v)split window
 vis:command_register("fzf", function(argv, force, win, selection, range)
     local command = string.gsub([[
             $fzf_path \
@@ -190,7 +189,11 @@ end
 
 -- Based on https://github.com/erf/vis-title/blob/master/init.luoa
 function set_title(fname)
-    local full_title = 'vis ' .. fname .. ' ' .. run_command('hostname')
+    local full_title = '🐱 vis ' ..
+      run_command('projectname.sh') ..
+      ' ' ..fname ..
+      ' ' .. run_command('echo $USER@$(hostname)')
+
     vis:command(string.format(":!printf '\\033]0;%s\\007'", full_title))
 end
 

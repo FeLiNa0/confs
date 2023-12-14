@@ -10,8 +10,8 @@ generate_kubeconfigs.sh '1337|0007-04|0007-13-morley|0007-629-max|0001-31-leghor
 # omnictl config context stage
 # generate_kubeconfigs.sh '0001-12|0007-629-max|0008-03|0001-31-integration-stall'
 # 
-# omnictl config context prd
-# generate_kubeconfigs.sh '0001|0077'
+omnictl config context prd
+generate_kubeconfigs.sh '0060|0001|0077'
 
 # This merges all .yaml files in ~/.kube into one single kubeconfig.
 # Switch configs with kubectx or with `kubectl config`.
