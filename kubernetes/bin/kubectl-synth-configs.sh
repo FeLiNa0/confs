@@ -22,3 +22,5 @@ gcloud container clusters get-credentials powerflex-small-scale-cluster  --regio
 gcloud container clusters get-credentials gke-stg-powerflex-cluster --region us-west2 --project edf-re-powerflex-stg-8019
 gcloud container clusters get-credentials gke-dev-powerflex-cluster --region us-west2 --project edf-re-powerflex-dev-16b1
 gcloud container clusters get-credentials nats-perf-cluster --region us-west2 --project powerflex-nats-perf-dev-7102
+gcloud container clusters get-credentials edf-re-powerflex-sim-cluster --region us-west2 --project edf-re-powerflex-sim-ada8
+gcloud container clusters get-credentials edf-re-powerflex-sim-edge-cluster --region us-west2 --project edf-re-powerflex-sim-ada8
