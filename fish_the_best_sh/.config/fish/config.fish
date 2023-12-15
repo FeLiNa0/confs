@@ -51,6 +51,8 @@ addpaths $HOME/.local/bin  --verbose
 addpaths $HOME/.cargo/bin
 # CUDA binaries
 addpaths /opt/cuda/bin
+# Snap Linux binaries
+addpaths /snap/bin
 
 set_global EDITOR vis
 

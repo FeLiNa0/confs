@@ -246,7 +246,7 @@ bindsym $mod+Shift+c exec "i3-msg reload"
 bindsym $mod+Shift+r restart
 
 # Autostart applications
-exec --no-startup-id udiskie --smart-tray
+exec --no-startup-id udiskie
 exec --no-startup-id wallpaper.sh
 exec --no-startup-id backup.sh
 exec --no-startup-id /opt/dropbox/dropboxd
