@@ -258,6 +258,7 @@ copy_confs_for protonvpn .config/systemd/user/protonvpn-autostart.service
 copy_confs_for backup \
   bin/backup-this-pacman-machine.sh \
   bin/backup-this-dnf-machine.sh \
+  bin/backup-this-apt-machine.sh \
   bin/backup.sh \
   bin/get-backup-root.sh
 
