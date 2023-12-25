@@ -329,7 +329,7 @@ copy_confs_for arandr bin/switch-displays-xrandr.sh
 
 copy_confs_for system-space-cleaner.sh bin/system-space-cleaner.sh
 
-copy_confs_for pass bin/pass-with-custom-editor.sh
+copy_confs_for pass bin/pass-custom.sh
 
 copy_confs_for kubernetes bin/kubectl-get-image-sizes.sh bin/kubectl-monitor-zigbee.sh bin/kubectl-synth-configs.sh bin/generate_kubeconfigs.sh bin/kubectl-get-argocd-ui-password.sh .config/k9s/plugin.yml
 
