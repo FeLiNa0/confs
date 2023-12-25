@@ -1,7 +1,19 @@
 #!/bin/bash -
 if command -v rofi > /dev/null
 then
-    rofi -padding 50 -show ${1:-run} -modi run,window,keys -sidebar-mode -lines 25 -sorting-method fzf
+    # -normalize-match -- Normalize characters with accents so plain letter matches them, e -> é
+    rofi \
+      -hover-select -me-select-entry '' -me-accept-entry MousePrimary \
+      -matching fuzzy \
+      -show ${1:-combi} \
+      -fixed-num-lines \
+      -scroll-method 1 \
+      -eh 2 \
+      -modi combi,run,window,ssh,keys \
+      -sidebar-mode \
+      -lines 50 \
+      -normalize-match \
+      -max-history-size 5000 -sorting-method fzf
 else
     dmenu_run
 fi

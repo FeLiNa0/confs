@@ -1,4 +1,6 @@
 #!/bin/bash
+OMNI="${OMNI:-omnictl}"
+OUTDIR="${OUTDIR:-$HOME/.kube}"
 
 # ANSI color codes
 RED='\033[0;31m'
@@ -29,7 +31,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Check that dependencies are executable
-if ! command -v omnictl 2>&1 >/dev/null ; then
+if ! command -v "$OMNI" 2>&1 >/dev/null ; then
     echo -e "${RED}ERROR: Please install omnictl${NC}"
     echo "Make sure to install the omniconfig file as well."
     echo "Follow this guide: https://omni.siderolabs.com/docs/how-to-guides/how-to-install-and-configure-omnictl/"
@@ -52,16 +54,16 @@ else
 fi
 
 # Check that a non-default omniconfig is installed
-if omnictl config info | grep "grpc://127.0.0.1:8080" ; then
+if "$OMNI" config info | grep "grpc://127.0.0.1:8080" ; then
     echo -e "${RED}WARNING: The current omni context is likely the default context.${NC}"
     echo "Make sure you're using a desired omni context with 'omnictl config info'"
 fi
 
-echo '+ omnictl config info'
-omnictl config info
+echo '+ $OMNI config info'
+"$OMNI" config info
 
 # Fetch all cluster names and store the output in YAML format
-cluster_output=$(omnictl get clusters -o yaml)
+cluster_output=$("$OMNI" get clusters -o yaml)
 if [ $? -ne 0 ]; then
     echo -e "${RED}Failed to get clusters${NC}"
     exit 1
@@ -76,6 +78,8 @@ if [ -z "$cluster_ids" ]; then
     exit 1
 fi
 
+mkdir -p "$OUTDIR"
+
 # Loop through the cluster IDs
 for cluster_id in $cluster_ids; do
     # If a filter is set, skip clusters that don't contain the filter substring
@@ -87,7 +91,7 @@ for cluster_id in $cluster_ids; do
         continue
     fi
 
-    kubeconfig_file="${cluster_id}.yaml"
+    kubeconfig_file="$OUTDIR/${cluster_id}.yaml"
     # Check if kubeconfig file already exists and rename if force is set
     if [ -f "$kubeconfig_file" ]; then
         if [ "$force" -eq 1 ]; then
@@ -102,7 +106,7 @@ for cluster_id in $cluster_ids; do
 
     # Generate kubeconfig
     echo -e "Generating kubeconfig for cluster: ${GREEN}$cluster_id${NC}"
-    omnictl kubeconfig "$kubeconfig_file" -c "$cluster_id"
+    "$OMNI" kubeconfig "$kubeconfig_file" -c "$cluster_id"
     if [ $? -ne 0 ]; then
         echo -e "${RED}Failed to generate kubeconfig for cluster: $cluster_id${NC}"
     else

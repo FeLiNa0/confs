@@ -182,8 +182,8 @@ for_window [class="Spotify|strawberry"] move to workspace 24:𝄞
 bindsym $mod+Tab exec --no-startup-id launcher.sh window
 
 # start program launcher
-# bindsym $mod+d exec --no-startup-id launcher.sh
-bindsym $mod+d exec --no-startup-id dmenu_recency
+# bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id launcher.sh
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -255,7 +255,6 @@ exec --no-startup-id evolution
 exec --no-startup-id protonmail-bridge
 exec --no-startup-id firefox
 exec --no-startup-id teams-for-linux
-exec --no-startup-id discord
 exec --no-startup-id .screenlayout/select-arandr-display.sh
 # SOC2
 exec --no-startup-id clamtk

@@ -12,17 +12,21 @@ function debug
   end
 end
 
-function addpaths --argument-names 'path' 'verbose'
+function addpaths --argument-names 'path' 'verbose' 'append'
   # For adding to PATH
   if test -d "$path"
     if not contains -- "$path" $fish_user_paths
       # Must check if path is already added.
       # Without this check, fish becomes gradually slower to start as it
       # struggles to manage an enormous variable.
-      set -U fish_user_paths $fish_user_paths "$path"
+      if [ "$append" = "no-append" ]
+          set -U fish_user_paths "$path" $fish_user_paths
+      else
+          set -U fish_user_paths $fish_user_paths "$path"
+      end
       debug Added path (trimdir.py "$path")
     end
-  else if ! [ "$verbose" = "" ]
+  else if [ "$verbose" = "verbose" ]
     debug "WARNING: addpaths could not find $argv[1]"
   end
 end
@@ -97,8 +101,6 @@ if command -v git > /dev/null
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
-
-abbr k9s 'echo -ne "\033]k9s connected to cluster "(kubectl config current-context)"\007" && k9s'
 
 if command -v kubectl > /dev/null
     abbr k kubectl

@@ -26,6 +26,7 @@ tryalias ipy-mouse 'ipy --TerminalInteractiveShell.mouse_support=True'
 
 tryalias v vis nvim vim vis vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
 tryalias nv nvim
+tryalias pnv 'pipenv run nvim'
 tryalias vmin 'nvim -u ~/.vimrc.minimal' 'vim -u ~/.vimrc.minmal' vis vi nano 'nvim -u ~/.vimrc.minimal'
 tryalias e 'zathura --fork' evince mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 
