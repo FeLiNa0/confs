@@ -224,7 +224,10 @@ end
 purty_colors_now = function(a, b, c, d)
     local light_mode = false
     if light_mode then
-        vis:command('set theme mellow')
+        vis:command('set theme light-16')
+        return null
+    else
+        vis:command('set theme solarized')
         return null
     end
 
