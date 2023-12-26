@@ -211,7 +211,7 @@ copy_confs_for x11 \
 copy_confs_for_host x11_keyboard_layout bin/set-keyboard-layout.sh
 
 copy_confs_for starship_rust_portable_shell_prompt \
-  .config/starship.toml
+  .config/starship.toml bin/uname-m-if-not-typical.sh
 
 copy_confs_for "{ba,z,tc,c}sh" \
   .bashrc .bashrc_ps1 .bash_profile .tryalias.sh .aliases bin/trimdir.py bin/gitinfo.sh bin/projectname.sh bin/projectroot.sh bin/real-deal-turbo-charged-cd.sh

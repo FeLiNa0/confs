@@ -2,7 +2,7 @@ tryalias knock 'nc -z'
 tryalias ma makeanywhere
 tryalias pma 'pipenv run makeanywhere'
 
-tryalias pass $HOME/bin/pass-with-custom-editor.sh
+tryalias pass $HOME/bin/pass-custom.sh
 
 tryalias em 'emacs -nw'
 tryalias emc 'emacsclient -nw --alternate-editor=""'

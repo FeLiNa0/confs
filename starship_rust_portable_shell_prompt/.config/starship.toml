@@ -1,5 +1,5 @@
 format = "$time$shell$hostname$username$jobs$all$directory$git_status$character"
-right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
+right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes${custom.machine_architecture}"
 add_newline = true
 
 [line_break]
@@ -14,7 +14,7 @@ style = 'bold red'
 format = "[$hostname $ssh_symbol]($style)"
 
 [username]
-disabled = false
+disabled = true
 format = "[$user]($style) @ "
 
 [shell]
@@ -107,6 +107,13 @@ style = "fg:#88ddff"
 'gke_.*_(powerflex-*_*)?(?P<var_cluster>[\w-]+)' = '$var_cluster'
 "kind-(?P<name>.*)" = "$name"
 "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)" = "$name"
+
+[custom.machine_architecture]
+when = "true"
+shell = "dash"
+command = "uname-m-if-not-typical.sh"
+format = " [$symbol($output)]($style)"
+style = "bold fg:red"
 
 [git_commit]
 commit_hash_length = 4
