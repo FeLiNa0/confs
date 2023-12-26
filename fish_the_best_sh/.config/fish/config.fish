@@ -203,7 +203,7 @@ if status is-interactive
 
   function fish_user_key_bindings
     # Use fzf.fish to implement the famous ctrl-p binding for searching files
-    bind \cp _fzf_search_directory
+    command -v fzf 2>&1 >/dev/null && bind \cp _fzf_search_directory
 
     # Ctrl-F is an essential fish command to autocomplete based on history
     bind \cf forward-char
@@ -219,7 +219,7 @@ if status is-interactive
 
   set_global fzf_preview_file_cmd cat
 
-  if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
+  if command -v fzf 2>&1 >/dev/null ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
     echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
     fisher install PatrickF1/fzf.fish
   end
