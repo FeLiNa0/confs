@@ -1,5 +1,5 @@
-format = "$time$shell$hostname$username$jobs$all$directory$git_status$character"
-right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes${custom.machine_architecture}"
+format = "$time$shell${custom.machine_architecture}$hostname$username$jobs$all$directory$git_status$character"
+right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
 add_newline = true
 
 [line_break]
@@ -109,10 +109,10 @@ style = "fg:#88ddff"
 "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)" = "$name"
 
 [custom.machine_architecture]
-when = "true"
+when = "uname-m-if-not-typical.sh"
 shell = "dash"
 command = "uname-m-if-not-typical.sh"
-format = " [$symbol($output)]($style)"
+format = "[$symbol($output)]($style) "
 style = "bold fg:red"
 
 [git_commit]
