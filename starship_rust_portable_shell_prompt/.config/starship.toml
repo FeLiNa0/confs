@@ -109,7 +109,9 @@ style = "fg:#88ddff"
 "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)" = "$name"
 
 [custom.machine_architecture]
-when = "[ $(uname -m) != x86_64 ]"
+# Either an odd architecture or an SSH connection
+# Check if SSH first since uname can run slow on some machines
+when = "[ -n \"$SSH_CLIENT\" ] || [ $(uname -m) != x86_64 ]"
 shell = "dash"
 command = "uname -m"
 format = "[$symbol($output) ]($style)"
