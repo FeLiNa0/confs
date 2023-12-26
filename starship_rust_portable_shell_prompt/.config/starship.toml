@@ -109,10 +109,10 @@ style = "fg:#88ddff"
 "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)" = "$name"
 
 [custom.machine_architecture]
-when = "true"
+when = "[ $(uname -m) != x86_64 ]"
 shell = "dash"
-command = "uname-m-if-not-typical.sh && echo ' '"
-format = "[$symbol($output)]($style)"
+command = "uname -m"
+format = "[$symbol($output) ]($style)"
 style = "bold fg:red"
 
 [git_commit]
