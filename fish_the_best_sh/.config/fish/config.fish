@@ -219,7 +219,7 @@ if status is-interactive
 
   set_global fzf_preview_file_cmd cat
 
-  if command -v fzf 2>&1 >/dev/null ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
+  if command -v fzf 2>&1 >/dev/null && ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
     echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
     fisher install PatrickF1/fzf.fish
   end
