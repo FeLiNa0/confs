@@ -13,10 +13,6 @@ function ssh_info
   printf " "
 end
 
-function fish_title_info
-  printf "pid=%s" $fish_pid
-end
-
 function fish_title
-  printf "🐱 🐠 %s %s%s %s" (ssh_info) (title_get_project) (pwd) (fish_title_info)
+  printf "🐱 🐠 %s %s%s %s" (ssh_info) (title_get_project) (trimdir.py (pwd) || pwd)
 end

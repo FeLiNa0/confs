@@ -54,7 +54,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set autoindent')
     vis:command('set cursorline on')
 
-    vis:command('set show-newlines')
+    -- vis:command('set show-newlines')
     vis:command('set show-tabs')
     vis:command('set show-eof')
 									-- tabs example

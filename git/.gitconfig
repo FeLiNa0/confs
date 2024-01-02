@@ -1,7 +1,7 @@
 [user]
 email = hugo@roguh.com
 name = Rivera Calzadillas
-signingkey = 57F7D4304B2BE5ACD2B27C7B7A0DD45A919A55AF
+signingkey = ED7F4EC6448A95C3617596DD2BEEF0E7C2E5D7AD
 
 [commit]
 gpgsign = true

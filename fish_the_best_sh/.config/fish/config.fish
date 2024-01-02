@@ -57,6 +57,8 @@ addpaths $HOME/.cargo/bin
 addpaths /opt/cuda/bin
 # Snap Linux binaries
 addpaths /snap/bin
+# Google Gcloud
+addpaths /opt/google-cloud-cli/bin/
 
 set_global EDITOR vis
 
