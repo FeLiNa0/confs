@@ -87,6 +87,12 @@ format = " $timestamp.datetime(f:'%R')Z "
 
 [[block]]
 block = "time"
+interval = 15
+timezone = "America/Argentina/Buenos_Aires"
+format = " $timestamp.datetime(f:'%H')A "
+
+[[block]]
+block = "time"
 interval = 30
 format = " $timestamp.datetime(f:'%d %R%z') "
 
