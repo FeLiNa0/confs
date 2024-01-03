@@ -15,6 +15,10 @@ else
   if [ "$PROJECTNAME_PRINT_PWD" != "true" ] && [ "$PROJECTNAME" = "$(basename $PWD)" ]; then
     echo "$PROJECTNAME"
   else
-    echo "$PROJECTNAME $(echo "$PWD" | sed "$PATTERN")"
+    if command -v trimdir.py 2>&1 >/dev/null; then
+      echo "$PROJECTNAME $(echo "$PWD" | sed "$PATTERN" | trimdir.py)"
+    else
+      echo "$PROJECTNAME $(echo "$PWD" | sed "$PATTERN")"
+    fi
   fi
 fi

@@ -65,7 +65,7 @@ format = "[$time]($style) "
 
 [git_branch]
 format = "[$symbol$branch]($style) "
-style = "bold fg:bright-yellow"
+style = "bold fg:bright-white"
 symbol = ""
 truncation_length=14
 
@@ -95,6 +95,7 @@ success_symbol = "[\\$](bold white)"
 error_symbol = "[X](bold red)"
 
 [cmd_duration]
+style = "bright-yellow"
 min_time = 5000
 show_milliseconds = false
 format = "[$duration]($style) "
@@ -104,8 +105,8 @@ disabled = false
 format = ' [ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
 contexts = [
- { context_pattern = "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)", context_alias = "$name", style = "red" },
- { context_pattern = 'gke_.*_(powerflex-*_*)?(?P<var_cluster>[\w-]+)', context_alias = '$var_cluster', style = "red" },
+ { context_pattern = "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)", context_alias = "$name", style = "bright-yellow" },
+ { context_pattern = 'gke_.*_(powerflex-*_*)?(?P<var_cluster>[\w-]+)', context_alias = '$var_cluster', style = "bright-yellow" },
  { context_pattern = "kind-(?P<name>.*)", context_alias = "$name" },
 ]
 
@@ -123,7 +124,7 @@ commit_hash_length = 4
 only_detached = false
 tag_disabled = false
 format = " [$hash$tag]($style)"
-style = "fg:bright-yellow"
+style = "fg:bright-white"
 
 [conda]
 ignore_base = false
