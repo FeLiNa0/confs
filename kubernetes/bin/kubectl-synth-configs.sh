@@ -5,7 +5,7 @@ set -x
 
 cd ~/.kube/
 omnictl config context dev
-generate_kubeconfigs.sh '0137|1337|0007-58|0007-04|0007-13|0007-629-max|0001-31-leghorn|0007-25-nico'
+generate_kubeconfigs.sh '1002|0137|1337|0007-58|0007-04|0007-13|0007-629-max|0001-31-leghorn|0007-25-nico'
 
 # # stage not stg, thank you sidero/omni/etc
 # omnictl config context stage

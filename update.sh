@@ -304,6 +304,8 @@ copy_confs_for top .config/procps/toprc
 
 copy_confs_for readline .inputrc
 
+copy_confs_for serial bin/save_jt48_ttyUSB_logs.sh
+
 copy_confs_for pywal bin/wal-set-theme.sh bin/theme-post.sh .cache/wal/{sequences,colors.*}
 
 copy_confs_for unison .unison/default.prf
@@ -331,9 +333,17 @@ copy_confs_for system-space-cleaner.sh bin/system-space-cleaner.sh
 
 copy_confs_for pass bin/pass-custom.sh
 
-copy_confs_for kubernetes bin/kubectl-get-image-sizes.sh bin/kubectl-monitor-zigbee.sh bin/kubectl-synth-configs.sh bin/generate_kubeconfigs.sh bin/kubectl-get-argocd-ui-password.sh .config/k9s/plugin.yml
+copy_confs_for kubernetes \
+    bin/correct-kubernetes-cluster.sh \
+    bin/kubectl-get-image-sizes.sh \
+    bin/kubectl-monitor-zigbee.sh \
+    bin/kubectl-synth-configs.sh \
+    bin/generate_kubeconfigs.sh \
+    bin/kubectl-get-argocd-ui-password.sh \
+    bin/k9s.sh   .config/k9s/plugin.yml \
+    bin/python-wget-curl-replacement.sh
 
-copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh
+copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 
