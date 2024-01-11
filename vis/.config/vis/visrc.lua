@@ -27,7 +27,8 @@ vis.events.subscribe(vis.events.INIT, function(win)
     
     -- Type current UTC time using Python
     vis:command_register("pt", function(argv, force, win, selection, range)
-        vis:feedkeys(':<python -c "import datetime; print(datetime.datetime.utcnow().isoformat(), end=\'\')"')
+        -- vis:feedkeys(':<python -c "import datetime; print(datetime.datetime.utcnow().isoformat(), end=\'\')"')
+        vis:feedkeys(':<TZ=UTC date --iso-8601=seconds')
     end)
     
     -- The famous ctrl-P for finding files
