@@ -4,7 +4,7 @@ add_newline = true
 
 [line_break]
 # Prompt is one line, not two lines
-disabled = true
+disabled = false
 
 [hostname]
 disabled = false
@@ -151,16 +151,72 @@ style = "white"
 format = "[$symbol($version )]($style)"
 
 [nodejs]
-disabled = true
 style = "white"
 format = "[$symbol($version )]($style)"
 
+[c]
+format = '[$symbol($version(-$name) )]($style)'
+
 [ocaml]
 # This is a double humped camel!!!!!!!! 🐫
+# See Perl
 style = "white"
 format = "[$symbol($version )]($style)"
 
 [perl]
 # This is a single humped camel!!!!!!!! 🐪
+# TIM TOADY
+# See OCaml
 style = "white"
 format = "[$symbol($version )]($style)"
+
+[raku]
+# TIM TOADY
+format = "[$symbol($version )]($style)"
+
+[elm]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[haskell]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[clojure]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[lua]
+format = '[$symbol($version )]($style)'
+
+# The rest of these languages are not often used, but I'll get rid of the 'via' string anyway
+[cobol]
+format = '[$symbol($version )]($style)'
+[crystal]
+format = '[$symbol($version )]($style)'
+[dart]
+format = '[$symbol($version )]($style)'
+[elixir]
+format = '[$symbol($version )]($style)'
+[go]
+format = '[$symbol($version )]($style)'
+[java]
+format = '[$symbol($version )]($style)'
+[julia]
+format = '[$symbol($version )]($style)'
+[kotlin]
+format = '[$symbol($version )]($style)'
+[php]
+format = '[$symbol($version )]($style)'
+[nim]
+format = '[$symbol($version )]($style)'
+[rlang]
+format = '[$symbol($version )]($style)'
+[ruby]
+format = '[$symbol($version )]($style)'
+[swift]
+format = '[$symbol($version )]($style)'
+[vlang]
+format = '[$symbol($version )]($style)'
+[zig]
+format = '[$symbol($version )]($style)'
