@@ -34,8 +34,18 @@ autocmd BufReadPost,BufWinEnter * silent! lcd %:p:h
 set ignorecase
 set smartcase
 
-" Spellcheck
-" Use z= to get spelling suggestions
+" Turn on spellchecking
+set spell
+
+" Use z= or Ctrl-W W to get spelling suggestions in normal mode
+" In insert mode, use Ctrl-X S, then Ctrl-N and Ctrl-P.
+" Ctrl-W W is used in the vis-spellcheck plugin, so match that.
+noremap <C-w>w   z=
+
+" Spell check individual CamelCase words (ApplePie).
+set spelloptions=camel
+
+" NeoVim should offer to download all these dictionaries if you don't have them
 set spelllang=en_us,es_es,es_mx,fr,ru_ru
 
 " C-x C-k to show dictionary words
@@ -253,8 +263,14 @@ vnoremap <C-c> "+y
 nnoremap <C-c> "+y
 cnoremap <C-c> "+y
 
-" Enable mouse control in neovim for normal mode, visual mode, and insert mode
-set mouse=nva
+" Enable mouse control in neovim for normal mode, visual mode, insert mode,
+" etc
+set mouse=nvia
+
+" Right mouse button pops up a menu.
+" Shift left mouse extends a position.
+" Clicking can also move the cursor.
+set mousemodel=popup_setpos
 
 " <Left> and <Right> wrap around line breaks
 set whichwrap+=<,>,[,]

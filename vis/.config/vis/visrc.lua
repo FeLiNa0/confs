@@ -14,33 +14,43 @@ require('vis')
 vis.events.subscribe(vis.events.INIT, function(win)
     -- Semicolon is the same as colon
     vis:map(vis.modes.NORMAL, ';', ':')
-    
+
     -- Alias shell redirection commands
     -- These won't work in VISUAL since they're taken by other mappings
     -- TODO force a mapping?
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE, '|', ':|')
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE, '<', ':<')
     vis:map(vis.modes.NORMAL | vis.modes.VISUAL_LINE, '>', ':>')
-    
+
     vis:map(vis.modes.NORMAL, '`', ':lint')
     vis:map(vis.modes.NORMAL, '~', ':fix')
-    
+
+    vis:map(vis.modes.NORMAL, 'z=', function()
+        vis:feedkeys('<C-w>e')
+        vis:feedkeys('<C-w>w')
+    end)
+
+    vis:map(vis.modes.NORMAL, 'z=', function()
+        vis:feedkeys('<C-w>e')
+        vis:feedkeys('<C-w>w')
+    end)
+
     -- Type current UTC time using Python
     vis:command_register("pt", function(argv, force, win, selection, range)
         -- vis:feedkeys(':<python -c "import datetime; print(datetime.datetime.utcnow().isoformat(), end=\'\')"')
         vis:feedkeys(':<TZ=UTC date --iso-8601=seconds')
     end)
-    
+
     -- The famous ctrl-P for finding files
     -- Process color codes with --ansi. This slows down fzf, but I can't seem to get rid of the color codes in the output from ag/somewhereelse
     vis:map(vis.modes.NORMAL, '<C-p>', ':fzf --ansi<Enter>')
-    
+
     -- Paste from system clipboard with vis-clipboard
     -- vis:map(vis.modes.NORMAL, '<C-v>', '"+p')
     -- vis:map(vis.modes.INSERT, '<C-v>', '<Escape>"+pi')
     vis:map(vis.modes.NORMAL, '<C-v>', function() vis:feedkeys(':>vis-clipboard --paste<Enter>') end)
     vis:map(vis.modes.INSERT, '<Escape><C-v>', function() vis:feedkeys(':>vis-clipboard --paste<Enter>') end)
-    
+
     -- Put selection content into system clipboard
     vis:map(vis.modes.VISUAL_LINE, '<C-c>', function() vis:feedkeys(':>vis-clipboard --copy<Enter>') end)
     -- TODO this doesn't work with multiple cursors, just gets last selection
@@ -74,6 +84,10 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set colorcolumn 79')
     vis:command('set tabwidth 4')
     vis:command('set expandtab on')
+
+    local lang = 'en_US'
+    vis:command('set spelllang ' .. lang)
+    vis:info('Spellchecking language is now ' .. lang .. '. F7 to activate; Ctrl-W W for sugggestions.')
 end)
 
 vis.events.subscribe(vis.events.INIT, function()
@@ -81,6 +95,10 @@ vis.events.subscribe(vis.events.INIT, function()
     lint = require_if_exists('https://github.com/roguh/vis-lint', 'vis-lint') or {}
     backup = require_if_exists('https://github.com/roguh/vis-backup', 'vis-backup', 'backup') or {}
     shebang = require_if_exists('https://github.com/e-zk/vis-shebang', 'vis-shebang') or {}
+    -- Forked from 'https://gitlab.com/muhq/vis-spellcheck'
+    spellcheck = require_if_exists('https://github.com/roguh/vis-spellcheck', 'vis-spellcheck') or {}
+
+    spellcheck.default_lang = "en_US"
 
     -- A global variable for configuring vis-shebang
     shebangs = {
@@ -95,7 +113,7 @@ vis.events.subscribe(vis.events.INIT, function()
     -- This will create the directory
     backup.set_directory(os.getenv("HOME") .. "/tmp/vis-backups")
     backup.get_fname = backup.entire_path_with_double_percentage_signs_and_timestamp
-    
+
 	lint.linters["yaml"] = {"yamllint -"}
 	lint.linters["python"] = {
 	   -- "black --check -", "isort --check -",
@@ -233,7 +251,7 @@ purty_colors_now = function(a, b, c, d)
     end
 
     local lexers = vis.lexers
-    
+
     -- Basic Style
     lexers.STYLE_CURSOR = 'reverse'
     lexers.STYLE_CURSOR_LINE = 'bold,underlined'
@@ -261,12 +279,12 @@ purty_colors_now = function(a, b, c, d)
         ['base0E'] = '#747474',
         ['base0F'] = '#5e5e5e',
     }
-    
+
     lexers.colors = colors
-    
+
     local fg = ',fore:'..colors.base05..','
     local bg = ',back:'..colors.base00..','
-    
+
     lexers.STYLE_DEFAULT = bg..fg
     lexers.STYLE_NOTHING = bg
     lexers.STYLE_CLASS = 'fore:'..colors.base0A
@@ -288,7 +306,7 @@ purty_colors_now = function(a, b, c, d)
     lexers.STYLE_WHITESPACE = 'fore:'..colors.base02
     lexers.STYLE_EMBEDDED = 'fore:'..colors.base0F
     lexers.STYLE_IDENTIFIER = 'fore:'..colors.base08
-    
+
     lexers.STYLE_LINENUMBER = 'fore:'..colors.base02..',back:'..colors.base00
     lexers.STYLE_CURSOR = 'fore:'..colors.base00..',back:'..colors.base05
     lexers.STYLE_CURSOR_PRIMARY = 'fore:'..colors.base00..',back:'..colors.base05

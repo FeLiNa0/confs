@@ -330,8 +330,9 @@
 (setq inhibit-splash-screen t)
 
 ;; Enable on-the-fly spellcheck suggestions
-;; (add-hook 'text-mode-hook 'flyspell-mode)
-;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
 ;; (with-eval-after-load "ispell"
 ;;         (setq ispell-program-name "hunspell")
@@ -345,7 +346,12 @@
   :defer 1
   :config
   (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
-  (setq flyspell-popup-correct-delay 1))
+  (setq flyspell-popup-correct-delay 1)
+  ;; Performance
+  (setq flyspell-issue-message-flag nil)
+  (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
+  (define-key flyspell-mode-map (kbd "C-w w") #'flyspell-popup-correct)
+  (flyspell-mode 1))
 
 ;; Do not clobber
 (global-auto-revert-mode 1)
