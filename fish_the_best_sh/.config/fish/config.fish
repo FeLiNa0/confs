@@ -55,6 +55,8 @@ addpaths $HOME/.local/bin  --verbose
 addpaths $HOME/.cargo/bin
 # CUDA binaries
 addpaths /opt/cuda/bin
+# Raku (Perl 6)
+addpaths $HOME/.rakudo-moar-2024.01-01-linux-x86_64-gcc/bin/
 # Snap Linux binaries
 addpaths /snap/bin
 # Google Gcloud
