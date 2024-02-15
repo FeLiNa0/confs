@@ -8,6 +8,8 @@
 ;;;
 ;;; Code:
 
+;;; Make sure ~/.emacs does not exist
+
 ;; Install use-package.
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -105,19 +107,19 @@
   (setq evil-operator-state-cursor '("red" hollow)))
 
 ;; HELM
-(use-package helm
-  :defer 1
-  :config
-  (setq helm-autoresize-max-height 0
-        helm-autoresize-min-height 20
-        helm-split-window-in-side-p t)
-  (helm-autoresize-mode 1)
-  (when (executable-find "curl")
-    (setq helm-google-suggest-use-curl-p t))
-  (global-set-key (kbd "M-x") #'helm-M-x)
-  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-  (global-set-key (kbd "C-x C-f") #'helm-find-files)
-  (helm-mode))
+;; (use-package helm
+;;   :defer 1
+;;   :config
+;;   (setq helm-autoresize-max-height 0
+;;         helm-autoresize-min-height 20
+;;         helm-split-window-in-side-p t)
+;;   (helm-autoresize-mode 1)
+;;   (when (executable-find "curl")
+;;     (setq helm-google-suggest-use-curl-p t))
+;;   (global-set-key (kbd "M-x") #'helm-M-x)
+;;   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+;;   (global-set-key (kbd "C-x C-f") #'helm-find-files)
+;;   (helm-mode))
 
 (use-package helm-projectile
   :config
@@ -248,13 +250,13 @@
 (use-package neotree
   :defer 1)
 
-(use-package ranger
-  :ensure t
-  :config
-  (setq ranger-show-hidden t)
-  ;; Replace dired
-  (ranger-override-dired-mode t)
-  (setq ranger-override-dired 'ranger))
+;; (use-package ranger
+;;   :ensure t
+;;   :config
+;;   (setq ranger-show-hidden t)
+;;   ;; Replace dired
+;;   (ranger-override-dired-mode t)
+;;   (setq ranger-override-dired 'ranger))
 
 ;; Icons package
 ;; Run all-the-icons-install-fonts to auto-magically install fonts.
