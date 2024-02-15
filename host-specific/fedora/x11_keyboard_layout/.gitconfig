@@ -1,7 +1,7 @@
 [user]
-email = felina@felina.art
-name = Felina A. Rivera Calzadillas
-signingkey = 516D39C29BEFC3F95B5A532EE1B10F13AB63EFED
+email = hugo@roguh.com
+name = Rivera Calzadillas
+signingkey = ED7F4EC6448A95C3617596DD2BEEF0E7C2E5D7AD
 
 [commit]
 gpgsign = true

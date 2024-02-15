@@ -11,107 +11,32 @@ call plug#begin()
 """""""""""""""" Load lightweight, essential, or quick-loading plugins first
 
 " Measure startup time
-Plug 'dstein64/vim-startuptime'
+" Plug 'dstein64/vim-startuptime'
 
 " Color themes
-" $ trizen -S gruvbox-dark-gtk lxappearance-gtk3
-" $ lxappearance
-" Plug 'sainnhe/gruvbox-material'
-Plug 'atelierbram/Base2Tone-vim'
-Plug 'kitten/vim-adventurous'
-Plug 'tjdevries/colorbuddy.nvim', { 'branch': 'dev' }
-Plug 'jesseleite/nvim-noirbuddy'
-Plug 'adigitoleo/vim-mellow'
+" Plug 'atelierbram/Base2Tone-vim'
+
+Plug 'kyoh86/momiji'
 
 " Reload files edited externally
 Plug 'djoshea/vim-autoread'
 
-" Good statusline
-Plug 'vim-airline/vim-airline'
-Plug 'enricobacis/vim-airline-clock'
-let g:airline#extensions#clock#format = '%H:%M'
-let g:airline_powerline_fonts = 1
-
-" Show git diff in window when writing git commit message
-Plug 'rhysd/committia.vim'
-
-" Org mode
-" Doesn't work very well...
-" Plug 'jwiegley/org-mode', { 'for': 'org' }
-" Plug 'jceb/vim-orgmode', { 'for': 'org' }
-
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'neovimhaskell/haskell-vim'
-
-" use ctrl-p to find files
-map <C-p> :CtrlPMixed<CR>
-
-" ignore files in .gitignore, include dotfiles
-let g:ctrlp_user_command = 'find %s -ipath \*.git -prune -or -type f'
-
-" Asynchronous grep results.
-" Default search tool is whatever is available first from:
-" ag, ack, grep, findstr, rg, pt, git
-" Leave an empty query to search for word under the cursor.
-Plug 'mhinz/vim-grepper'
-
-command! ProjectGrepper execute 'Grepper -dir repo'
-map <C-f> :ProjectGrepper<CR>
-
-" File browser.
-Plug 'francoiscabrol/ranger.vim'
-if has('nvim')
-  Plug 'rbgrouleff/bclose.vim'
-end
-
-let g:ranger_replace_netrw = 1
-let g:ranger_map_keys = 0
-map <C-n> :Ranger<CR>
-
-" Folding for C, Fortran, Java, CPP
+" Activate advanced folding: C, Fortran, Java, CPP, any filetype really...
 Plug 'pseewald/anyfold'
-
-" Activate advanced folding
 let g:anyfold_fold_comments=1
 autocmd Filetype * AnyFoldActivate
 
-" Open all folds
-set foldlevel=20
-set foldlevelstart=20
-
-" Use :OpenSession :SaveSession
-" Useful: :RestartVim to save session, close and restart vim, and then reload
-" session. Great for debugging vim scripts.
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-session'
-" 
-" " Save session every X minutes
-" let g:session_autosave_periodic = 1
-" let g:session_autosave_silent = 1
-" let g:session_autoload = 'no'
-" let g:session_autosave = 'no'
-
-" Rainbow coloring for parenthesis and other paired characters
-" Uncomment following line for demo
-" ( (( [ ] ]]] )) )
-Plug 'frazrepo/vim-rainbow'
-let g:rainbow_active = 1
-
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup = 1
-" Sample:
-                                                                 let test_var = 0
-
-" Plug 'lark-parser/vim-lark-syntax'
+" use ctrl-p to find files
+Plug 'ctrlpvim/ctrlp.vim'
+map <C-p> :CtrlPMixed<CR>
+" ignore files in .gitignore, include dotfiles
+let g:ctrlp_user_command = 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
 
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 10000
 
 " THE BEST GIT PORCELAIN IN THE VIM WORLD
 Plug 'tpope/vim-fugitive'
-
-Plug 'tpope/vim-jdaddy'
 
 " Language server protocol (LSP) for completion and other fancy IDE-like features
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['java', 'typescript', 'javascript', 'javascript.jsx', 'python', 'rust', 'json', 'yaml', 'yaml.docker-compose', 'dockerfile'] }
@@ -138,30 +63,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-Plug 'ervandew/supertab'
-
-" Use tab for selecting completion
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-
-" Plug 'stevearc/vim-arduino'
-
-" Strip trailing whitespace on changed lines only
-" Use :WStrip to clean all trailing whitespace
-Plug 'tweekmonster/wstrip.vim'
-
-" Good default settings
-" "one step above the nocompatible setting"
-" A taste of its features:
-"   'backspace': Backspace through anything in insert mode.
-"   'incsearch': Start searching before pressing enter.
-"   'listchars': Makes :set list (visible whitespace) prettier.
-"   'scrolloff': Always show at least one line above/below the cursor.
-"   'autoread': Autoload file changes. You can undo by pressing u.
-"   runtime! macros/matchit.vim: Load the version of matchit.vim that ships with Vim.
-" I enable most of these manually.
-" Plug 'tpope/vim-sensible'
-
 " Various language syntax definitions. Loads much faster than individual plugins.
 " Languages supported as of 02/2020:
 " acpiasl (syntax), ansible (syntax, indent, ftplugin), apiblueprint (syntax), applescript (syntax, indent), arduino (syntax, indent), asciidoc (syntax), autohotkey (indent), blade (syntax, indent, ftplugin), c++11 (syntax), c/c++ (syntax), caddyfile (syntax, indent, ftplugin), carp (syntax), cjsx (syntax, ftplugin), clojure (syntax, indent, autoload, ftplugin), cmake (syntax, indent), coffee-script (syntax, compiler, indent, autoload, ftplugin), cql (syntax), cryptol (syntax, compiler, ftplugin), crystal (syntax, indent, autoload, ftplugin), csv (syntax, autoload, ftplugin), cucumber (syntax, indent, compiler, ftplugin), cue (syntax), dart (syntax, indent, autoload, ftplugin), dhall (syntax, ftplugin), dlang (syntax, indent), dockerfile (syntax, indent, ftplugin), elixir (syntax, indent, compiler, autoload, ftplugin),
@@ -172,9 +73,7 @@ Plug 'tweekmonster/wstrip.vim'
 " reason (syntax, indent), rspec (syntax), rst (syntax, indent, autoload, ftplugin), ruby (syntax, indent, compiler, autoload, ftplugin), rust (syntax, indent, compiler, autoload, ftplugin), sbt (syntax), scala (syntax, indent, compiler, ftplugin), scss (syntax, indent, ftplugin), slim (syntax, indent, ftplugin), slime (syntax, indent), smt2 (syntax, autoload, ftplugin), solidity (syntax, indent, ftplugin), stylus (syntax, indent, ftplugin), svelte (syntax, indent), svg-indent (indent),
 " svg (syntax), swift (syntax, indent, ftplugin), sxhkd (syntax), systemd (syntax, ftplugin), terraform (syntax, indent, autoload, ftplugin), textile (syntax, ftplugin), thrift (syntax), tmux (syntax, ftplugin), tomdoc (syntax), toml (syntax, ftplugin), tptp (syntax), twig (syntax, indent, ftplugin), typescript (syntax, indent, compiler, ftplugin), v (syntax, indent, ftplugin), vala (syntax, indent, ftplugin), vbnet (syntax), vcl (syntax), vifm (syntax, autoload, ftplugin), vm (syntax, indent), vue (syntax, indent, ftplugin), xdc (syntax), xls (syntax), xml (syntax), yaml (syntax, ftplugin), yard (syntax), zephir (syntax), zig (syntax, autoload, ftplugin)
 Plug 'sheerun/vim-polyglot'
-let g:polyglot_disabled = ['ocaml', 'org', 'python']
-
-Plug 'ap/vim-css-color'
+let g:polyglot_disabled = ['python']
 
 """""""""""""""" Load heavy and/or extra plugins
 if $VIM_LOAD_EXTRA_PLUGINS == "true"
@@ -189,6 +88,69 @@ if $VIM_LOAD_EXTRA_PLUGINS == "true"
 
     " Reason
     Plug 'reasonml-editor/vim-reason-plus'
+
+    " Good statusline
+    Plug 'vim-airline/vim-airline'
+    Plug 'enricobacis/vim-airline-clock'
+    let g:airline#extensions#clock#format = '%H:%M'
+    let g:airline_powerline_fonts = 1
+
+    Plug 'neovimhaskell/haskell-vim'
+
+    " Asynchronous grep results.
+    " Default search tool is whatever is available first from:
+    " ag, ack, grep, findstr, rg, pt, git
+    " Leave an empty query to search for word under the cursor.
+    Plug 'mhinz/vim-grepper'
+    command! ProjectGrepper execute 'Grepper -dir repo'
+    map <C-f> :ProjectGrepper<CR>
+
+    " File browser.
+    Plug 'francoiscabrol/ranger.vim'
+
+    let g:ranger_replace_netrw = 1
+    let g:ranger_map_keys = 0
+    map <C-n> :Ranger<CR>
+
+    " Strip trailing whitespace on changed lines only
+    " Use :WStrip to clean all trailing whitespace
+    Plug 'tweekmonster/wstrip.vim'
+
+    " Use :OpenSession :SaveSession
+    " Useful: :RestartVim to save session, close and restart vim, and then reload
+    " session. Great for debugging vim scripts.
+    Plug 'xolox/vim-misc'
+    Plug 'xolox/vim-session'
+    " Save session every X minutes
+    let g:session_autosave_periodic = 1
+    let g:session_autosave_silent = 1
+    let g:session_autoload = 'no'
+    let g:session_autosave = 'no'
+
+    " Rainbow coloring for parenthesis and other paired characters
+    " Uncomment following line for demo
+    " ( (( [ ] ]]] )) )
+    Plug 'frazrepo/vim-rainbow'
+    let g:rainbow_active = 1
+
+    Plug 'lark-parser/vim-lark-syntax'
+
+    " Show color of CSS colors using syntax highlighting
+    Plug 'ap/vim-css-color'
+
+    Plug 'stevearc/vim-arduino'
+
+    " Good default settings
+    " "one step above the nocompatible setting"
+    " A taste of its features:
+    "   'backspace': Backspace through anything in insert mode.
+    "   'incsearch': Start searching before pressing enter.
+    "   'listchars': Makes :set list (visible whitespace) prettier.
+    "   'scrolloff': Always show at least one line above/below the cursor.
+    "   'autoread': Autoload file changes. You can undo by pressing u.
+    "   runtime! macros/matchit.vim: Load the version of matchit.vim that ships with Vim.
+    " I enable most of these manually.
+    Plug 'tpope/vim-sensible'
 
     " Haskell
     " needs ghc-mod
@@ -282,49 +244,15 @@ endif
 call plug#end()
 
 " Set colors
-try
-  " set background=dark
-  " colorscheme Base2Tone_EveningDark
-  " let g:airline_theme='Base2Tone_EveningDark'
+"set background=dark
+"colorscheme Base2Tone_LavenderDark
+"let g:airline_theme='Base2Tone_LavenderDark'
 
-  " set background=dark
-  " colorscheme Base2Tone_LavenderDark
-  " let g:airline_theme='Base2Tone_LavenderDark'
+"set background=light
+"colorscheme Base2Tone_LavenderLight
+"let g:airline_theme='Base2Tone_LavenderLight'
 
-  set background=dark
-  colorscheme adventurous
-  let g:airline_theme='Base2Tone_LavenderDark'
-
-  set background=dark
-  lua require("noirbuddy").setup()
-  
-  " set background=light
-  " colorscheme Base2Tone_LavenderLight
-  " let g:airline_theme='Base2Tone_LavenderLight'
-
-  " colorscheme mellow
-catch
-  try
-    set background=dark
-    colorscheme adventurous
-    let g:airline_theme='Base2Tone_LavenderDark'
-  catch
-  endtry
-endtry
-
-function! FixColorScheme()
-  " 256color 249 is Grey70
-  " highlight Comment guifg=249 ctermfg=249 ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
-  " highlight SpecialComment guifg=249 ctermfg=249 ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
-  " highlight vimCommentTitle guifg=249 ctermfg=249 ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
-  " highlight javaCommentTitle guifg=249 ctermfg=249 ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
-  " highlight erubyComment guifg=249 ctermfg=249 ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
-endfunction
-
-augroup FixColorSchemeGroup
-  au!
-  au ColorScheme * call FixColorScheme()
-augroup END
+colorscheme momiji
 
 " Read the real vim config.
 if filereadable(expand('~/.vimrc.minimal'))

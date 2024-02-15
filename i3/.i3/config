@@ -1,6 +1,6 @@
 # i3 config file (v4)
-# Hugo O. Rivera's i3 config
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# roguh's i3 config
 
 # Control
 # set $mod Control
@@ -11,13 +11,12 @@
 # Super key
 set $mod Mod4
 
+
+# Default layout
+workspace_layout stacking
+
 # Window title font
-# font pango: Ubuntu Mono 12
-# font pango:monospace 11
-# font pango:DejaVu Sans Mono 10
-# font pango: Source Code Pro 10
-font pango:Purista 15
-# font pango:MonoLisa Heavy 10
+font pango:MonoLisa Heavy, monospace 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -45,7 +44,6 @@ bindsym $mod+v split v
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym F11 fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -54,9 +52,6 @@ bindsym $mod+e layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
 
 # Focus the parent container
 bindsym $mod+a focus parent
@@ -91,65 +86,41 @@ bindsym $mod+p workspace 23:fun
 bindsym $mod+bracketleft workspace 24:𝄞
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1; workspace 1
-bindsym $mod+Shift+2 move container to workspace 2; workspace 2
-bindsym $mod+Shift+3 move container to workspace 3; workspace 3
-bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Shift+5 move container to workspace 5; workspace 5
-bindsym $mod+Shift+6 move container to workspace 6; workspace 6
-bindsym $mod+Shift+7 move container to workspace 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace 8; workspace 8
-bindsym $mod+Shift+9 move container to workspace 9; workspace 9
-bindsym $mod+Shift+F1 move container to workspace 11; workspace 11
-bindsym $mod+Shift+F2 move container to workspace 12; workspace 12
-bindsym $mod+Shift+F3 move container to workspace 13; workspace 13
-bindsym $mod+Shift+F4 move container to workspace 14; workspace 14
-bindsym $mod+Shift+F5 move container to workspace 15; workspace 15
-bindsym $mod+Shift+F6 move container to workspace 16; workspace 16
-bindsym $mod+Shift+F7 move container to workspace 17; workspace 17
-bindsym $mod+Shift+F8 move container to workspace 18; workspace 18
-bindsym $mod+Shift+F9 move container to workspace 19; workspace 19
-bindsym $mod+Shift+F10 move container to workspace 20; workspace 20
-bindsym $mod+Shift+F11 move container to workspace 21; workspace 21
-bindsym $mod+Shift+F12 move container to workspace 22; workspace 22
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+F1 move container to workspace 11
+bindsym $mod+Shift+F2 move container to workspace 12
+bindsym $mod+Shift+F3 move container to workspace 13
+bindsym $mod+Shift+F4 move container to workspace 14
+bindsym $mod+Shift+F5 move container to workspace 15
+bindsym $mod+Shift+F6 move container to workspace 16
+bindsym $mod+Shift+F7 move container to workspace 17
+bindsym $mod+Shift+F8 move container to workspace 18
+bindsym $mod+Shift+F9 move container to workspace 19
+bindsym $mod+Shift+F10 move container to workspace 20
+bindsym $mod+Shift+F11 move container to workspace 21
+bindsym $mod+Shift+F12 move container to workspace 22
 # backtick
-bindsym $mod+Shift+grave move container to workspace 0:📝; workspace 0:📝
-bindsym $mod+Shift+i move container to workspace 21:🏠; workspace 21:🏠
-bindsym $mod+Shift+o move container to workspace 22:TODO; workspace 22:TODO
-bindsym $mod+Shift+p move container to workspace 23:fun; workspace 23:fun
+bindsym $mod+Shift+grave move container to workspace 0:📝
+bindsym $mod+Shift+i move container to workspace 21:🏠
+bindsym $mod+Shift+o move container to workspace 22:TODO
+bindsym $mod+Shift+p move container to workspace 23:fun
 # Doesn't work!
-# bindsym $mod+braceright move container to workspace 24:𝄞; workspace 24:𝄞
-bindsym $mod+Shift+bracketleft move container to workspace 24:𝄞; workspace 24:𝄞
-
-bindsym XF86HomePage exec --no-startup-id i3empty.py next 1
-
-bindsym $mod+Mod1+1 exec --no-startup-id i3empty.py next 1
-bindsym $mod+Mod1+2 exec --no-startup-id i3empty.py next 2
-bindsym $mod+Mod1+3 exec --no-startup-id i3empty.py next 3
-bindsym $mod+Mod1+4 exec --no-startup-id i3empty.py next 4
-bindsym $mod+Mod1+5 exec --no-startup-id i3empty.py next 5
-bindsym $mod+Mod1+6 exec --no-startup-id i3empty.py next 6
-bindsym $mod+Mod1+7 exec --no-startup-id i3empty.py next 7
-bindsym $mod+Mod1+8 exec --no-startup-id i3empty.py next 8
-bindsym $mod+Mod1+9 exec --no-startup-id i3empty.py next 9
-
-bindsym $mod+Ctrl+Left exec --no-startup-id i3empty.py prev
-bindsym $mod+Ctrl+Right exec --no-startup-id i3empty.py next
-
-bindsym $mod+Shift+Ctrl+Left exec --no-startup-id i3empty.py --move prev
-bindsym $mod+Shift+Ctrl+Right exec --no-startup-id i3empty.py --move next
+# bindsym $mod+braceright move container to workspace 24:𝄞
+bindsym $mod+Shift+bracketleft move container to workspace 24:𝄞
 
 bindsym $mod+Mod1+Left workspace prev
 bindsym $mod+Mod1+Right workspace next
 
 bindsym Ctrl+Mod1+Left workspace prev
 bindsym Ctrl+Mod1+Right workspace next
-
-bindsym $mod+Shift+Mod1+Left move container to workspace prev; workspace prev
-bindsym $mod+Shift+Mod1+Right move container to workspace next; workspace next
-
-bindsym Ctrl+Shift+Mod1+Left move container to workspace prev; workspace prev
-bindsym Ctrl+Shift+Mod1+Right move container to workspace next; workspace next
 
 # rename current workspace
 bindsym $mod+u exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -208,8 +179,20 @@ for_window [urgent=latest] focus
 for_window [class="Spotify|strawberry"] move to workspace 24:𝄞
 
 # program launcher
-bindsym $mod+d exec --no-startup-id launcher.sh
 bindsym $mod+Tab exec --no-startup-id launcher.sh window
+
+# start program launcher
+# bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id launcher.sh
+
+# launch categorized menu
+bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # editor
 bindsym $mod+c exec --no-startup-id emacs
@@ -219,17 +202,17 @@ set $terminal terminal.sh
 set $terminal2 terminal2.sh
 set $browser firefox
 
-bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+x exec --no-startup-id $terminal
 bindsym $mod+Shift+x exec --no-startup-id $terminal2
-bindsym $mod+z exec --no-startup-id $terminal2
-bindsym $mod+Shift+z exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Shift+z exec --no-startup-id $terminal2
 bindsym $mod+n exec --no-startup-id $browser
-# ... for business + messaging
 bindsym $mod+Shift+n exec --no-startup-id chromium --kiosk --new-window https://instagram.com
-
-bindsym $mod+l exec --no-startup-id locker.sh
 bindsym $mod+Shift+l exec --no-startup-id backlightoff.sh
+
+# custom screen lock
+# bindsym $mod+l exec --no-startup-id locker.sh
+# exec --no-startup-id xautolock -time 10 -locker locker.sh
 
 bindsym Control+space exec dunstctl close
 bindsym Control+grave exec dunstctl history-pop
@@ -240,19 +223,18 @@ bindsym Control+grave exec dunstctl history-pop
 
 # Hide borders
 hide_edge_borders none
-
-# for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 0
 
 smart_gaps on
 gaps outer 2
 gaps inner 4
 
 # hide border for extremely common windows
-for_window [title="Firefox|Chromium|Chrome$"] border pixel 1
-# for_window [title="Firefox|Chromium|Chrome$"] border pixel 0
+# for_window [title="Firefox|Chromium|Chrome$"] border pixel 1
+for_window [title="Firefox|Chromium|Chrome$"] border pixel 0
 
 # popups should float
-for_window [window_role="pop-up"] floating enable
+# for_window [window_role="pop-up"] floating enable
 
 # ;)
 for_window [class="Tor Browser"] floating enable
@@ -264,42 +246,37 @@ bindsym $mod+Shift+c exec "i3-msg reload"
 bindsym $mod+Shift+r restart
 
 # Autostart applications
-# idk
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nm-applet
-exec --no-startup-id udiskie --smart-tray
-exec --no-startup-id xfce4-power-manager
-# Bluetooth widget. Bluetoothd starts with or without applet running.
-# exec --no-startup-id blueman-applet
-exec --no-startup-id conky.sh
+exec --no-startup-id udiskie
 exec --no-startup-id wallpaper.sh
-exec --no-startup-id xautolock -time 10 -locker locker.sh
-# For disabling power management, e.g. when watching a movie
-# exec --no-startup-id caffeine
 exec --no-startup-id backup.sh
-# Run Dropbox daemon to sync files
-# Arch: Install dropbox from the AUR
 exec --no-startup-id /opt/dropbox/dropboxd
-# Connect to devices on LAN
-# exec --no-startup-id kdeconnect-indicator
-# On-screen keyboard
-# exec --no-startup-id onboard
-
 exec --no-startup-id kitty fish -c welcome-shell.sh
 exec --no-startup-id evolution
+exec --no-startup-id protonmail-bridge
 exec --no-startup-id firefox
-# Systemd does this
-# exec --no-startup-id protonvpn-cli connect --cc US
-exec --no-startup-id emacs --daemon
-exec --no-startup-id ripcord
-exec --no-startup-id teams-insiders
+# exec --no-startup-id teams-for-linux
 exec --no-startup-id .screenlayout/select-arandr-display.sh
-
-exec --no-startup-id "xbindkeys"
-
-# exec --no-startup-id indicator-keylock # notifications when capslock pressed
-exec --no-startup-id set-keyboard-layout.sh
+# SOC2
+exec --no-startup-id clamtk
+exec --no-startup-id drata-agent
+exec --no-startup-id xbindkeys
 exec --no-startup-id xrdb -merge ~/.Xresources
+
+# Autostart applications (Manjaro)
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+#exec --no-startup-id manjaro-hello
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+exec --no-startup-id blueman-applet
+# exec_always --no-startup-id sbxkb
+exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_green
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
 
 # Notifications
 exec --no-startup-id killall xfce4-notifyd; dunst
@@ -307,8 +284,8 @@ exec --no-startup-id killall xfce4-notifyd; dunst
 # Night light. 36N, 115W
 exec --no-startup-id redshift -l36:-115 -t 5500K:2000K
 
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+# On-screen keyboard
+# exec --no-startup-id onboard
 
 # Default workspace
 exec --no-startup-id i3-msg workspace 21:🏠
@@ -357,9 +334,9 @@ bindsym $mod+m bar mode toggle
 bar {
 	i3bar_command i3bar
 	status_command i3status-rs --threads 2
-	font pango:Purista, MonoLisa, FontAwesome, PowerlineSymbols bold 15
-	position top
-	tray_padding 10
+	font pango:MonoLisa, monospace, FontAwesome, PowerlineSymbols bold 12
+	position bottom
+	tray_padding 3
 
   # mode hide
   # hidden_state hide
@@ -384,6 +361,29 @@ bar {
 
 
 client.focused #ff1694 #ff1694 #ffffff #662b9c
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused #222222 #222222 #888888 #292d2e
+client.focused_inactive #111111 #5f676a #ffffff #484e50
+client.unfocused #020202 #020202 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- blurlock
+
+# Faster keyboard rate
+exec --no-startup-id xset r rate 125 42
+
+################################################################################################
+## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
+################################################################################################
+
+#exec --no-startup-id volumeicon
+#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+exec --no-startup-id pulseaudio
+exec --no-startup-id pa-applet
+bindsym $mod+Ctrl+m exec pavucontrol
+
+################################################################################################
+
+# Screen brightness controls
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"

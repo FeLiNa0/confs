@@ -19,22 +19,22 @@ function debug
   end
 end
 
-function warn
-  set_color bryellow black
-  debug WARNING: $argv
-end
-
-function addpaths --argument-names 'path' 'verbose'
+function addpaths --argument-names 'path' 'verbose' 'append'
+  # For adding to PATH
   if test -d "$path"
     if not contains -- "$path" $fish_user_paths
       # Must check if path is already added.
       # Without this check, fish becomes gradually slower to start as it
       # struggles to manage an enormous variable.
-      set -U fish_user_paths $fish_user_paths "$path"
+      if [ "$append" = "no-append" ]
+          set -U fish_user_paths "$path" $fish_user_paths
+      else
+          set -U fish_user_paths $fish_user_paths "$path"
+      end
       debug Added path (trimdir.py "$path")
     end
-  else if ! [ "$verbose" = "" ]
-    warn addpaths could not find $argv[1]
+  else if [ "$verbose" = "verbose" ]
+    debug "WARNING: addpaths could not find $argv[1]"
   end
 end
 
@@ -43,7 +43,7 @@ function load_file --argument-names 'file' 'verbose'
       source $file
       debug Loaded file $file
     else if ! [ "$verbose" = "" ]
-      warn File not found: $file
+      debug "WARNING: File not found to load as fish script: $file"
     end
 end
 
@@ -62,18 +62,23 @@ debug Starting FISH debug output. Set DO_NOT_CLEAR to leave it on the screen aft
 set_global DO_NOT_CLEAR true
 
 load_file $HOME/.config/fish/local_env.fish
-set_global_if_unset FISH_LOGO # 🐠
+# set_global FISH_LOGO 🐠
 
+# Common binary paths
 addpaths $HOME/bin --verbose
 addpaths $HOME/.local/bin  --verbose
+# Rust binaries
 addpaths $HOME/.cargo/bin
+# CUDA binaries
 addpaths /opt/cuda/bin
-addpaths /opt/asdf-vm/bin/
+# Raku (Perl 6)
+addpaths $HOME/.rakudo-moar-2024.01-01-linux-x86_64-gcc/bin/
+# Snap Linux binaries
+addpaths /snap/bin
+# Google Gcloud
+addpaths /opt/google-cloud-cli/bin/
 
-set_global_if_unset ESHELL /bin/bash
-set_global_if_unset SHELL (command -v fish)
-set_global_if_unset EDITOR vim
-set_global_if_unset VISUAL vim
+set_global EDITOR vis
 
 # Caused bitsandbytes package from  oobabooga/text-generation-webui
 # to crash as it scanned through all env vars in search of CUDA stuff
@@ -83,22 +88,11 @@ set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
 # This is used for speeding up integration/unit tests on a private repo
 set_global TEST_TIMEOUT_SCALING_FACTOR 2
 
-# To disable parallely notifications unless a failure happens
-set_global_if_unset NOTIFY_COMMAND 'true'
-
+# For kubectl
 set_global USE_GKE_GCLOUD_AUTH_PLUGIN True
 
-set_global_if_unset PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
-
-if test -d /opt/android-sdk/
-  # On Arch, must install aur/android-platform and aur/android-sdk-build-tools
-  set_global ANDROID_SDK_ROOT /opt/android-sdk/
-  addpaths $ANDROID_SDK_ROOT/tools
-  addpaths $ANDROID_SDK_ROOT/platform-tools
-  addpaths $ANDROID_SDK_ROOT/build-tools
-
-  debug Set Android variables and paths
-end
+# Load some common python libraries
+set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
 
 if command -v most > /dev/null 2>&1
     set_global PAGER most
@@ -109,17 +103,22 @@ if command -v most > /dev/null 2>&1
     alias less=$PAGER
 end
 
+# Load aliases before abbreviations
+# I tried getting rid of tryalias with "alias tryalias alias", but it's actually
+# almost as fast as plain alias so I'll keep it.
+load_file $HOME/.aliases --verbose
+# commacomma is defined as a fish function so should not be shared with other shells
+alias ,,=commacomma
+
 if command -v git > /dev/null
     abbr ga 'git add'
     abbr gc 'git commit'
     abbr gch 'git checkout'
-    abbr gchm 'git checkout main || git checkout master || git checkout trunk'
-    abbr gs 'git status'
+    abbr gs '_fzf_search_git_status || git status'
     abbr gst 'git stash push --'
     abbr gstp 'git stash pop'
     abbr gd 'git diff'
-    abbr gdt 'git difftool'
-    abbr gl 'git log'
+    abbr gl '_fzf_search_git_log || git log'
     abbr gcl 'git clone'
     abbr gri 'git rebase -i'
     abbr grim 'git rebase -i main'
@@ -129,8 +128,8 @@ end
 if command -v kubectl > /dev/null
     abbr k kubectl
     abbr kx kubectx
-    abbr ka 'kubectl apply'
     abbr kc 'kubectl config'
+    abbr kcn 'kubectl config set-context --current --namespace'
     # List and detail resources
     abbr kg 'kubectl get'
     abbr kga 'kubectl get applications'
@@ -138,27 +137,38 @@ if command -v kubectl > /dev/null
     abbr kgi 'kubectl get ingress'
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
+    abbr kgcm 'kubectl get configmaps'
+    abbr kgi 'kubectl get ingress'
     abbr kd 'kubectl describe'
-    abbr kdl 'kubectl delete'
-    abbr krr 'kubectl rollout restart'
+    abbr ktop 'kubectl top'
     # Debugging pods
     abbr kl 'kubectl logs'
     abbr kcp 'kubectl cp'
     abbr kex 'kubectl exec'
     abbr kpf 'kubectl port-forward'
-    abbr kubectl-stop-sync-app 'kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
-    abbr kubectl-start-sync-app 'kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
-
+    # Emergency/local modifications. Prefer devops. Ensure correct cluster is targeted.
+    abbr kdl 'correct-kubernetes-cluster.sh && kubectl delete'
+    abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
+    abbr kubectl-stop-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
+    abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
     debug Setup Kubernetes abbreviations
 
     addpaths $HOME/.krew/bin
+end
+
+if true
+    abbr ff 'cd ~/pf/powerflex_edge_traffic_manager'
+    abbr cs 'cd ~/pf/powerflex_edge_ocpp_central_system'
+    abbr ev 'cd ~/pf/pfc_ev'
+    abbr scale 'cd ~/pf/small_scale'
 end
 
 if command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
     abbr dex 'docker exec'
-    abbr dck 'docker container kill (docker ps -q)'
+    abbr dck "docker container kill (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
+    abbr dck-all 'docker container kill (docker ps -q)'
     set_global BUILDKIT_PROGRESS plain
     set_global DOCKER_BUILDKIT 1
     debug Setup Docker abbreviations
@@ -169,11 +179,9 @@ if command -v makeanywhere > /dev/null
     function makeanywhere --wraps make --description "makeanywhere --wraps make $MAKEANYWHERE"
         "$MAKEANYWHERE" $argv
     end
-    
     function pma --wraps make --description "pma --wraps make pipenv run $MAKEANYWHERE"
         pipenv run "$MAKEANYWHERE" $argv
     end
-
     alias ma makeanywhere
 
     debug Setup makeanywhere alias
@@ -251,15 +259,16 @@ if command -v ag > /dev/null 2>&1
   if command -v fzf > /dev/null 2>&1
     set_global FZF_DEFAULT_COMMAND 'ag --hidden -g ""'
     set_global FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-
-    debug Set fzf variables
+    debug fzf will now use the silver searcher ag
   end
 end
 
 function miniconda_fish_init
-  # set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
+  # If this function is overwriting your system's Python:
+  # conda config --set auto_activate_base false
+  set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
   # set --local CONDA_BIN "/opt/miniconda3/bin/conda"
-  set --local CONDA_BIN "/usr/bin/conda"
+  # set --local CONDA_BIN "/usr/bin/conda"
   if ! command -v "$CONDA_BIN" > /dev/null
     return 1
   end
@@ -276,44 +285,21 @@ end
 if status is-interactive
   echo 'Bienvenido a FISH, la shell amigable e interactiva :)'
   echo 'Bienvenue dans FISH, le shell amical et interactif :)'
-  echo '    ^                                ^    '
-  echo '   / \       ________________       / \   '
-  echo '__/   \__----                ----__/   \__'
+  echo '    ^                     ^    '
+  echo '   / \       _____       / \   '
+  echo '__/   \__----     ----__/   \__'
   echo 'Mater artium necessitas.'
 
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 200 60
-    debug Set keyboard rate
-  end
-
-  if command -v gh > /dev/null
-    if [ "$FAST_STARTUP" = true ]
-      debug SPEEDUP Skipping GitHub gh completions
-    else
-      eval (gh completion --shell fish)
-      debug Added GitHub gh completions
-    end
+    xset r rate 125 42
+    debug Set faster keyboard rate
   end
 
   function fish_user_key_bindings
-    if command -v fzf > /dev/null 2>&1
-      # Use Ctrl-R to find command in history
-      if command -v fzf_key_bindings > /dev/null 2>&1
-          fzf_key_bindings
-      end
+    # Use fzf.fish to implement the famous ctrl-p binding for searching files
+    command -v fzf 2>&1 >/dev/null && bind \cp _fzf_search_directory
 
-      # Use Ctrl-P to find files
-      bind \cp fzf
-
-      if bind -M insert > /dev/null 2>&1 2>&1
-        bind -M insert \cp fzf
-      end
-      # debug Configured interactive fzf features
-    end
-
-    # Ctrl-F is essential fish
-    # It can become unbound, e.g. if in vi-mode
-    # Right Arrow and Ctrl-E might work
+    # Ctrl-F is an essential fish command to autocomplete based on history
     bind \cf forward-char
     # debug Bound Ctrl-F
   end
@@ -326,47 +312,20 @@ if status is-interactive
   
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
   log "$TOTAL_STARTUP_TIME"ms
+  echo "Mater artium necessitas."
 
-  set SHELL_TYPE ([ -n "$SSH_CLIENT" ] && echo ' SSH' || echo)
-  switch $hostname$SHELL_TYPE
-    case 'raspberrypi' '*SSH*'
-      if [ "$hostname" = raspberrypi ]
-        set HOSTNAME_SUMMARY "a Raspberry Pi"
-      else
-        set HOSTNAME_SUMMARY "SSH on $hostname (SSH_CLIENT=$SSH_CLIENT)"
-      end
-      set USER_AND_HOST_COLOR brred
-    case '*T580*' localhost
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR brcyan
-    case '*flex*'
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR bryellow
-    case '2012-iMac'
-      set HOSTNAME_SUMMARY "a known host"
-      set USER_AND_HOST_COLOR bryellow
-    case '*'
-      set HOSTNAME_SUMMARY "an UNKNOWN host"
-      set USER_AND_HOST_COLOR brwhite
+  set_global fzf_preview_file_cmd cat
+
+  if command -v fzf 2>&1 >/dev/null && ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
+    echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
+    fisher install PatrickF1/fzf.fish
   end
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
-    if [ "$FAST_STARTUP" = true ] && [ "$SSH_AGENT_PID" != "" ] && [ -e "/proc/$SSH_AGENT_PID/status" ]
-        warn SPEEDUP Skipping calling keychain as SSH_AGENT_PID is already set and ssh-agent is running
-    else
-        # Timeout after 10 hours (600 minutes)
-        # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
-        eval (keychain --quick --timeout 600 --eval --agents ssh -Q --quiet --nogui id_ed25519_felina id_ed25519) &
-        debug Started ssh-agent with keychain
-        if ! [ -e "/proc/$SSH_AGENT_PID/status" ]
-          if [ (ps "$SSH_AGENT_PID" | wc -l) -ge 2 ]
-            warn Your system does not support procfs 
-          else
-            warn The SSH agent was not started!
-          end
-        end
-    end
+    # Timeout after 10 hours (600 minutes)
+    # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
+    eval (keychain --quick --timeout 600 --eval --agents ssh -Q --quiet id_ed25519)
   end
 end
 
@@ -375,13 +334,12 @@ function install_plugin_manager
 end
 
 function install_plugins
-  # Done
+  # Notification when commands finish
   fisher install franciscolourenco/done
-
-  # kubectl completion
-  if command -v kubectl > /dev/null 2>&1
-    fisher install evanlucas/fish-kubectl-completions
-  end
+  fisher install PatrickF1/fzf.fish
+  fisher install evanlucas/fish-kubectl-completions
+  gh completion --shell fish > ~/.config/fish/completions/gh.fish || echo "No gh"
+  omnictl completion fish > ~/.config/fish/completions/omnictl.fish || echo "No omnictl"
 end
 
 # Fish does lots of things by default:

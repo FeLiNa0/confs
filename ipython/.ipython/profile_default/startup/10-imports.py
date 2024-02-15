@@ -11,9 +11,6 @@ _failed_preimported_modules = []
 _preimported_modules_not_loaded = []
 
 _preimport_implementation = getattr(sys, "implementation", None)
-print(sys.version, _preimport_implementation)
-print()
-print("sys.path:", "\n".join(sys.path))
 
 
 def imp(module_name, third_party=False, not2=False, not_pypy=False):
@@ -24,10 +21,11 @@ def imp(module_name, third_party=False, not2=False, not_pypy=False):
             _preimported_modules_not_loaded.append(module_name)
             return
 
-        module_start_time = time.time()
-        module = importlib.import_module(module_name)
-        _preimported_modules[module_name] = (time.time() - module_start_time) * 1000
-        return module
+        if module_name not in sys.modules:
+            module_start_time = time.time()
+            importlib.import_module(module_name)
+            _preimported_modules[module_name] = (time.time() - module_start_time) * 1000
+        return importlib.import_module(module_name)
 
     except Exception as exc:  # pylint: disable=broad-except
         _failed_preimported_modules.append(module_name)
@@ -82,18 +80,24 @@ enum = imp("enum", not2=True)
 statistics = imp("statistics", not2=True)
 typing = imp("typing", not2=True)
 
-print()
-
 _failed_preimported_modules_str = " ".join(
     sorted(_preimported_modules_not_loaded + _failed_preimported_modules)
 )
-if _failed_preimported_modules_str:
-    print("failed:", _failed_preimported_modules_str)
 
-print(
-    "preimported",
-    len(_preimported_modules),
-    "in",
-    f"{time.time() - _preimport_start_time:.3} seconds.",
-)
-print(" ".join(sorted(_preimported_modules)))
+duration = time.time() - _preimport_start_time
+
+if len(_preimported_modules) > 0:
+    print(sys.version, _preimport_implementation)
+    print("sys.path:", "    ".join(sys.path))
+    print()
+
+    print(
+        "import",
+        len(_preimported_modules),
+        "in",
+        f"{duration:.3}sec",
+        " ".join(sorted(_preimported_modules)),
+    )
+
+    if _failed_preimported_modules_str:
+        print("failed:", _failed_preimported_modules_str)

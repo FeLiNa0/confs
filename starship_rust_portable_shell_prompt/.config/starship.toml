@@ -1,20 +1,20 @@
-format = "$shell$hostname$username$time$directory$jobs$all$git_branch$git_status$status$cmd_duration$battery$character"
-right_format = "${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
-add_newline = false
+format = "$time$shell${custom.machine_architecture}$hostname$username$jobs$all$directory$git_status$character"
+right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
+add_newline = true
 
 [line_break]
 # Prompt is one line, not two lines
-disabled = true
+disabled = false
 
 [hostname]
 disabled = false
-ssh_only = false
+ssh_only = true
 ssh_symbol = 'SSH '
 style = 'bold red'
 format = "[$hostname $ssh_symbol]($style)"
 
 [username]
-disabled = false
+disabled = true
 format = "[$user]($style) @ "
 
 [shell]
@@ -27,7 +27,7 @@ powershell_indicator = "psh "
 # format = '[($indicator )]($style)'
 # format = '([$indicator]($style) )'
 format = '[$indicator]($style)'
-style = "white"
+style = ""
 disabled = false
 
 [custom.git_metrics_main_added_deleted]
@@ -42,9 +42,9 @@ format = " [$symbol($output)]($style)"
 style = "bold underline fg:blue"
 
 [directory]
-style = "bright-white bold"
-truncation_length = 2
-truncation_symbol = "⋮ "
+style = "bright-white"
+truncation_length = 1
+truncation_symbol = ""
 [directory.substitutions]
 "powerflex_edge_" = ""
 "powerflex_cloud_" = ""
@@ -60,11 +60,12 @@ truncation_symbol = "⋮ "
 [time]
 disabled = false
 style = "dimmed white"
+time_format = "%h %d %R"
 format = "[$time]($style) "
 
 [git_branch]
 format = "[$symbol$branch]($style) "
-style = "bold fg:bright-yellow"
+style = "bold fg:bright-white"
 symbol = ""
 truncation_length=14
 
@@ -84,38 +85,46 @@ stashed = "S"
 [status]
 # Show exit code of last command
 disabled = false
-format = '[\[$status $common meaning\]]($style) '
+format = '[\[$status\]]($style) '
 
 [[battery.display]]
 threshold = 25
 
 [character]
-success_symbol = "[>](bold white)"
+success_symbol = "[\\$](bold white)"
 error_symbol = "[X](bold red)"
 
 [cmd_duration]
-min_time = 60_000
+style = "bright-yellow"
+min_time = 5000
 show_milliseconds = false
 format = "[$duration]($style) "
 
 [kubernetes]
 disabled = false
-format = ' [$symbol$context( \($namespace\))]($style)'
+format = ' [ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
-[kubernetes.context_aliases]
-"0007-04-hugoroguh" = "0007-04"
-"1337-77-hugo" = "1337-77"
-"gke_edf-re-powerflex-dev-16b1_us-west2_gke-dev-powerflex-cluster" = "gke-dev"
-"gke_powerflex-small-scale-dev-7fa9_us-west2_powerflex-small-scale-cluster" = "smallscale-dev"
-"powerflex-0001-25-powerflex-leghorn" = "foghorn-leghorn-hq"
-"kind-timekeeper" = "timekeeper"
+contexts = [
+ { context_pattern = "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)", context_alias = "$name", style = "bright-yellow" },
+ { context_pattern = 'gke_.*_(powerflex-*_*)?(?P<var_cluster>[\w-]+)', context_alias = '$var_cluster', style = "bright-yellow" },
+ { context_pattern = "kind-(?P<name>.*)", context_alias = "$name" },
+]
+
+[custom.machine_architecture]
+# Either an odd architecture or an SSH connection
+# Check if SSH first since uname can run slow on some machines
+when = "[ -n \"$SSH_CLIENT\" ] || [ $(uname -m) != x86_64 ]"
+shell = "dash"
+command = "uname -m"
+format = "[$symbol($output) ]($style)"
+style = "bold fg:red"
 
 [git_commit]
 commit_hash_length = 4
 only_detached = false
 tag_disabled = false
 format = " [$hash$tag]($style)"
-style = "fg:bright-yellow"
+style = "fg:bright-white"
 
 [conda]
 ignore_base = false
@@ -142,16 +151,72 @@ style = "white"
 format = "[$symbol($version )]($style)"
 
 [nodejs]
-disabled = true
 style = "white"
 format = "[$symbol($version )]($style)"
 
+[c]
+format = '[$symbol($version(-$name) )]($style)'
+
 [ocaml]
 # This is a double humped camel!!!!!!!! 🐫
+# See Perl
 style = "white"
 format = "[$symbol($version )]($style)"
 
 [perl]
 # This is a single humped camel!!!!!!!! 🐪
+# TIM TOADY
+# See OCaml
 style = "white"
 format = "[$symbol($version )]($style)"
+
+[raku]
+# TIM TOADY
+format = "[$symbol($version )]($style)"
+
+[elm]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[haskell]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[clojure]
+style = "red underline bold"
+format = "[$symbol($version )]($style)"
+
+[lua]
+format = '[$symbol($version )]($style)'
+
+# The rest of these languages are not often used, but I'll get rid of the 'via' string anyway
+[cobol]
+format = '[$symbol($version )]($style)'
+[crystal]
+format = '[$symbol($version )]($style)'
+[dart]
+format = '[$symbol($version )]($style)'
+[elixir]
+format = '[$symbol($version )]($style)'
+[go]
+format = '[$symbol($version )]($style)'
+[java]
+format = '[$symbol($version )]($style)'
+[julia]
+format = '[$symbol($version )]($style)'
+[kotlin]
+format = '[$symbol($version )]($style)'
+[php]
+format = '[$symbol($version )]($style)'
+[nim]
+format = '[$symbol($version )]($style)'
+[rlang]
+format = '[$symbol($version )]($style)'
+[ruby]
+format = '[$symbol($version )]($style)'
+[swift]
+format = '[$symbol($version )]($style)'
+[vlang]
+format = '[$symbol($version )]($style)'
+[zig]
+format = '[$symbol($version )]($style)'

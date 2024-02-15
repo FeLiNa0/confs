@@ -34,7 +34,7 @@ function default_fish_prompt
         set status_message "[ $last_status ] "
     end
 
-    set_color --italics -b $USER_AND_HOST_COLOR
+    set_color --italics -b white
     set_color black
     printf "%s" "$USER@$hostname$SHELL_TYPE"
 

@@ -191,7 +191,8 @@ copy_confs_for vim \
 
 copy_confs_for vis \
   .config/vis/visrc.lua \
-  .config/vis/prep.sh
+  .config/vis/prep.sh \
+  bin/vc bin/vp
 
 copy_confs_for zathura \
   .config/zathura/zathurarc
@@ -210,7 +211,7 @@ copy_confs_for x11 \
 copy_confs_for_host x11_keyboard_layout bin/set-keyboard-layout.sh .gitconfig
 
 copy_confs_for starship_rust_portable_shell_prompt \
-  .config/starship.toml
+  .config/starship.toml bin/uname-m-if-not-typical.sh
 
 copy_confs_for "{ba,z,tc,c}sh" \
   .bashrc .bashrc_ps1 .bash_profile .tryalias.sh .aliases bin/trimdir.py bin/gitinfo.sh bin/projectname.sh bin/projectroot.sh bin/real-deal-turbo-charged-cd.sh
@@ -258,6 +259,7 @@ copy_confs_for protonvpn .config/systemd/user/protonvpn-autostart.service
 copy_confs_for backup \
   bin/backup-this-pacman-machine.sh \
   bin/backup-this-dnf-machine.sh \
+  bin/backup-this-apt-machine.sh \
   bin/backup.sh \
   bin/get-backup-root.sh
 
@@ -303,6 +305,8 @@ copy_confs_for top .config/procps/toprc
 
 copy_confs_for readline .inputrc
 
+copy_confs_for serial bin/save_jt48_ttyUSB_logs.sh
+
 copy_confs_for pywal bin/wal-set-theme.sh bin/theme-post.sh .cache/wal/{sequences,colors.*}
 
 copy_confs_for unison .unison/default.prf
@@ -328,9 +332,19 @@ copy_confs_for arandr bin/switch-displays-xrandr.sh
 
 copy_confs_for system-space-cleaner.sh bin/system-space-cleaner.sh
 
-copy_confs_for pass bin/pass-with-custom-editor.sh
+copy_confs_for pass bin/pass-custom.sh
 
-copy_confs_for kubernetes bin/kubectl-get-image-sizes.sh bin/kubectl-monitor-zigbee.sh
+copy_confs_for kubernetes \
+    bin/correct-kubernetes-cluster.sh \
+    bin/kubectl-get-image-sizes.sh \
+    bin/kubectl-monitor-zigbee.sh \
+    bin/kubectl-synth-configs.sh \
+    bin/generate_kubeconfigs.sh \
+    bin/kubectl-get-argocd-ui-password.sh \
+    bin/k9s.sh   .config/k9s/plugin.yml \
+    bin/python-wget-curl-replacement.sh
+
+copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 

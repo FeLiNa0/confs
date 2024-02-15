@@ -332,8 +332,9 @@
 (setq inhibit-splash-screen t)
 
 ;; Enable on-the-fly spellcheck suggestions
-;; (add-hook 'text-mode-hook 'flyspell-mode)
-;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
 ;; (with-eval-after-load "ispell"
 ;;         (setq ispell-program-name "hunspell")
@@ -347,7 +348,12 @@
   :defer 1
   :config
   (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
-  (setq flyspell-popup-correct-delay 1))
+  (setq flyspell-popup-correct-delay 1)
+  ;; Performance
+  (setq flyspell-issue-message-flag nil)
+  (add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
+  (define-key flyspell-mode-map (kbd "C-w w") #'flyspell-popup-correct)
+  (flyspell-mode 1))
 
 ;; Do not clobber
 (global-auto-revert-mode 1)
@@ -434,7 +440,7 @@
  '(org-modules
    '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-rmail org-w3m org-drill))
  '(package-selected-packages
-   '(zenburn-theme company-c-headers pipenv smooth-scrolling ein helm zenburn diff-hl fill-column-indicator cursor-chg ergoemacs-mode org-contrib flyspell-popup org-drill xresources-theme column-marker git-gutter android-mode whitespace-cleanup-mode use-package tao-theme smex rainbow-mode magit linum-relative langtool json-mode impatient-mode haskell-mode guide-key flycheck evil col-highlight coffee-mode benchmark-init auto-complete auctex)))
+   '(almost-mono-themes zenburn-theme company-c-headers pipenv smooth-scrolling ein helm zenburn diff-hl fill-column-indicator cursor-chg ergoemacs-mode org-contrib flyspell-popup org-drill xresources-theme column-marker git-gutter android-mode whitespace-cleanup-mode use-package tao-theme smex rainbow-mode magit linum-relative langtool json-mode impatient-mode haskell-mode guide-key flycheck evil col-highlight coffee-mode benchmark-init auto-complete auctex)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

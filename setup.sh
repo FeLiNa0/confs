@@ -15,6 +15,9 @@ function link () {
     fi
 }
 
+echo ------- making ~/bin -------
+mkdir $DST/bin
+
 echo ------- making ~/tmp -------
 mkdir $DST/tmp
 
