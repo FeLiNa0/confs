@@ -40,7 +40,7 @@ status_net() {
 }
 
 status_time() {
-    local time=$(date '+%F   %T  ')
+    local time="$(TZ=GMT date '+%s  %H:%M%Z')  $(date '+Q%q %d %H:%M%Z')"
     echo -n "{\"name\":\"time\",\"full_text\":\"$time\"}" # last entry
 }
 
@@ -111,7 +111,7 @@ status_disk() {
     local free=''
     local size=''
     local usage=''
-    local vm='level1_go'
+    local vm='barbie1_go'
     disk="$(qvm-ls --raw-data $vm --fields priv-used)"
     # read size usage <<< $(qvm-pool -i $(qubes-prefs default-pool) | grep 'size\|usage' | sort | awk '{print $2}')
     # free=$(($size - $usage))
@@ -160,7 +160,7 @@ main() {
         fi
         local time=$(status_time)
         echo ",[$qubes$disk$bat$load$volume$time]"
-	# Sleep more often to give updated seconds counter
+	# Sleep less often to give updated seconds counter
         sleep 0.5
     done
 }
