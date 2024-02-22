@@ -41,9 +41,14 @@ set spell
 " In insert mode, use Ctrl-X S, then Ctrl-N and Ctrl-P.
 " Ctrl-W W is used in the vis-spellcheck plugin, so match that.
 noremap <C-w>w   z=
+noremap <C-w>a   zg
 
 " Spell check individual CamelCase words (ApplePie).
 set spelloptions=camel
+
+" Custom words file.
+" This is shared with vis if enchant-2 is installed.
+" set spellfile='~/.config/enchant/en_US.dic'
 
 " NeoVim should offer to download all these dictionaries if you don't have them
 set spelllang=en_us,es_es,es_mx,fr,ru_ru

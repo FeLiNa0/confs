@@ -96,6 +96,7 @@ vis.events.subscribe(vis.events.INIT, function()
     backup = require_if_exists('https://github.com/roguh/vis-backup', 'vis-backup', 'backup') or {}
     shebang = require_if_exists('https://github.com/e-zk/vis-shebang', 'vis-shebang') or {}
     -- Forked from 'https://gitlab.com/muhq/vis-spellcheck'
+    -- This plugin will use enchant, enchant-2, aspell, or hunspell in that order
     spellcheck = require_if_exists('https://github.com/roguh/vis-spellcheck', 'vis-spellcheck') or {}
 
     spellcheck.default_lang = "en_US"
