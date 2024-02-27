@@ -1,21 +1,14 @@
 # Felina A. Rivera's FISH config
 # Remember to run `install_plugins` once.
-
-set LANG fr_FR.UTF-8
-
 set START_TIME (date +%s.%N)
 set FAST_STARTUP true
 set DEBUG_OUTPUT false
 
-function log
-  set_color -i
-  echo "$FISH_LOGO $argv"
-  set_color normal
-end
-
 function debug
-  if [ "$DEBUG_OUTPUT" = true ]
-    log "$argv"
+  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
+    set_color -i
+    echo "$FISH_LOGO $argv"
+    set_color normal
   end
 end
 
@@ -52,15 +45,6 @@ function set_global
   debug Set variable $argv[1]
 end
 
-function set_global_if_unset
-  if not set -q $argv[1]
-    set_global $argv
-  end
-end
-
-debug Starting FISH debug output. Set DO_NOT_CLEAR to leave it on the screen after startup.
-set_global DO_NOT_CLEAR true
-
 load_file $HOME/.config/fish/local_env.fish
 # set_global FISH_LOGO 🐠
 
@@ -96,7 +80,6 @@ set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
 
 if command -v most > /dev/null 2>&1
     set_global PAGER most
-    set_global pager $PAGER
     set_global LESS $PAGER
     set_global MANPAGER $PAGER
     set_global SYSTEMD_PAGER $PAGER
@@ -120,8 +103,6 @@ if command -v git > /dev/null
     abbr gd 'git diff'
     abbr gl '_fzf_search_git_log || git log'
     abbr gcl 'git clone'
-    abbr gri 'git rebase -i'
-    abbr grim 'git rebase -i main'
     debug Setup Git abbreviations
 end
 
@@ -132,9 +113,6 @@ if command -v kubectl > /dev/null
     abbr kcn 'kubectl config set-context --current --namespace'
     # List and detail resources
     abbr kg 'kubectl get'
-    abbr kga 'kubectl get applications'
-    abbr kgcm 'kubectl get configmap'
-    abbr kgi 'kubectl get ingress'
     abbr kgp 'kubectl get pods'
     abbr kgs 'kubectl get services'
     abbr kgcm 'kubectl get configmaps'
@@ -152,7 +130,6 @@ if command -v kubectl > /dev/null
     abbr kubectl-stop-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
     abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
     debug Setup Kubernetes abbreviations
-
     addpaths $HOME/.krew/bin
 end
 
@@ -191,37 +168,6 @@ function pmake --wraps make --description "pma --wraps make pipenv run"
     pipenv run make $argv
 end
 
-# Load aliases
-# TODO reduce number of aliases to speed up loading time or create ~/.essential_aliases
-# I tried getting rid of tryalias with "alias tryalias alias", but it's actually
-# almost as fast as plain alias so I'll keep it.
-load_file $HOME/.aliases --verbose
-tryalias ,, commacomma
-
-# Load OCaml
-load_file $HOME/.opam/opam-init/init.fish
-
-load_file ~/.asdf/asdf.fish --verbose
-
-if test -e ~/.asdf/completions/asdf.fish
-  mkdir -p ~/.config/fish/completions
-  rm -f ~/.config/fish/completions/asdf.fish
-  cp -f ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-  debug Loaded ASDF fish completions
-end
-
-if command -v go > /dev/null 2>&1
-  if [ "$FAST_STARTUP" ]
-    debug SPEEDUP: Guessing GOPATH
-    set_global GOPATH "$HOME/go"
-  else
-    set_global GOPATH (go env GOPATH)
-  end
-  addpaths $GOPATH/bin --verbose
-  debug Set Go variables and paths
-end
-
-
 set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
 
 # darwin with some patches
@@ -230,34 +176,10 @@ addpaths /Library/Frameworks/Python.framework/Versions/3.7/bin
 addpaths /usr/local/opt/openssl@1.1/bin
 addpaths /usr/local/opt/openssl/bin
 
-if test -d /usr/local/opt/openssl/
-  set_global LDFLAGS "-L/usr/local/opt/openssl/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/openssl/include"
-  set_global PKG_CONFIG_PATH "/usr/local/opt/openssl/lib/pkgconfig"
-
-  debug Set local openssl variables
-end
-
-if test -d /usr/local/opt/gettext/lib
-  set_global LDFLAGS "-L/usr/local/opt/gettext/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/gettext/include"
-
-  debug Set local gettext variables
-end
-
-if test -d /usr/local/opt/openssl@1.1/lib
-  set_global LDFLAGS "-L/usr/local/opt/openssl@1.1/lib"
-  set_global CPPFLAGS "-I/usr/local/opt/openssl@1.1/include"
-  set_global PKG_CONFIG_PATH "/usr/local/opt/openssl@1.1/lib/pkgconfig"
-
-  debug Set local openssl@1.1 variables
-end
-
-
 # Have fzf use ag to find files
 if command -v ag > /dev/null 2>&1
   if command -v fzf > /dev/null 2>&1
-    set_global FZF_DEFAULT_COMMAND 'ag --hidden -g ""'
+    set_global FZF_DEFAULT_COMMAND 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
     set_global FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
     debug fzf will now use the silver searcher ag
   end
@@ -277,19 +199,7 @@ function miniconda_fish_init
   debug Loaded miniconda and the $argv[1] environment
 end
 
-# If this is overwriting your system's Python:
-# conda config --set auto_activate_base false
-#
-# miniconda_fish_init
-
 if status is-interactive
-  echo 'Bienvenido a FISH, la shell amigable e interactiva :)'
-  echo 'Bienvenue dans FISH, le shell amical et interactif :)'
-  echo '    ^                     ^    '
-  echo '   / \       _____       / \   '
-  echo '__/   \__----     ----__/   \__'
-  echo 'Mater artium necessitas.'
-
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
     xset r rate 125 42
     debug Set faster keyboard rate
@@ -301,17 +211,14 @@ if status is-interactive
 
     # Ctrl-F is an essential fish command to autocomplete based on history
     bind \cf forward-char
-    # debug Bound Ctrl-F
   end
 
-  # Waiting for https://github.com/starship/starship/issues/3305 to be fixed
-  # Applying temp fix manually
   if command -v starship > /dev/null
     starship init fish | source
   end
   
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
-  log "$TOTAL_STARTUP_TIME"ms
+  echo "Fish $TOTAL_STARTUP_TIME"ms
   echo "Mater artium necessitas."
 
   set_global fzf_preview_file_cmd cat
@@ -341,8 +248,3 @@ function install_plugins
   gh completion --shell fish > ~/.config/fish/completions/gh.fish || echo "No gh"
   omnictl completion fish > ~/.config/fish/completions/omnictl.fish || echo "No omnictl"
 end
-
-# Fish does lots of things by default:
-# ignore dups and blank lines in history
-# interactive cd and autocompletion
-# etc
