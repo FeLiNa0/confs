@@ -317,6 +317,10 @@ if status is-interactive
   set_global fzf_preview_file_cmd cat
 
   if command -v fzf 2>&1 >/dev/null && ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null
+    # Dependencies are:
+    # fzf
+    # fd, find alternative https://github.com/sharkdp/fd (fd-find in fedora)
+    # optional bat, cat replacement
     echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
     fisher install PatrickF1/fzf.fish
   end
