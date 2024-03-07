@@ -348,7 +348,7 @@ copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 
-HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,fish,i3,i3status-rust,starship.toml,.bashrc,Xresources}
+HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,fish,i3,i3status-rust,starship.toml,.bashrc,.xscreensaver,Xresources}
 
 HOST=qubes-fedora-37 copy_confs_for_host qubes-fedora-37 QubesIncoming/fedora-37/du-niiice.sh
 

@@ -8,6 +8,6 @@ fi
 
 set -x
 cd "$HOME"
-qvm-copy-to-vm "$TARGET" bin .config/fish .bashrc
+qvm-copy-to-vm "$TARGET" bin .config/fish .bashrc .xscreensaver
 echo "Backed up to $TARGET"
 
