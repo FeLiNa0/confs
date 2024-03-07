@@ -2,6 +2,9 @@ tryalias knock 'nc -z'
 tryalias ma makeanywhere
 tryalias pma 'pipenv run makeanywhere'
 
+# careful with this one
+tryalias docker-compose 'docker-compose' 'docker compose'
+
 tryalias pass $HOME/bin/pass-custom.sh
 
 tryalias em 'emacs -nw'

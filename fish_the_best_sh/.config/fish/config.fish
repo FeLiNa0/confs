@@ -145,6 +145,7 @@ if command -v docker > /dev/null
     abbr dl 'docker logs'
     abbr dex 'docker exec'
     abbr dck "docker container kill (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
+    abbr docker-norestart "docker update --restart=no (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
     abbr dck-all 'docker container kill (docker ps -q)'
     set_global BUILDKIT_PROGRESS plain
     set_global DOCKER_BUILDKIT 1
