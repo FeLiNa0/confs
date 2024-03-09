@@ -1,3 +1,9 @@
+# https://codegolf.stackexchange.com/a/254589/112181
+# http://underpop.online.fr/f/ffmpeg/help/life.htm.gz
+# https://sgamal.com/posts/ffmpeg/lavfi/
+tryalias gameoflifeff 'ffplay -f lavfi -i life=death_color=red:life_color=black:mold_color=white:r=60:rule=B36/S23:ratio=0.7'
+tryalias gol gameoflifeff
+
 tryalias knock 'nc -z'
 tryalias ma makeanywhere
 tryalias pma 'pipenv run makeanywhere'
@@ -15,8 +21,8 @@ tryalias cp 'cp -i'
 tryalias rm 'rm -i'
 
 tryalias ls exa ls
-tryalias l 'ls -F -aa'
-tryalias ll 'l -l -h'
+tryalias l 'ls -Fa'
+tryalias ll 'l -lh'
 tryalias gzip pigz gzip
 
 tryalias exa 'exa --git' exa

@@ -252,7 +252,7 @@ call plug#end()
 "colorscheme Base2Tone_LavenderLight
 "let g:airline_theme='Base2Tone_LavenderLight'
 
-colorscheme momiji
+colorscheme slate
 
 " Read the real vim config.
 if filereadable(expand('~/.vimrc.minimal'))
