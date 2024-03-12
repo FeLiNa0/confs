@@ -136,8 +136,8 @@ end
 if true
     abbr ff 'cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf/powerflex_edge_ocpp_central_system'
-    abbr ev 'cd ~/pf/pfc_ev'
-    abbr scale 'cd ~/pf/small_scale'
+    abbr ev 'cd ~/pf && cd pfc_ev'
+    abbr scale 'cd ~/pf && cd ~/pf/small_scale'
 end
 
 if command -v docker > /dev/null
