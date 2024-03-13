@@ -13,9 +13,23 @@ HOST="$(hostname)"
 
 CONFS_COPY_PARALLEL="${CONFS_COPY_PARALLEL-true}"
 if [ "${VERBOSE-}" == "" ]; then
-    VERBOSE=true
+    VERBOSE=false
 fi
 VERBOSE="${VERBOSE-false}"
+SILENCE="${SILENCE-false}"
+
+debug() {
+    if [ "$VERBOSE" = true ] ; then
+        echo $@
+    fi
+}
+
+log() {
+    if [ "$SILENCE" = false ] ; then
+        echo -e $@
+    fi
+}
+
 
 # Either "restore" or "backup"
 MODE=$1
@@ -34,17 +48,18 @@ BACKUP_R_DIR=$CONF_DIR/restore-bak
 if [ "$MODE" == backup ] ; then
     SRC=$2
     DST=$CONF_DIR
-    echo "Backups are located in $BACKUP_B_DIR"
+    debug "Backups are located in $BACKUP_B_DIR"
 
 else
     SRC=$CONF_DIR
     DST=$2
-    echo "Backups are located in $BACKUP_R_DIR"
+    debug "Backups are located in $BACKUP_R_DIR"
 fi
 
 # Confirm changes
-echo "Press ENTER to $MODE files from $SRC to $DST"
-read -r changes_ok
+# echo "Press ENTER to $MODE files from $SRC to $DST"
+# read -r changes_ok
+changes_ok=""
 
 if [[ "$changes_ok" != "" ]] ; then
   exit 1
@@ -64,12 +79,6 @@ RSYNC_RESTORE="$RSYNC_OPTS --relative"
 
 pids=()
 
-log() {
-    if [[ "$VERBOSE" == true ]] ; then
-        echo $@
-    fi
-}
-
 # USAGE: copy_confs_for section_name [file1 [file2 ...]]
 #
 # Either copy all files from section_name/ to the destination
@@ -81,7 +90,7 @@ copy_confs_for() {
         _copy_confs_for "$@" > "$LOG_FILE_DIR/$SECTION" &
         PID="$!"
         pids+=("$PID")
-        echo "$SECTION" > "$LOG_FILE_DIR/$PID"
+        log "$SECTION" > "$LOG_FILE_DIR/$PID"
     else
         _copy_confs_for "$@"
     fi
@@ -97,9 +106,9 @@ _copy_confs_for() {
         exit 0
     fi
 
-    printf "\n--------- $SECTION ---------\n"
+    debug "\n--------- $SECTION ---------\n"
 
-    echo "$@"
+    log "$@"
     mkdir -p "$CONF_DIR/$SECTION"
 
     FILES=
@@ -114,18 +123,17 @@ _copy_confs_for() {
     for f in "$@" ; do
         FILES="$FILES $FROM/./$f"
     done
-    echo FILES: "$FILES"
 
     if [ "$MODE" == backup ] ; then
-        log rsync $RSYNC_BAK "$DST/$SECTION" "$BACKUP_B_DIR"
-        rsync $RSYNC_BAK "$DST/$SECTION" "$BACKUP_B_DIR"
-        log rsync $RSYNC_BACKUP $FILES "$DST/$SECTION"
-        rsync $RSYNC_BACKUP $FILES "$DST/$SECTION"
+        debug rsync $RSYNC_BAK "$DST/$SECTION" "$BACKUP_B_DIR"
+        rsync $RSYNC_BAK "$DST/$SECTION" "$BACKUP_B_DIR" 2>&1
+        debug rsync $RSYNC_BACKUP $FILES "$DST/$SECTION"
+        rsync $RSYNC_BACKUP $FILES "$DST/$SECTION" 2>&1
     else
-        log rsync $RSYNC_BAK --relative $FILES "$BACKUP_R_DIR/$SECTION"
-        rsync $RSYNC_BAK --relative $FILES "$BACKUP_R_DIR/$SECTION" || true
-        log rsync $RSYNC_RESTORE "$SRC/$SECTION/./" $DST
-        rsync $RSYNC_RESTORE "$SRC/$SECTION/./" $DST
+        debug rsync $RSYNC_BAK --relative $FILES "$BACKUP_R_DIR/$SECTION"
+        rsync $RSYNC_BAK --relative $FILES "$BACKUP_R_DIR/$SECTION" 2>&1 || true
+        debug rsync $RSYNC_RESTORE "$SRC/$SECTION/./" $DST
+        rsync $RSYNC_RESTORE "$SRC/$SECTION/./" $DST 2>&1 
     fi
 }
 
@@ -138,7 +146,7 @@ copy_confs_for_host() {
         _copy_confs_for_host "$@" > "$LOG_FILE_DIR/$SECTION-$HOST" &
         PID="$!"
         pids+=("$PID")
-        echo "$SECTION-$HOST" > "$LOG_FILE_DIR/$PID"
+        log "$SECTION-$HOST" > "$LOG_FILE_DIR/$PID"
     else
         _copy_confs_for_host "$@"
     fi
@@ -148,8 +156,8 @@ _copy_confs_for_host() {
     SECTION="$1"
     shift
 
-    printf "\n--------- $SECTION for $HOST ---------\n"
-    echo "$@"
+    debug "\n--------- $SECTION for $HOST ---------\n"
+    log "$@"
     mkdir -p "$CONF_DIR/$SECTION"
 
     FILES=
@@ -161,27 +169,26 @@ _copy_confs_for_host() {
     else
         THIS_SRC="$SRC/$HOST_SPECIFIC_DIR/$HOST/$SECTION"
         if ! [ -d "$THIS_SRC" ]; then
-            echo "Ignoring"
+            debug "Ignoring"
             exit 0
         fi
-        echo "Unimplemented: cannot restore from host specific directory"
-        exit 1
+        log "UNIMPLEMENTED: cannot restore from host specific directory"
+        exit 3
     fi
 
     for f in "$@" ; do
         FILES="$FILES $FROM/./$f"
     done
-    echo FILES: "$FILES"
 
     if [ "$MODE" == backup ] ; then
-        log rsync $RSYNC_BAK "$THIS_DST" "$BACKUP_B_DIR"
-        rsync $RSYNC_BAK "$THIS_DST" "$BACKUP_B_DIR"
-        log rsync $RSYNC_BACKUP $FILES "$THIS_DST"
-        rsync $RSYNC_BACKUP $FILES "$THIS_DST"
+        debug rsync $RSYNC_BAK "$THIS_DST" "$BACKUP_B_DIR"
+        rsync $RSYNC_BAK "$THIS_DST" "$BACKUP_B_DIR" 2>&1
+        debug rsync $RSYNC_BACKUP $FILES "$THIS_DST"
+        rsync $RSYNC_BACKUP $FILES "$THIS_DST" 2>&1
     fi
 }
 
-log "VERBOSE=$VERBOSE CONFS_COPY_PARALLEL=$CONFS_COPY_PARALLEL"
+debug "VERBOSE=$VERBOSE CONFS_COPY_PARALLEL=$CONFS_COPY_PARALLEL"
 
 copy_confs_for vim \
   .vimrc \
@@ -208,7 +215,7 @@ copy_confs_for polybar .config/polybar/config \
 copy_confs_for x11 \
   .xinitrc .xbindkeysrc bin/calculator.sh
 
-copy_confs_for_host x11_keyboard_layout bin/set-keyboard-layout.sh .gitconfig
+copy_confs_for_host x11_keyboard_layout .gitconfig
 
 copy_confs_for starship_rust_portable_shell_prompt \
   .config/starship.toml bin/uname-m-if-not-typical.sh
@@ -362,12 +369,8 @@ FAILURES=0
 SUCCESS=0
 for PID in "${pids[@]}"; do
   if ! wait "$PID"; then
-    echo
-    echo Failure in PID="$PID"
-    SECTION="$(cat "$LOG_FILE_DIR/$PID")"
-    echo cat "$LOG_FILE_DIR/$SECTION"
-    cat "$LOG_FILE_DIR/$SECTION"
-    echo Failure in SECTION="$SECTION"
+    SECTION="$(cat "$LOG_FILE_DIR/$PID" 2>&1)"
+    log "\nFailure in PID=$PID SECTION=$SECTION: $(cat "$LOG_FILE_DIR/$SECTION" 2>&1)"
     FAILURE=true
     FAILURES="$((FAILURES + 1))"
     FAILED_SECTIONS="$SECTION $FAILED_SECTIONS"
@@ -376,8 +379,7 @@ for PID in "${pids[@]}"; do
   fi
 done
 
-echo "$SUCCESS" sections copied successfully
+echo "UPDATED $SUCCESS sections, $FAILURES failures"
 if [ "$FAILURE" = true ]; then
-    echo "$FAILURES section(s) could not be copied: $FAILED_SECTIONS"
     exit 1
 fi
