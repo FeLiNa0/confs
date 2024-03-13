@@ -136,7 +136,9 @@ end
 if true
     abbr ff 'cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf/powerflex_edge_ocpp_central_system'
-    abbr ev 'cd ~/pf && cd pfc_ev'
+    abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
+    abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
+    abbr devadm 'cd ~/pf && cd ~/pf/pfc_ev/device-administrator'
     abbr scale 'cd ~/pf && cd ~/pf/small_scale'
 end
 
