@@ -6,12 +6,12 @@ for OTHERSCRIPT in ./correct-kubernetes-cluster.sh ./infra/correct-kubernetes-cl
     fi
 done
 
-echo "WARNING: DESTRUCTIVE KUBERNETES OPERATION"
-echo "Current kubernetes cluster: $(kubectl config current-context)"
-echo "Are you sure? Type yes"
+echo "$(tput bold)$(tput setaf 1)WARNING: DESTRUCTIVE KUBERNETES OPERATION$(tput sgr0). Is this the corrrect kubernetes cluster?"
+echo "$(tput bold)$(kubectl config current-context)$(tput sgr0)"
 
-sleep 0.5
-read INPUT
+sleep 0.7
+read -p "If so, type yes: " -n 3 INPUT
+
 if [ "$INPUT" = "yes" ]; then
     echo "Running"
     exit 0
