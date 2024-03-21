@@ -353,6 +353,8 @@ copy_confs_for kubernetes \
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
+copy_confs_for thedevil bin/code-notossh.sh .config/Code/User/settings.json .config/Code\ -\ OSS/User/settings.json
+
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 
 HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,config.fish,.bashrc,.xscreensaver}

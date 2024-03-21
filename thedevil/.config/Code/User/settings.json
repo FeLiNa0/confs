@@ -1,0 +1,21 @@
+{
+    "workbench.statusBar.visible": false,
+    "editor.minimap.enabled": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.overviewRulerBorder": false,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "color-highlight.markRuler": false,
+    "breadcrumbs.enabled": false,
+    "explorer.openEditors.visible": 1,
+    "explorer.decorations.colors": false,
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "window.menuBarVisibility": "toggle",
+    "workbench.layoutControl.type": "menu",
+    "workbench.activityBar.location": "hidden",
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Solarized Dark",
+    "editor.fontFamily": "'Mono Lisa', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.renderWhitespace": "boundary"
+}
