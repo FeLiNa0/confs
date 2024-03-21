@@ -61,9 +61,13 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     -- Per window configuration options.
     vis:command('set shell sh') -- a barebones shell that should have no extra config/outputs
     vis:command('set number')
+    -- relativenumber + number = hybrid number mode with current line number shown, all others are relative
+    -- TODO use absolute line numbers in insert mode, "smart hybrid mode"
     vis:command('set relativenumber')
     vis:command('set autoindent')
     vis:command('set cursorline on')
+    -- TODO only ignore case if search string is all lowercase
+    vis:command('set ignorecase on')
 
     -- vis:command('set show-newlines')
     vis:command('set show-tabs')
@@ -202,6 +206,25 @@ vis:command_register("fzf", function(argv, force, win, selection, range)
 
     return true;
 end, "Select file to open with fzf")
+
+-- Use + and - to shift selection (:x)
+-- Use , to reverse
+vis:map(vis.modes.VISUAL, ',', function(keys)
+        local ranges = {}
+        local contents = {}
+        for selection in vis.win:selections_iterator() do
+                table.insert(ranges, selection.range)
+                table.insert(contents, vis.win.file:content(selection.range))
+        end
+        for source = 1, #ranges do
+                local target = #ranges - source + 1
+                vis.win.file:delete(ranges[target])
+                vis.win.file:insert(ranges[target].start, contents[source])
+        end
+        vis.win.selections = {}
+        vis.mode = vis.modes.NORMAL
+        vis:feedkeys("<vis-redraw>")
+end, "reverse selections")
 
 function run_command(command)
     return io.popen(command):read('*a'):gsub('\n', '')

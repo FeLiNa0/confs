@@ -60,8 +60,16 @@ set complete+=kspell
 set autoread
 
 " Show line numbers
+" Hybrid numbers: line number for current line, relative for others
 set number
 set relativenumber
+
+" Smart numbers: absolute in INSERT mode, relative otherwise
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
 
 " Highlight searches
 set hlsearch

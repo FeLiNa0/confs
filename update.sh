@@ -353,7 +353,10 @@ copy_confs_for kubernetes \
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
-copy_confs_for thedevil bin/code-notossh.sh .config/Code/User/settings.json .config/Code\ -\ OSS/User/settings.json
+copy_confs_for xfce4_and_xubuntu .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+
+# TODO copy to Code - OSS config too, symlink like my vim/nvim configs
+copy_confs_for thedevil bin/thedevil.sh bin/code-notossh.sh .config/Code/User/settings.json
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 

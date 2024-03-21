@@ -1,4 +1,5 @@
 {
+    "security.workspace.trust.untrustedFiles": "open",
     "workbench.statusBar.visible": false,
     "editor.minimap.enabled": false,
     "editor.hideCursorInOverviewRuler": true,
@@ -17,5 +18,13 @@
     "files.autoSave": "afterDelay",
     "workbench.colorTheme": "Solarized Dark",
     "editor.fontFamily": "'Mono Lisa', 'Droid Sans Mono', 'monospace', monospace",
-    "editor.renderWhitespace": "boundary"
+    "editor.renderWhitespace": "boundary",
+    "git.openRepositoryInParentFolders": "always",
+    "editor.lineNumbers": "relative",
+    "editor.unfoldOnClickAfterEndOfLine": true,
+    "zenMode.hideLineNumbers": false,
+    "telemetry.telemetryLevel": "off",
+    "git.timeline.showUncommitted": true,
+    "vim.cursorStylePerMode.visualline": "line-thin",
+    "vim.smartRelativeLine": true
 }
