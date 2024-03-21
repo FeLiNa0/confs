@@ -300,7 +300,7 @@ autocmd FileType scss set iskeyword+=-
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
 " Set GUI Font
-set guifont=MonoLisa\ Medium:h14
+set guifont=MonoLisa\ Medium:h10
 
 " Don't save hidden and unloaded buffers in sessions.
 set sessionoptions-=buffers

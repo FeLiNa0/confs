@@ -16,7 +16,8 @@ call plug#begin()
 " Color themes
 " Plug 'atelierbram/Base2Tone-vim'
 
-Plug 'kyoh86/momiji'
+" Plug 'kyoh86/momiji'
+Plug 'altercation/vim-colors-solarized'
 
 " Reload files edited externally
 Plug 'djoshea/vim-autoread'
@@ -62,6 +63,14 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Rainbow coloring for parenthesis and other paired characters
+" Uncomment following line for demo
+" ( (( [ ] ]]] )) )
+Plug 'frazrepo/vim-rainbow'
+let g:rainbow_active = 1
+
+Plug 'mg979/vim-visual-multi'
 
 " Various language syntax definitions. Loads much faster than individual plugins.
 " Languages supported as of 02/2020:
@@ -127,11 +136,6 @@ if $VIM_LOAD_EXTRA_PLUGINS == "true"
     let g:session_autoload = 'no'
     let g:session_autosave = 'no'
 
-    " Rainbow coloring for parenthesis and other paired characters
-    " Uncomment following line for demo
-    " ( (( [ ] ]]] )) )
-    Plug 'frazrepo/vim-rainbow'
-    let g:rainbow_active = 1
 
     Plug 'lark-parser/vim-lark-syntax'
 
@@ -252,7 +256,10 @@ call plug#end()
 "colorscheme Base2Tone_LavenderLight
 "let g:airline_theme='Base2Tone_LavenderLight'
 
-colorscheme slate
+"colorscheme slate
+
+set background=dark
+colorscheme solarized
 
 " Read the real vim config.
 if filereadable(expand('~/.vimrc.minimal'))
