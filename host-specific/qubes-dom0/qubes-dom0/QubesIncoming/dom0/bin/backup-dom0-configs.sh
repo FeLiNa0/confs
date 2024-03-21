@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eo pipefail
-FILES="bin .config/fish/config.fish .bashrc .xscreensaver"
+FILES="bin .config/fish/config.fish .bashrc .xscreensaver .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
 TARGET="$1"
 if [ -z "$TARGET" ]; then
 	echo "USAGE: $0 [target_qube_name]"

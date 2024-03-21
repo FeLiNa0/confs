@@ -360,7 +360,7 @@ copy_confs_for thedevil bin/thedevil.sh bin/code-notossh.sh .config/Code/User/se
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 
-HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,config.fish,.bashrc,.xscreensaver}
+HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,config.fish,.bashrc,.xscreensaver,xfce4-keyboard-shortcuts.xml}
 
 HOST=qubes-fedora-37 copy_confs_for_host qubes-fedora-37 QubesIncoming/fedora-37/du-niiice.sh
 
