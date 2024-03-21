@@ -1,0 +1,6 @@
+[user]
+	email = hugo.rivera@powerflex.com
+	name = Hugo O. Rivera (ROGUH)
+	signingkey = 6F13CD54D9F09EFEFDB2E73462A23E18CF53770B
+[commit]
+	gpgsign = true

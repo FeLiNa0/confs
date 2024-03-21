@@ -215,7 +215,7 @@ copy_confs_for polybar .config/polybar/config \
 copy_confs_for x11 \
   .xinitrc .xbindkeysrc bin/calculator.sh
 
-copy_confs_for_host x11_keyboard_layout .gitconfig
+copy_confs_for_host gitconfig .gitconfig
 
 copy_confs_for starship_rust_portable_shell_prompt \
   .config/starship.toml bin/uname-m-if-not-typical.sh
