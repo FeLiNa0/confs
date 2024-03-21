@@ -1,5 +1,9 @@
--- Hugo O. Rivera's vis configuration
--- Hugo O. Rivera's vis configuration
+-- ROGUH's vis configuration
+-- ROGUH's vis configuration
+-- ROGUH's vis configuration
+-- ROGUH's vis configuration
+-- ROGUH's vis configuration
+-- ROGUH's vis configuration
 
 -- TODO ranger file browser or alternative
 -- TODO simple version of https://github.com/rhysd/committia.vim/tree/master/autoload ?

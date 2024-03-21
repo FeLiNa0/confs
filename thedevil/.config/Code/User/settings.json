@@ -1,4 +1,5 @@
 {
+    "window.title": "🐱 vc ${rootName} ${activeEditorShort}",
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.statusBar.visible": false,
     "editor.minimap.enabled": false,
@@ -17,7 +18,7 @@
     "workbench.activityBar.location": "hidden",
     "files.autoSave": "afterDelay",
     "workbench.colorTheme": "Solarized Dark",
-    "editor.fontFamily": "'Mono Lisa', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontFamily": "'Mono Lisa Medium', 'Droid Sans Mono', 'monospace', monospace",
     "editor.renderWhitespace": "boundary",
     "git.openRepositoryInParentFolders": "always",
     "editor.lineNumbers": "relative",
@@ -26,5 +27,6 @@
     "telemetry.telemetryLevel": "off",
     "git.timeline.showUncommitted": true,
     "vim.cursorStylePerMode.visualline": "line-thin",
-    "vim.smartRelativeLine": true
+    "vim.smartRelativeLine": true,
+    "terminal.integrated.sendKeybindingsToShell": true
 }
