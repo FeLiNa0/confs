@@ -3,6 +3,7 @@
 set START_TIME (date +%s.%N)
 set FAST_STARTUP true
 set DEBUG_OUTPUT false
+set TERM "xterm-256color"
 
 function debug
   if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
