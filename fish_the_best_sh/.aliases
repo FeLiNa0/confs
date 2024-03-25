@@ -38,7 +38,7 @@ tryalias nv neovide nvim
 tryalias pnv 'pipenv run nvim'
 tryalias vmin 'nvim -u ~/.vimrc.minimal' 'vim -u ~/.vimrc.minmal' vis vi nano 'nvim -u ~/.vimrc.minimal'
 
-tryalias vc "snap run code" "wine code.exe" vis vim
+tryalias vs "snap run code" "wine code.exe" vis vim
 
 tryalias e evince 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 
