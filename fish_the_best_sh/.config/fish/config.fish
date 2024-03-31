@@ -3,7 +3,6 @@
 set START_TIME (date +%s.%N)
 set FAST_STARTUP true
 set DEBUG_OUTPUT false
-set TERM "xterm-256color"
 
 function debug
   if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
@@ -56,6 +55,8 @@ addpaths $HOME/.local/bin  --verbose
 addpaths $HOME/.cargo/bin
 # CUDA binaries
 addpaths /opt/cuda/bin
+# ASDF from Arch's AUR
+addpaths /opt/asdf-vm/bin
 # Raku (Perl 6)
 addpaths $HOME/.rakudo-moar-2024.01-01-linux-x86_64-gcc/bin/
 # Snap Linux binaries
@@ -94,6 +95,10 @@ load_file $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
+abbr py python3
+abbr ipy ipython3
+abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
+
 if command -v git > /dev/null
     abbr ga 'git add'
     abbr gc 'git commit'
@@ -107,7 +112,12 @@ if command -v git > /dev/null
     debug Setup Git abbreviations
 end
 
+if command -v gh > /dev/null
+    abbr ghch 'gh pr checkout'
+end
+
 if command -v kubectl > /dev/null
+    # TODO kubectl get apps -A | grep -v Synced 
     abbr k kubectl
     abbr kx kubectx
     abbr kc 'kubectl config'
