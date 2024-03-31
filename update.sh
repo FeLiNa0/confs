@@ -264,6 +264,7 @@ copy_confs_for htop .config/htop/htoprc
 copy_confs_for protonvpn .config/systemd/user/protonvpn-autostart.service
 
 copy_confs_for backup \
+  bin/pacman-Qie-install.py \
   bin/backup-this-pacman-machine.sh \
   bin/backup-this-dnf-machine.sh \
   bin/backup-this-apt-machine.sh \
@@ -355,7 +356,14 @@ copy_confs_for kubernetes \
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
-copy_confs_for xfce4_and_xubuntu .xscreensaver .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+copy_confs_for xfce4_and_xubuntu \
+    .xscreensaver \
+    .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml \
+    .config/autostart/caffeine-ng.desktop \
+    .config/autostart/dropbox.desktop \
+    .config/autostart/dunst_notifs.desktop \
+    .config/autostart/redshift.desktop \
+    .config/autostart/zeal.desktop
 
 # TODO copy to Code - OSS config too, symlink like my vim/nvim configs
 copy_confs_for thedevil bin/thedevil.sh bin/code-notoss.sh .config/Code/User/settings.json
