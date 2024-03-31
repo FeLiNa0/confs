@@ -41,9 +41,10 @@ vis.events.subscribe(vis.events.INIT, function(win)
 
     -- Type current UTC time using Python
     vis:command_register("pt", function(argv, force, win, selection, range)
+        -- This command used to be a hideous Python one-liner
         -- vis:feedkeys(':<python -c "import datetime; print(datetime.datetime.utcnow().isoformat(), end=\'\')"')
         vis:feedkeys(':<TZ=UTC date --iso-8601=seconds')
-    end)
+    end, "Insert 8601 UTC timestamp with seconds")
 
     -- The famous ctrl-P for finding files
     -- Process color codes with --ansi. This slows down fzf, but I can't seem to get rid of the color codes in the output from ag/somewhereelse
@@ -64,11 +65,12 @@ end)
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     -- Per window configuration options.
     vis:command('set shell sh') -- a barebones shell that should have no extra config/outputs
-    vis:command('set number')
+    -- vis:command('set number')
     -- relativenumber + number = hybrid number mode with current line number shown, all others are relative
     -- TODO use absolute line numbers in insert mode, "smart hybrid mode"
-    vis:command('set relativenumber')
+    -- vis:command('set rnu') -- same as vis:command('set relativenumber')
     vis:command('set autoindent')
+    vis:command('set layout v')
     vis:command('set cursorline on')
     -- TODO only ignore case if search string is all lowercase
     vis:command('set ignorecase on')

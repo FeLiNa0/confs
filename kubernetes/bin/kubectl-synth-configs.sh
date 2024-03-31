@@ -18,10 +18,6 @@ generate_kubeconfigs.sh '0018|0060|0001|0077|0117'
 # Switch configs with kubectx or with `kubectl config`.
 KUBECONFIG="$HOME/.kube/config":$(find "$HOME/.kube" -type f -iname \*.yaml | tr '\n' ':') kubectl config view --flatten > "$HOME/.kube/config"
 
-gcloud container clusters get-credentials --region us-west2 powerflex-small-scale-cluster  --project powerflex-small-scale-dev-7fa9
-gcloud container clusters get-credentials --region us-west2 powerflex-small-scale-cluster  --project powerflex-small-scale-stg-5025
 gcloud container clusters get-credentials --region us-west2 gke-stg-powerflex-cluster --project edf-re-powerflex-stg-8019
 gcloud container clusters get-credentials --region us-west2 gke-dev-powerflex-cluster --project edf-re-powerflex-dev-16b1
-gcloud container clusters get-credentials --region us-west2 nats-perf-cluster --project powerflex-nats-perf-dev-7102
-gcloud container clusters get-credentials --region us-west2 gke-sim-powerflex-cluster --project edf-re-powerflex-sim-ada8 
-gcloud container clusters get-credentials --region us-west2 gke-sim-powerflex-edge-cluster --project edf-re-powerflex-sim-ada8 
+gcloud container clusters get-credentials --region us-west2 gke-dev-powerflex-cloud-nexus  --project powerflex-cloud-nexus-dev

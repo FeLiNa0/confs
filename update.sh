@@ -326,6 +326,8 @@ copy_confs_for hyper .hyper.js
 
 copy_confs_for asdf .default-python-packages .default-npm-packages .tool-versions
 
+copy_confs_for jsstuffff .npmrc
+
 copy_confs_for fanciness bin/showoff-linux-desktop-unixporn-sexy-oh-wow-screenshot-time-here-we-go-fancy-extra-nice-UNDO.sh bin/showoff-linux-desktop-unixporn-sexy-oh-wow-screenshot-time-here-we-go-fancy-extra-nice.sh
 
 # git@github.com:roguh/git-quick-stats.git
@@ -353,10 +355,10 @@ copy_confs_for kubernetes \
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
-copy_confs_for xfce4_and_xubuntu .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+copy_confs_for xfce4_and_xubuntu .xscreensaver .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
 
 # TODO copy to Code - OSS config too, symlink like my vim/nvim configs
-copy_confs_for thedevil bin/thedevil.sh bin/code-notossh.sh .config/Code/User/settings.json
+copy_confs_for thedevil bin/thedevil.sh bin/code-notoss.sh .config/Code/User/settings.json
 
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 

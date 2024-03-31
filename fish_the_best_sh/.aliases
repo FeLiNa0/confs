@@ -29,8 +29,8 @@ tryalias exa 'exa --git' exa
 
 tryalias trizen 'trizen --flip-results=1'
 
-tryalias py python3 python
-tryalias ipy ipython3 ipython
+# tryalias py python3 python
+# tryalias ipy ipython3 ipython
 tryalias ipy-mouse 'ipy --TerminalInteractiveShell.mouse_support=True'
 
 tryalias v vis nvim vim vis vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
