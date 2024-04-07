@@ -7,8 +7,8 @@ function fish_greeting
   fish_prompt
   echo
   if command -v exa > /dev/null 2>&1
-    exa -a "$PWD"
+    exa "$PWD"
   else
-    ls -a "$PWD"
+    ls "$PWD"
   end
 end

@@ -21,6 +21,9 @@ mkdir $DST/bin
 echo ------- making ~/tmp -------
 mkdir $DST/tmp
 
+echo ------- making ~/src -------
+mkdir $DST/src
+
 echo ------- mkshrc is bashrc -------
 link $DST/.bashrc $DST/.mkshrc
 
@@ -35,6 +38,9 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo ------- downloading minecraft-server -------
+git clone https://github.com/Fellowship-The/minecraft-server $HOME/src/minecraft-server
 
 echo ------- downloading kitty-themes -------
 git clone --depth 1 git@github.com:dexpota/kitty-themes.git ~/.config/kitty/kitty-themes

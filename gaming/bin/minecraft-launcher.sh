@@ -1,0 +1,3 @@
+#!/bin/sh
+# TODO run lunar or badlion or vanilla, offer a choice.....
+echo TODO

@@ -368,6 +368,9 @@ copy_confs_for xfce4_and_xubuntu \
 # TODO copy to Code - OSS config too, symlink like my vim/nvim configs
 copy_confs_for thedevil bin/thedevil.sh bin/code-notoss.sh .config/Code/User/settings.json
 
+# https://github.com/Fellowship-The/minecraft-server
+copy_confs_for gaming bin/minecraft-launcher.sh bin/minecraft-backup.sh bin/veloren-launcher-betterthanminecraft.sh
+
 copy_confs_for qubes bin/mount-manjaro.sh .config/autostart/dropbox.desktop
 
 HOST=qubes-dom0 copy_confs_for_host qubes-dom0 QubesIncoming/dom0/{bin,config.fish,.bashrc,.xscreensaver,xfce4-keyboard-shortcuts.xml}
