@@ -194,6 +194,7 @@ copy_confs_for vim \
   .vimrc \
   .vimrc.minimal \
   .config/nvim/coc-settings.json \
+  .config/nvim/init.lua \
   .bash_vim
 
 copy_confs_for vis \

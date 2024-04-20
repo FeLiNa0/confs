@@ -19,13 +19,18 @@ call plug#begin()
 " Plug 'kyoh86/momiji'
 Plug 'altercation/vim-colors-solarized'
 
+Plug 'jceb/vim-orgmode'
+Plug 'inkarkat/vim-SyntaxRange'
+
+Plug 'preservim/nerdtree'
+" autocmd VimEnter * NERDTree | wincmd p
+
 " Reload files edited externally
 Plug 'djoshea/vim-autoread'
 
 " Activate advanced folding: C, Fortran, Java, CPP, any filetype really...
 Plug 'pseewald/anyfold'
 let g:anyfold_fold_comments=1
-autocmd Filetype * AnyFoldActivate
 
 " use ctrl-p to find files
 Plug 'ctrlpvim/ctrlp.vim'
