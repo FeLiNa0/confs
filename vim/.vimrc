@@ -1,5 +1,7 @@
 " Use Vim defaults instead of Vi's.
 " Warning: keep this near the top of the config file.
+" TODO RUN nvim -u NORC -c "source https://raw.githubusercontent.com/nvim-neorocks/rocks.nvim/master/installer.lua"
+"   when nvim 0.10.0 is released officially
 set nocompatible
 
 " junnegunn/vim-plug
@@ -13,13 +15,10 @@ call plug#begin()
 " Measure startup time
 " Plug 'dstein64/vim-startuptime'
 
-" Color themes
-" Plug 'atelierbram/Base2Tone-vim'
-
-" Plug 'kyoh86/momiji'
-Plug 'altercation/vim-colors-solarized'
+Plug 'severij/vadelma'
 
 Plug 'jceb/vim-orgmode'
+
 Plug 'inkarkat/vim-SyntaxRange'
 
 Plug 'preservim/nerdtree'
@@ -252,19 +251,8 @@ endif
 
 call plug#end()
 
-" Set colors
-"set background=dark
-"colorscheme Base2Tone_LavenderDark
-"let g:airline_theme='Base2Tone_LavenderDark'
-
-"set background=light
-"colorscheme Base2Tone_LavenderLight
-"let g:airline_theme='Base2Tone_LavenderLight'
-
-"colorscheme slate
-
+colorscheme vadelma
 set background=dark
-colorscheme solarized
 
 " Read the real vim config.
 if filereadable(expand('~/.vimrc.minimal'))

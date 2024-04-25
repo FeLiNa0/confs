@@ -42,9 +42,9 @@ require("lazy").setup({
           ["core.dirman"] = {
             config = {
               workspaces = {
-                notes = "~/notes",
+                notes = "~/org",
               },
-              default_workspace = "notes",
+              default_workspace = "org",
             },
           },
         },
