@@ -60,7 +60,7 @@ truncation_symbol = ""
 [time]
 disabled = false
 style = "dimmed white"
-time_format = "%h %d %R"
+time_format = "%h %d %R%Z"
 format = "[$time]($style) "
 
 [git_branch]
