@@ -1,3 +1,2 @@
 #!/bin/sh
-# TODO run lunar or badlion or vanilla, offer a choice.....
-echo TODO
+exec "Lunar Client-3.2.6.AppImage" || notify-send "No minecraft launcher found"
