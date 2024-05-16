@@ -1,10 +1,13 @@
-format = "$time$shell${custom.machine_architecture}$hostname$username$jobs$all$directory$git_status$character"
-right_format = "$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes"
-add_newline = true
+format = "$time$shell${custom.machine_architecture}$hostname$username$jobs$all$git_status$fill$battery$status$cmd_duration$git_branch${custom.git_metrics_main_added_deleted}$git_commit$conda$kubernetes$line_break$directory$character"
+right_format = ""
+add_newline = false
 
 [line_break]
 # Prompt is one line, not two lines
 disabled = false
+
+[fill]
+symbol = " "
 
 [hostname]
 disabled = false
@@ -60,7 +63,7 @@ truncation_symbol = ""
 [time]
 disabled = false
 style = "dimmed white"
-time_format = "%h %d %R"
+time_format = "%h %d %R%Z"
 format = "[$time]($style) "
 
 [git_branch]
@@ -101,7 +104,7 @@ show_milliseconds = false
 format = "[$duration]($style) "
 
 [kubernetes]
-disabled = true
+disabled = false
 format = ' [ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
 contexts = [

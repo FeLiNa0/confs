@@ -30,8 +30,6 @@ link $DST/.bashrc $DST/.mkshrc
 echo ------- linking .vimrc to .config/nvim. creating vim backup dirs -------
 mkdir -p $DST/.config/nvim
 mkdir -p $DST/{.vim,.config/nvim,tmp}/{backup,swap,undo}
-touch $DST/.vimrc
-link $DST/.vimrc $DST/.config/nvim/init.vim
 
 echo ------- downloading plug.vim -------
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \

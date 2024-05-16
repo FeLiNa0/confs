@@ -20,4 +20,6 @@ KUBECONFIG="$HOME/.kube/config":$(find "$HOME/.kube" -type f -iname \*.yaml | tr
 
 gcloud container clusters get-credentials --region us-west2 gke-stg-powerflex-cluster --project edf-re-powerflex-stg-8019
 gcloud container clusters get-credentials --region us-west2 gke-dev-powerflex-cluster --project edf-re-powerflex-dev-16b1
-gcloud container clusters get-credentials --region us-west2 gke-dev-powerflex-cloud-nexus  --project powerflex-cloud-nexus-dev
+gcloud container clusters get-credentials --region us-west2 gke-dev-powerflex-cloud-nexus --project powerflex-cloud-nexus-dev
+gcloud container clusters get-credentials --region us-west2 gke-stg-powerflex-cloud-nexus --project powerflex-cloud-nexus-stg
+gcloud container clusters get-credentials --region us-west2 gke-prd-powerflex-cloud-nexus --project powerflex-cloud-nexus-prd

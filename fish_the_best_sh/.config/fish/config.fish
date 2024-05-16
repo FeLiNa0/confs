@@ -98,6 +98,7 @@ alias ,,=commacomma
 abbr py python3
 abbr ipy ipython3
 abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
+abbr jwt_decode "python3 -c \"import jwt,json ; print(json.dumps(jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}), indent=2)) # Please run pip install PyJWT if this fails\""
 
 if command -v git > /dev/null
     abbr ga 'git add'
@@ -121,6 +122,8 @@ if command -v kubectl > /dev/null
     abbr k kubectl
     abbr kx kubectx
     abbr kc 'kubectl config'
+    abbr kcc 'kubectl config current-context'
+    abbr whereami 'kubectl config current-context'
     abbr kcn 'kubectl config set-context --current --namespace'
     # List and detail resources
     abbr kg 'kubectl get'
