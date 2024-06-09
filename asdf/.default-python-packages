@@ -1,8 +1,0 @@
-streamlit
-pipenv
-ipython
-requests
-isort
-black
-progressbar
-ruff

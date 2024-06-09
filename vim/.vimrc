@@ -33,7 +33,7 @@ let g:anyfold_fold_comments=1
 
 " use ctrl-p to find files
 Plug 'ctrlpvim/ctrlp.vim'
-map <C-p> :CtrlPMixed<CR>
+map <C-p> :CtrlP<CR>
 " ignore files in .gitignore, include dotfiles
 let g:ctrlp_user_command = 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
 
