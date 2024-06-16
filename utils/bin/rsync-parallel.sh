@@ -1,4 +1,5 @@
 #!/bin/sh
+# From https://wiki.ncsa.illinois.edu/display/~wglick/2013/11/01/Parallel+Rsync
  
 # SETUP OPTIONS
 export SRC="${SRC:$1}"
