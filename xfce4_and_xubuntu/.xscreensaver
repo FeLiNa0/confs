@@ -1,10 +1,10 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.08 for FeLiNa on Sun Mar 31 12:07:52 2024.
+# Written by xscreensaver-settings 6.08 for FeLiNa on Tue Jun 18 01:13:42 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:01:00
 cycle:		0:03:00
-lock:		True
+lock:		False
 lockTimeout:	0:01:00
 passwdTimeout:	0:00:15
 visualID:	default
