@@ -154,6 +154,7 @@ if true
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr devadm 'cd ~/pf && cd ~/pf/pfc_ev/device-administrator'
     abbr scale 'cd ~/pf && cd ~/pf/small_scale'
+    abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
 end
 
 if command -v docker > /dev/null

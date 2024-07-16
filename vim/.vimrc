@@ -49,7 +49,7 @@ let g:coc_global_extensions = ['coc-syntax', 'coc-json', 'coc-git', 'coc-java', 
 
 autocmd BufWritePost *.rs call CocAction('format')
 autocmd BufWritePost *.py call CocAction('format')
-autocmd BufWritePost *.py CocCommand python.sortImports
+" autocmd BufWritePost *.py CocCommand python.sortImports
 autocmd BufWritePost *.py CocCommand python.runLinting
 
 nmap <silent> <C-h> <Plug>(coc-diagnostic-next)

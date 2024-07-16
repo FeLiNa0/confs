@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.08 for FeLiNa on Tue Jun 18 01:13:42 2024.
+# Written by xscreensaver-settings 6.08 for FeLiNa on Tue Jul  2 13:13:37 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:01:00
@@ -37,7 +37,7 @@ textFile:	/etc/fedora-release
 textProgram:	fortune -s
 textURL:	http://planet.fedoraproject.org/rss20.xml
 dialogTheme:	default
-settingsGeom:	93,226 1166,315
+settingsGeom:	531,148 1166,315
 
 programs:								      \
 				! Qubes options begin - do not edit	    \n\
@@ -148,7 +148,7 @@ programs:								      \
 				piecewise --root			    \n\
 				pong --root				    \n\
 -				popsquares --root			    \n\
-				xanalogtv --root			    \n\
+-				xanalogtv --root			    \n\
 				abstractile --root			    \n\
 				anemotaxis --root			    \n\
 -				fireworkx --root			    \n\
@@ -254,8 +254,8 @@ programs:								      \
   GL: 				glcells --root				    \n\
   GL: 				lockward --root				    \n\
   GL: 				moebiusgears --root			    \n\
-  GL: 				voronoi --root				    \n\
-  GL: 				hypnowheel --root			    \n\
+- GL: 				voronoi --root				    \n\
+- GL: 				hypnowheel --root			    \n\
   GL: 				klein --root				    \n\
   GL: 				photopile --root			    \n\
   GL: 				skytentacles --root			    \n\
