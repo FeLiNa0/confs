@@ -161,7 +161,7 @@ function! SetTitleString()
         \ . ' ' .
         \ expand('%')
         \ . ' ' .
-        \ $USER . '@' . hostname()
+        \ hostname()
 endfunction
 
 autocmd BufNewFile,BufRead,BufEnter * exe "call SetTitleString()"

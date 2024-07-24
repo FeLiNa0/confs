@@ -4,11 +4,11 @@ function fish_greeting
   end
   
   true
-  fish_prompt
-  echo
-  if command -v exa > /dev/null 2>&1
-    exa "$PWD"
-  else
-    ls "$PWD"
-  end
+  # fish_prompt
+  # echo
+  # if command -v exa > /dev/null 2>&1
+  #   exa "$PWD"
+  # else
+  #   ls "$PWD"
+  # end
 end

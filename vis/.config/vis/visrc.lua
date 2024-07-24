@@ -238,10 +238,10 @@ end
 
 -- Based on https://github.com/erf/vis-title/blob/master/init.luoa
 function set_title(fname)
-    local full_title = '🐱 vis ' ..
+    local full_title = 'vis ' ..
       run_command('projectname.sh') ..
       ' ' ..fname ..
-      ' ' .. run_command('echo $USER@$(hostname)')
+      ' ' .. run_command('echo $(hostname)')
 
     vis:command(string.format(":!printf '\\033]0;%s\\007'", full_title))
 end

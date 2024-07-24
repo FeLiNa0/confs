@@ -367,6 +367,8 @@ copy_confs_for xfce4_and_xubuntu \
     .config/autostart/redshift.desktop \
     .config/autostart/zeal.desktop
 
+copy_confs_for discord .config/config/settings.json
+
 copy_confs_for Zed_text_editor .config/zed/settings.json
 
 # TODO copy to Code - OSS config too, symlink like my vim/nvim configs

@@ -51,6 +51,8 @@ load_file $HOME/.config/fish/local_env.fish
 # Common binary paths
 addpaths $HOME/bin --verbose
 addpaths $HOME/.local/bin  --verbose
+# Lua
+addpaths $HOME/.luarocks/bin  --verbose
 # Rust binaries
 addpaths $HOME/.cargo/bin
 # CUDA binaries
@@ -73,6 +75,8 @@ set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
 
 # This is used for speeding up integration/unit tests on a private repo
 set_global TEST_TIMEOUT_SCALING_FACTOR 2
+
+set_global DEVICE_MANAGER_FORCE_PASS true
 
 # For kubectl
 set_global USE_GKE_GCLOUD_AUTH_PLUGIN True
@@ -236,7 +240,7 @@ if status is-interactive
   end
   
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
-  echo "Fish $TOTAL_STARTUP_TIME"ms
+  # echo "Fish $TOTAL_STARTUP_TIME"ms
   echo "Mater artium necessitas."
 
   set_global fzf_preview_file_cmd cat
