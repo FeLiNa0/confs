@@ -240,8 +240,9 @@ if status is-interactive
   end
   
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
-  # echo "Fish $TOTAL_STARTUP_TIME"ms
-  echo "Mater artium necessitas."
+  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
+    echo "$TOTAL_STARTUP_TIME"ms
+  end
 
   set_global fzf_preview_file_cmd cat
 

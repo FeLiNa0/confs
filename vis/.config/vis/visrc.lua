@@ -238,9 +238,10 @@ end
 
 -- Based on https://github.com/erf/vis-title/blob/master/init.luoa
 function set_title(fname)
+    -- ruh roh printf input sanitization
     local full_title = 'vis ' ..
       run_command('projectname.sh') ..
-      ' ' ..fname ..
+      ' ' .. (fname and fname:gsub("(%%)", "%%%%") or fname) ..
       ' ' .. run_command('echo $(hostname)')
 
     vis:command(string.format(":!printf '\\033]0;%s\\007'", full_title))
