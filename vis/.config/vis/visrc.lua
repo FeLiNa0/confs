@@ -102,12 +102,12 @@ end)
 
 vis.events.subscribe(vis.events.INIT, function()
     -- Load plugins with require(), download if necessary
-    lint = require_if_exists('https://github.com/roguh/vis-lint', 'vis-lint') or {}
+    lint = require_if_exists('https://github.com/rnpnr/vis-lint', 'vis-lint') or {}
     backup = require_if_exists('https://github.com/roguh/vis-backup', 'vis-backup', 'backup') or {}
     shebang = require_if_exists('https://github.com/e-zk/vis-shebang', 'vis-shebang') or {}
     -- Forked from 'https://gitlab.com/muhq/vis-spellcheck'
     -- This plugin will use enchant, enchant-2, aspell, or hunspell in that order
-    spellcheck = require_if_exists('https://github.com/roguh/vis-spellcheck', 'vis-spellcheck') or {}
+    spellcheck = require_if_exists('https://gitlab.com/muhq/vis-spellcheck', 'vis-spellcheck') or {}
 
     spellcheck.default_lang = "en_US"
 
