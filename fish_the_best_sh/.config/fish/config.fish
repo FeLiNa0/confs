@@ -99,11 +99,11 @@ load_file $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
-abbr leet "cd ~/src/golf/0speed_challenges/*"
 abbr py python3
 abbr ipy ipython3
 abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
 abbr jwt_decode "python3 -c \"import jwt,json ; print(json.dumps(jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}), indent=2)) # Please run pip install PyJWT if this fails\""
+abbr leet "cd ~/src/golf/0speed_challenges/*/1/3/3/7/*/*/"
 
 if command -v git > /dev/null
     abbr ga 'git add'
