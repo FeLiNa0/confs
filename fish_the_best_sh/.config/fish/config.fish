@@ -104,9 +104,13 @@ abbr ipy ipython3
 abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
 abbr jwt_decode "python3 -c \"import jwt,json ; print(json.dumps(jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}), indent=2)) # Please run pip install PyJWT if this fails\""
 abbr leet "cd ~/src/golf/speed/*/1/3/3/7/*/*/"
+abbr art "cd ~/src/art/"
+abbr games "cd ~/src/games/"
+abbr golf "cd ~/src/golf/"
 
 if command -v git > /dev/null
     abbr ga 'git add'
+    abbr gr 'git rebase'
     abbr gc 'git commit'
     abbr gch 'git checkout'
     abbr gs '_fzf_search_git_status || git status'
@@ -153,8 +157,8 @@ if command -v kubectl > /dev/null
 end
 
 if true
-    abbr ff 'cd ~/pf/powerflex_edge_traffic_manager'
-    abbr cs 'cd ~/pf/powerflex_edge_ocpp_central_system'
+    abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
+    abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr devadm 'cd ~/pf && cd ~/pf/pfc_ev/device-administrator'
@@ -224,7 +228,7 @@ end
 
 if status is-interactive
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 125 42
+    xset r rate 100 42
     debug Set faster keyboard rate
   end
 
