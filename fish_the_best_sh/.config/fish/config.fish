@@ -31,7 +31,7 @@ function addpaths --argument-names 'path' 'verbose' 'append'
   end
 end
 
-function load_file --argument-names 'file' 'verbose'
+function source_if_exists --argument-names 'file' 'verbose'
     if test -e $file
       source $file
       debug Loaded file $file
@@ -45,7 +45,7 @@ function set_global
   debug Set variable $argv[1]
 end
 
-load_file $HOME/.config/fish/local_env.fish
+source_if_exists $HOME/.config/fish/local_env.fish
 # set_global FISH_LOGO 🐠
 
 # Common binary paths
@@ -65,6 +65,9 @@ addpaths $HOME/.rakudo-moar-2024.01-01-linux-x86_64-gcc/bin/
 addpaths /snap/bin
 # Google Gcloud
 addpaths /opt/google-cloud-cli/bin/
+
+# ASDF
+source_if_exists /opt/asdf-vm/asdf.fish
 
 set_global EDITOR vis
 
@@ -95,7 +98,7 @@ end
 # Load aliases before abbreviations
 # I tried getting rid of tryalias with "alias tryalias alias", but it's actually
 # almost as fast as plain alias so I'll keep it.
-load_file $HOME/.aliases --verbose
+source_if_exists $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
@@ -124,6 +127,8 @@ end
 
 if command -v gh > /dev/null
     abbr ghch 'gh pr checkout'
+    abbr ghw 'gh pr checks --watch'
+    abbr ghwm 'gh pr checks --watch && gh pr merge --delete-branch --merge'
 end
 
 if command -v kubectl > /dev/null
