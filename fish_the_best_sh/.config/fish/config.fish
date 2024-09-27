@@ -32,9 +32,9 @@ function addpaths --argument-names 'path' 'verbose' 'append'
 end
 
 function source_if_exists --argument-names 'file' 'verbose'
-    if test -e $file
-      source $file
-      debug Loaded file $file
+    if test -e "$file"
+      source "$file"
+      debug "Source $file"
     else if ! [ "$verbose" = "" ]
       debug "WARNING: File not found to load as fish script: $file"
     end
