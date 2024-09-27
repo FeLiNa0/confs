@@ -3,8 +3,8 @@ tryalias feh viewnior feh
 tryalias v vis nvim vim vis vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
 tryalias nv nvim neovide
 tryalias nvi neovide nvim
-tryalias pnvim 'pipenv run nvim'
-tryalias pvim 'pipenv run vim'
+tryalias pnvim 'python -m pipenv run nvim'
+tryalias pvim 'python -m pipenv run vim'
 tryalias vmin 'nvim -u ~/.vimrc.minimal' 'vim -u ~/.vimrc.minmal' vis vi nano 'nvim -u ~/.vimrc.minimal'
 
 # https://codegolf.stackexchange.com/a/254589/112181
@@ -15,7 +15,7 @@ tryalias gol gameoflifeff
 
 tryalias knock 'nc -z'
 tryalias ma makeanywhere
-tryalias pma 'pipenv run makeanywhere'
+tryalias pma 'python -m pipenv run makeanywhere'
 
 # careful with this one
 tryalias docker-compose 'docker-compose' 'docker compose'
@@ -46,7 +46,7 @@ tryalias vs "snap run code" "wine code.exe" vis vim
 
 tryalias e evince 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 
-tryalias pmake 'pipenv run make'
+tryalias pmake 'python -m pipenv run make'
 
 tryalias pink 'printf "\x1b[48;5;200m  PINK  "'
 

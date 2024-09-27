@@ -24,7 +24,7 @@ function addpaths --argument-names 'path' 'verbose' 'append'
       else
           set -U fish_user_paths $fish_user_paths "$path"
       end
-      debug Added path (trimdir.py "$path")
+      debug Added path "$path"
     end
   else if [ "$verbose" = "verbose" ]
     debug "WARNING: addpaths could not find $argv[1]"
@@ -189,7 +189,7 @@ if command -v makeanywhere > /dev/null
         "$MAKEANYWHERE" $argv
     end
     function pma --wraps make --description "pma --wraps make pipenv run $MAKEANYWHERE"
-        pipenv run "$MAKEANYWHERE" $argv
+        python -m pipenv run "$MAKEANYWHERE" $argv
     end
     alias ma makeanywhere
 
@@ -197,7 +197,7 @@ if command -v makeanywhere > /dev/null
 end
 
 function pmake --wraps make --description "pma --wraps make pipenv run"
-    pipenv run make $argv
+    python -m pipenv run make $argv
 end
 
 set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
