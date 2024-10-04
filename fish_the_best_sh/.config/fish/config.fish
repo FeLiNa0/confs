@@ -84,6 +84,10 @@ set_global DEVICE_MANAGER_FORCE_PASS true
 # For kubectl
 set_global USE_GKE_GCLOUD_AUTH_PLUGIN True
 
+# Disable legacy algorithms in OpenSSL 3.0+
+# A fix when using the Python cryptography library.
+set_global CRYPTOGRAPHY_OPENSSL_NO_LEGACY true
+
 # Load some common python libraries
 set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
 
@@ -220,8 +224,8 @@ end
 function miniconda_fish_init
   # If this function is overwriting your system's Python:
   # conda config --set auto_activate_base false
-  set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
-  # set --local CONDA_BIN "/opt/miniconda3/bin/conda"
+  # set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
+  set --local CONDA_BIN "/opt/miniconda3/bin/conda"
   # set --local CONDA_BIN "/usr/bin/conda"
   if ! command -v "$CONDA_BIN" > /dev/null
     return 1
