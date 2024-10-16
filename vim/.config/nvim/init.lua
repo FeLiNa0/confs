@@ -30,30 +30,6 @@ require("lazy").setup({
       priority = 1000,
       config = true,
   },
-  {
-    "nvim-neorg/neorg",
-    dependencies = { "luarocks.nvim" },
-    version = "*",
-    config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {},
-          ["core.concealer"] = {},
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                notes = "~/org",
-              },
-              default_workspace = "org",
-            },
-          },
-        },
-      }
-
-      vim.wo.foldlevel = 99
-      vim.wo.conceallevel = 2
-    end,
-  }
 })
 
 vim.cmd.source("~/.vimrc") 
