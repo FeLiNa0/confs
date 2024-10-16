@@ -17,7 +17,7 @@ call plug#begin()
 
 Plug 'severij/vadelma'
 
-Plug 'jceb/vim-orgmode'
+" Plug 'jceb/vim-orgmode'
 
 Plug 'inkarkat/vim-SyntaxRange'
 
@@ -30,6 +30,14 @@ Plug 'djoshea/vim-autoread'
 " Activate advanced folding: C, Fortran, Java, CPP, any filetype really...
 Plug 'pseewald/anyfold'
 let g:anyfold_fold_comments=1
+
+" Asynchronous grep results.
+" Default search tool is whatever is available first from:
+" ag, ack, grep, findstr, rg, pt, git
+" Leave an empty query to search for word under the cursor.
+Plug 'mhinz/vim-grepper'
+command! ProjectGrepper execute 'Grepper -dir repo'
+map <C-f> :ProjectGrepper<CR>
 
 " use ctrl-p to find files
 Plug 'ctrlpvim/ctrlp.vim'
@@ -44,7 +52,7 @@ let g:highlightedyank_highlight_duration = 10000
 Plug 'tpope/vim-fugitive'
 
 " Language server protocol (LSP) for completion and other fancy IDE-like features
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['java', 'typescript', 'javascript', 'javascript.jsx', 'python', 'rust', 'json', 'yaml', 'yaml.docker-compose', 'dockerfile', 'c', 'cpp', 'c++', 'objc', 'objcpp', 'cc'] }
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['java', 'typescript', 'javascript', 'javascript.jsx', 'html', 'ts', 'python', 'rust', 'json', 'yaml', 'yaml.docker-compose', 'dockerfile', 'c', 'cpp', 'c++', 'objc', 'objcpp', 'cc'] }
 let g:coc_global_extensions = ['coc-syntax', 'coc-json', 'coc-git', 'coc-java', 'coc-tsserver', 'coc-pyright', 'coc-rust-analyzer', 'coc-yaml', 'coc-docker', 'coc-clangd']
 
 autocmd BufWritePost *.rs call CocAction('format')
@@ -109,14 +117,6 @@ if $VIM_LOAD_EXTRA_PLUGINS == "true"
     let g:airline_powerline_fonts = 1
 
     Plug 'neovimhaskell/haskell-vim'
-
-    " Asynchronous grep results.
-    " Default search tool is whatever is available first from:
-    " ag, ack, grep, findstr, rg, pt, git
-    " Leave an empty query to search for word under the cursor.
-    Plug 'mhinz/vim-grepper'
-    command! ProjectGrepper execute 'Grepper -dir repo'
-    map <C-f> :ProjectGrepper<CR>
 
     " File browser.
     Plug 'francoiscabrol/ranger.vim'

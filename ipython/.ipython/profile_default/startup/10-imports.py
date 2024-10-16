@@ -56,6 +56,7 @@ os = imp("os")
 # pickle = imp("pickle")
 # slow
 # platform = imp("platform")
+glob = imp("glob")
 pprint = imp("pprint")
 random = imp("random")
 re = imp("re")
