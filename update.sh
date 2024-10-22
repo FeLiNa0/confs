@@ -233,6 +233,7 @@ copy_confs_for utils \
   bin/rsync-for-src.sh \
   bin/rsync-parallel.sh \
   bin/dropbox-status.sh \
+  bin/reset-rescan-thunderbolt.sh \
   bin/open-starlink.html
 
 copy_confs_for alacritty .config/alacritty/alacritty.yml bin/alacritty-cwd.sh
