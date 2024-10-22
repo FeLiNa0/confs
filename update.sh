@@ -217,6 +217,7 @@ copy_confs_for x11 \
   .xinitrc .xbindkeysrc bin/calculator.sh
 
 copy_confs_for_host gitconfig .gitconfig
+# git config rerere.enabled true --global
 
 copy_confs_for starship_rust_portable_shell_prompt \
   .config/starship.toml bin/uname-m-if-not-typical.sh
