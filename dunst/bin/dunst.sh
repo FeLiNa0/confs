@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source "$HOME/.cache/wal/colors.sh"
+killall xfce4-notifyd
 killall dunst
+
 # Background, foreground, frame color of low, normal, and critical priority messages
 dunst \
         -lb "${color12:-#000000}" \
@@ -13,3 +14,5 @@ dunst \
         -cb "${foreground:-#000000}" \
         -cf "${background:-#FFFFFF}" \
         &
+
+notify-send "Dunst is active" "$(date)"

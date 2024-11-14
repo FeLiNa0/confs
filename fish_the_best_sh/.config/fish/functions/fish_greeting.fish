@@ -1,6 +1,7 @@
 function fish_greeting
   if [ "$PWD" = "$HOME" ]
-    printf "%s %s\n" "Mater artium necessitas" (uname -o -n -r)
+    printf "%s %s\n" "Mater artium necessitas"
+    uname -mnors
   end
   # fish_prompt
   # echo
