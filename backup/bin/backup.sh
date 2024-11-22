@@ -9,6 +9,10 @@ elif command -v apt > /dev/null; then
     backup-this-apt-machine.sh
 fi
 
+if command -v backup-games.sh; then
+    backup-games.sh
+fi
+
 if command -v backup-$(hostname).sh; then
     backup-$(hostname).sh
 fi
