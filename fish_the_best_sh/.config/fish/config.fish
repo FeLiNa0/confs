@@ -165,6 +165,11 @@ if command -v kubectl > /dev/null
     addpaths $HOME/.krew/bin
 end
 
+if command -v aws > /dev/null 2>&1
+    abbr a aws
+    abbr s3 'aws s3'
+end
+
 if true
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
