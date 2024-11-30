@@ -1,0 +1,9 @@
+# https://spacebums.co.uk/thunar-webp-thumbnails/
+
+~ $ sudo vim /usr/share/thumbnailers/webp.thumbnailer
+Nov 29 15:52-07:00                                                                             
+~ $ mkdir -p ~/.local/share/mime/packages
+Nov 29 15:52-07:00                                                                             
+~ $ v ~/.local/share/mime/packages/webp.xml
+Nov 29 15:52-07:00                                                                          5s 
+~ $ update-mime-database ~/.local/share/mime
