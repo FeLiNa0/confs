@@ -39,6 +39,7 @@ binascii = imp("binascii")
 collections = imp("collections")
 copy = imp("copy")
 datetime = imp("datetime")
+getpass = imp("getpass")
 decimal = imp("decimal")
 Decimal = decimal.Decimal
 fileinput = imp("fileinput")
