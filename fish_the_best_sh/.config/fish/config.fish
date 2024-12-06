@@ -166,6 +166,7 @@ if command -v kubectl > /dev/null
 end
 
 if command -v aws > /dev/null 2>&1
+    # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
     abbr a aws
     abbr s3 'aws s3'
 end
