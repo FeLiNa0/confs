@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.08 for FeLiNa on Tue Jul  2 13:13:37 2024.
+# Written by xscreensaver-settings 6.09 for felina on Sun Dec  8 00:19:00 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:01:00
@@ -37,7 +37,7 @@ textFile:	/etc/fedora-release
 textProgram:	fortune -s
 textURL:	http://planet.fedoraproject.org/rss20.xml
 dialogTheme:	default
-settingsGeom:	531,148 1166,315
+settingsGeom:	652,169 1166,315
 
 programs:								      \
 				! Qubes options begin - do not edit	    \n\
@@ -117,8 +117,8 @@ programs:								      \
 				squiral --root				    \n\
 				wander --root				    \n\
 -				xflame --root				    \n\
-				xmatrix --root --small --delay 9160	      \
-				  --density 93				    \n\
+				xmatrix --root --small --mode dna --delay     \
+				  3817 --density 93			    \n\
 -				nerverot --root				    \n\
 -				xrayswarm --root			    \n\
 -				xspirograph --root			    \n\
@@ -306,6 +306,8 @@ programs:								      \
   GL: 				cubocteversion --root			    \n\
   GL: 				papercube --root			    \n\
   GL: 				skulloop --root				    \n\
+  GL: 				highvoltage --root			    \n\
+  GL: 				kallisti --root				    \n\
 
 
 pointerHysteresis:  10
