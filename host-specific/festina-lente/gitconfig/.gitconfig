@@ -6,3 +6,5 @@
 	gpgsign = true
 [maintenance]
 	repo = /home/FeLiNa/pf/pfc_site_uploader
+[alias]
+    praise = blame

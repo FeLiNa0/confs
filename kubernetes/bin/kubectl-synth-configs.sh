@@ -13,7 +13,7 @@ omnictl config context dev
 
 # prd
 omnictl config context prd
-generate_kubeconfigs.sh '0018|0060|0001|0008|0077|0117|0137|9137'
+generate_kubeconfigs.sh '0018|0060|0001|0008|0077|0117|0137|9137|0003'
 
 # This merges all .yaml files in ~/.kube into one single kubeconfig.
 # Switch configs with kubectx or with `kubectl config`.
