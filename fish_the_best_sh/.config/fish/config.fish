@@ -107,6 +107,7 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr k "rlwrap ngnk"
+abbr mc "cd ~/src/min*"
 abbr py python3
 abbr ipy ipython3
 abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
