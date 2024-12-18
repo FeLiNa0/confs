@@ -181,7 +181,7 @@ if true
     abbr devadm 'cd ~/pf && cd ~/pf/pfc_ev/device-administrator'
     abbr scale 'cd ~/pf && cd ~/pf/small_scale'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
-    abbr nin 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
+    abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
 end
 
 if command -v docker > /dev/null
