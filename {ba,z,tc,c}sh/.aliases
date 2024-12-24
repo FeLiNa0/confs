@@ -1,59 +1,65 @@
-tryalias feh viewnior feh
+# tryalias will alias a single command to the first of a list of commands that exist on the system.
+# for example: `tryalias v vim vis nvim` will attempt to alias v to vim if it exists, vis, or nvim in that order.
+# tryalias is a custom function implemented in FISH and BASH.
 
-tryalias v vis 'nvim -p' vim vis vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
-tryalias nv 'nvim -p' neovide
-tryalias nvi neovide 'nvim -p'
-tryalias pnvim 'python -m pipenv run nvim -p'
-tryalias pvim 'python -m pipenv run vim'
-tryalias vmin 'nvim -u ~/.vimrc.minimal' 'vim -u ~/.vimrc.minmal' vis vi nano 'nvim -u ~/.vimrc.minimal'
-
-# https://codegolf.stackexchange.com/a/254589/112181
-# http://underpop.online.fr/f/ffmpeg/help/life.htm.gz
-# https://sgamal.com/posts/ffmpeg/lavfi/
-tryalias gameoflifeff 'ffplay -f lavfi -i life=death_color=red:life_color=black:mold_color=white:r=60:rule=B36/S23:ratio=0.7'
-tryalias gol gameoflifeff
-
-tryalias knock 'nc -z'
-tryalias ma makeanywhere
-tryalias pma 'python -m pipenv run makeanywhere'
-
-# careful with this one
-tryalias docker-compose 'docker-compose' 'docker compose'
-
-tryalias pass $HOME/bin/pass-custom.sh
-
-tryalias em 'emacs -nw'
-tryalias emc 'emacsclient -nw --alternate-editor=""'
-tryalias emacsc 'emacsclient --alternate-editor=""'
 tryalias mv 'mv -i'
 tryalias cp 'cp -i'
 tryalias rm 'rm -i'
 
 tryalias ls exa ls
-tryalias l 'ls -F -a'
-tryalias ll 'l -l -h'
-tryalias gzip pigz gzip
 
-tryalias exa 'exa --git' exa
-
+tryalias v vis 'vim -p' vim vis nvim vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
+tryalias pass $HOME/bin/pass-custom.sh
+tryalias bucle curl
 tryalias trizen 'trizen --flip-results=1'
 
-# tryalias py python3 python
-# tryalias ipy ipython3 ipython
-tryalias ipy-mouse 'ipy --TerminalInteractiveShell.mouse_support=True'
 
-tryalias vs "snap run code" "wine code.exe" vis vim
 
-tryalias e evince 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 
-tryalias pmake 'python -m pipenv run make'
+# tryalias pnvim 'python -m pipenv run nvim -p'
+# tryalias gameoflifeff 'ffplay -f lavfi -i life=death_color=red:life_color=black:mold_color=white:r=60:rule=B36/S23:ratio=0.7'
 
-tryalias pink 'printf "\x1b[48;5;200m  PINK  "'
 
-tryalias bucle curl
+#### Unused:
+## tryalias vmin 'nvim -u ~/.vimrc.minimal' 'vim -u ~/.vimrc.minmal' vis vi nano 'nvim -u ~/.vimrc.minimal'
 
-# cp ~/.kube/config ~/.kube/config.bak && KUBECONFIG=~/.kube/config:./ADDITIONAL_KUBECONFIG kubectl config view --flatten > /tmp/config && mv /tmp/config ~/.kube/config
+## tryalias nv 'vim -p' 'nvim -p' neovide
+## tryalias nvi neovide 'nvim -p'
+## tryalias pvim 'python -m pipenv run vim -p'
+## tryalias pvim 'python -m pipenv run vim'
 
-tryalias MONKEY 'echo MONKEY'
+## https://codegolf.stackexchange.com/a/254589/112181
+## http://underpop.online.fr/f/ffmpeg/help/life.htm.gz
+## https://sgamal.com/posts/ffmpeg/lavfi/
+## tryalias gameoflifeff 'ffplay -f lavfi -i life=death_color=red:life_color=black:mold_color=white:r=60:rule=B36/S23:ratio=0.7'
+## tryalias gol gameoflifeff
 
-# Some aliases are now only found as Fish abbreviations
+## tryalias knock 'nc -z'
+## tryalias ma makeanywhere
+## tryalias pma 'python -m pipenv run makeanywhere'
+
+## careful with this one
+## tryalias docker-compose 'docker-compose' 'docker compose'
+
+
+## tryalias em 'emacs -nw'
+## tryalias emc 'emacsclient -nw --alternate-editor=""'
+## tryalias emacsc 'emacsclient --alternate-editor=""'
+
+## tryalias gzip pigz gzip
+
+## tryalias exa 'exa --git' exa
+
+## tryalias py python3 python
+## tryalias ipy ipython3 ipython
+## tryalias ipy-mouse 'ipy --TerminalInteractiveShell.mouse_support=True'
+
+## tryalias vs "snap run code" "wine code.exe" vis vim
+
+## tryalias pmake 'python -m pipenv run make'
+
+## tryalias pink 'printf "\x1b[48;5;200m  PINK  "'
+
+## cp ~/.kube/config ~/.kube/config.bak && KUBECONFIG=~/.kube/config:./ADDITIONAL_KUBECONFIG kubectl config view --flatten > /tmp/config && mv /tmp/config ~/.kube/config
+
+#### Most aliases are now only found as Fish abbreviations

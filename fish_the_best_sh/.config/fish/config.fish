@@ -106,17 +106,30 @@ source_if_exists $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
-abbr k "rlwrap ngnk"
+
+abbr l 'ls -F -a'
+abbr ll 'l -l -h'
+abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
+abbr feh viewnior
+abbr MONKEY 'echo MONKEY'
+
+
+abbr k "rlwrap ngnk"  # The K language
 abbr mc "cd ~/src/min*"
+
+# Python and Scientific commands
 abbr py python3
 abbr ipy ipython3
 abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
 abbr jwt_decode "python3 -c \"import jwt,json ; print(json.dumps(jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}), indent=2)) # Please run pip install PyJWT if this fails\""
+
+# Common directories
 abbr leet "cd ~/src/golf/speed/*/1/3/3/7/*/*/"
 abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 
+# Git shortcuts
 if command -v git > /dev/null
     abbr ga 'git add'
     abbr gr 'git rebase'
@@ -131,12 +144,14 @@ if command -v git > /dev/null
     debug Setup Git abbreviations
 end
 
+# Github-specific shortcuts
 if command -v gh > /dev/null
     abbr ghch 'gh pr checkout'
     abbr ghw 'gh pr checks --watch'
     abbr ghwm 'gh pr checks --watch && gh pr merge --delete-branch --merge'
 end
 
+# KUUUUUUUUUUUUUUUBBBBBBBBBBBBBBBBB
 if command -v kubectl > /dev/null
     # TODO kubectl get apps -A | grep -v Synced 
     abbr k kubectl
@@ -184,6 +199,7 @@ if true
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
 end
 
+# Docker shortcuts
 if command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
