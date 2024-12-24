@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-settings 6.09 for felina on Sun Dec  8 00:19:00 2024.
+# Written by xscreensaver-settings 6.09 for FeLiNa on Tue Dec 24 06:26:13 2024.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:01:00
@@ -286,7 +286,7 @@ programs:								      \
   GL: 				esper --root				    \n\
   GL: 				vigilance --root			    \n\
   GL: 				crumbler --root				    \n\
-  GL: 				handsy --root				    \n\
+- GL: 				handsy --root				    \n\
   GL: 				maze3d --root				    \n\
   GL: 				peepers --root				    \n\
   GL: 				razzledazzle --root			    \n\
