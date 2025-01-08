@@ -1,3 +1,3 @@
 #!/bin/bash
 set -x
-EDITOR='nvim -u /dev/null' pass "$@"
+EDITOR='vim -u /dev/null' pass "$@"

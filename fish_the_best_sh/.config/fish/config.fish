@@ -102,6 +102,10 @@ abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 abbr feh viewnior
 abbr MONKEY 'echo MONKEY'
+abbr em 'emacs -nw'
+abbr emc 'emacsclient -nw --alternate-editor=""'
+abbr emacsc 'emacsclient --alternate-editor=""'
+
 
 abbr k "rlwrap ngnk"  # The K language
 
@@ -159,6 +163,7 @@ if command -v kubectl > /dev/null
     ## abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
     debug Setup Kubernetes abbreviations
     #### Rarely used:
+    ## kubectl exec -it rfr-edge-redis-0 -n default -c redis -- redis-cli
     ## kubectl get apps -A | grep -v Synced 
     ## abbr kc 'kubectl config'
     ## abbr kcc 'kubectl config current-context'

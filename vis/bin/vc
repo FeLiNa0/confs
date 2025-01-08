@@ -1,2 +1,6 @@
 #!/bin/sh
-exec vis-clipboard --copy "$@"
+if [ -f "$1" ]; then
+    cat "$1" | vis-clipboard --copy
+else
+    exec vis-clipboard --copy
+fi
