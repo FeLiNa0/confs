@@ -9,6 +9,7 @@ tryalias rm 'rm -i'
 tryalias ls exa ls
 
 tryalias v vis 'vim -p' vim vis nvim vi nano ed libreoffice openoffice 'wine MicrosoftOffice2003.exe' vim
+tryalias pvim 'python -m pipenv run vim -p'
 tryalias pass $HOME/bin/pass-custom.sh
 tryalias bucle curl
 tryalias trizen 'trizen --flip-results=1'

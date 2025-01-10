@@ -188,6 +188,8 @@ if true
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr scale 'cd ~/pf && cd ~/pf/small_scale'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
+    abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
+    abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
 end
 
