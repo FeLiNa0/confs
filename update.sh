@@ -234,6 +234,7 @@ copy_confs_for utils \
   bin/rsync-for-src.sh \
   bin/rsync-parallel.sh \
   bin/dropbox-status.sh \
+  bin/speedtest-info.sh \
   bin/reset-rescan-thunderbolt.sh \
   bin/open-starlink.html
 
