@@ -216,6 +216,7 @@ copy_confs_for polybar .config/polybar/config \
 copy_confs_for x11 \
   .xinitrc .xbindkeysrc bin/calculator.sh
 
+copy_confs_for_host f16 bin/f16-startup.sh
 copy_confs_for_host gitconfig .gitconfig
 # git config rerere.enabled true --global
 

@@ -1,0 +1,13 @@
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/felina/.ssh/id_ed25519.pub
+	email = roguh@roguh.com
+	name = ROGUH Rivera Calzadillas
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+    praise = blame
