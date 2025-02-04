@@ -104,7 +104,7 @@ show_milliseconds = false
 format = "[$duration]($style) "
 
 [kubernetes]
-disabled = true
+disabled = false
 format = ' [ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
 contexts = [
