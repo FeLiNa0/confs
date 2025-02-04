@@ -11,3 +11,5 @@
 	required = true
 [alias]
     praise = blame
+[init]
+	defaultBranch = main
