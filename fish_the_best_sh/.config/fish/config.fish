@@ -270,7 +270,7 @@ if status is-interactive
   end
   
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
-  if status is-interactive ## && [ "$DEBUG_OUTPUT" = true ]
+  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
     echo "$TOTAL_STARTUP_TIME"ms
   end
 
