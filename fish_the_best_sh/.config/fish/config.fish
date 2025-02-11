@@ -182,7 +182,7 @@ if command -v aws > /dev/null 2>&1
 end
 
 if true
-    ## abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
+    abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
