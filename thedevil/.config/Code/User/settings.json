@@ -28,5 +28,6 @@
     "git.timeline.showUncommitted": true,
     "vim.cursorStylePerMode.visualline": "line-thin",
     "vim.smartRelativeLine": true,
-    "terminal.integrated.sendKeybindingsToShell": true
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "thunder-client.customLocation": "$HOME/pf/powerflex_api_collections"
 }

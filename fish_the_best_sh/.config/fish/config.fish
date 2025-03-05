@@ -120,6 +120,7 @@ abbr mc "cd ~/src/min*"
 abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
+abbr leet "cd ~/src/golf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
 
 # Git shortcuts
 if command -v git > /dev/null
@@ -186,7 +187,7 @@ if true
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
-    abbr scale 'cd ~/pf && cd ~/pf/small_scale'
+    abbr scale 'cd ~/pf && cd ~/pf/scale'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
