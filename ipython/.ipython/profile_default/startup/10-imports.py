@@ -91,6 +91,7 @@ _failed_preimported_modules_str = " ".join(
 duration = time.time() - _preimport_start_time
 
 if len(_preimported_modules) > 0:
+    print()
     print(sys.version, _preimport_implementation)
     print("sys.path:", "    ".join(sys.path))
     print()
