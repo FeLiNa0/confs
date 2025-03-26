@@ -105,6 +105,7 @@ abbr MONKEY 'echo MONKEY'
 abbr em 'emacs -nw'
 abbr emc 'emacsclient -nw --alternate-editor=""'
 abbr emacsc 'emacsclient --alternate-editor=""'
+abbr rsync 'rsync -rh --info=progress2'
 
 
 abbr k "rlwrap ngnk"  # The K language
@@ -120,7 +121,7 @@ abbr mc "cd ~/src/min*"
 abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
-abbr leet "cd ~/src/golf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
+abbr leet "cd ~/src/golf/notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
 
 # Git shortcuts
 if command -v git > /dev/null
