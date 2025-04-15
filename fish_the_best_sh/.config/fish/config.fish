@@ -189,6 +189,7 @@ if true
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr scale 'cd ~/pf && cd ~/pf/scale'
+    abbr passman 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
@@ -258,6 +259,10 @@ if status is-interactive
 
   if command -v starship > /dev/null
     starship init fish | source
+  end
+
+  if command -v pyenv > /dev/null
+    pyenv init - fish | source
   end
   
   set_global fzf_preview_file_cmd cat

@@ -3,11 +3,10 @@ if command -v rofi > /dev/null
 then
     # -normalize-match -- Normalize characters with accents so plain letter matches them, e -> é
     rofi \
-      -hover-select -me-select-entry '' -me-accept-entry MousePrimary \
+      -me-select-entry '' \
       -matching fuzzy \
       -show ${1:-combi} \
       -fixed-num-lines \
-      -scroll-method 1 \
       -eh 2 \
       -modi combi,run,window,ssh,keys \
       -sidebar-mode \

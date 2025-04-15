@@ -10,7 +10,7 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "theme": "Xcode Midnight",
+  "theme": "macOS Classic Dark2",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
