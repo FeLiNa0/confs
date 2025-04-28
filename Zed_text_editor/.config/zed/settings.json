@@ -25,5 +25,19 @@
     "highlight_on_yank_duration": 5000
   },
   "ui_font_size": 16,
+  "lsp": {
+    "basedpyright": {
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        }
+      }
+    },
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        }
+      }
+    },
   "buffer_font_size": 16
 }
