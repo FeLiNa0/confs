@@ -7,7 +7,26 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "mode": "eager",
+    "enabled_in_assistant": false
+  },
+  "assistant": {
+    "default_model": {
+      // use local ollama model for assistant
+      "provider": "ollama",
+      "model": "mistral:latest"
+    },
+    "version": "2"
+  },
+  "languages": {
+    "Org": {
+      "show_edit_predictions": false
+    }
+  },
+  "show_edit_predictions": true,
   "features": {
+    // use zed's local Zeta LLM for edit predictions
     "edit_prediction_provider": "zed"
   },
   "theme": "macOS Classic Dark2",

@@ -122,6 +122,7 @@ abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 abbr leet "cd ~/src/golf/notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
+abbr z zeditor # whoooooooooooooo new editor
 
 # Git shortcuts
 if command -v git > /dev/null
@@ -212,7 +213,9 @@ end
     
 ## still needed? set_global BUILDKIT_PROGRESS plain
 ## still set_global DOCKER_BUILDKIT 1
-## still needed? addpaths $HOME/.krew/bin
+
+# kubectl krew plugins
+set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
 if command -v makeanywhere > /dev/null
     set -g MAKEANYWHERE (command -v makeanywhere)
