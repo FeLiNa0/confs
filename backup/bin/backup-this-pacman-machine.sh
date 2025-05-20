@@ -9,6 +9,8 @@ ROOT=$(get-backup-root.sh)/$(date +%Y-%m)
 # etc
 RSYNC_OPTS="--archive --human-readable --delete-after --recursive --ignore-missing-args"
 
+mkdir -p "$ROOT"
+
 echo "BACKUP all installed packages WITH pacman -Qie"
 pacman -Qie --native > $ROOT/pacman-Qie
 pacman -Qie --foreign > $ROOT/pacman-Qie-AUR

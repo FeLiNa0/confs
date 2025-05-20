@@ -291,7 +291,7 @@ if status is-interactive
   if command -v keychain > /dev/null 2>&1
     # Timeout after 10 hours (600 minutes)
     # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
-    eval (keychain --quick --timeout 600 --eval --agents ssh -Q --quiet id_ed25519)
+    eval (keychain --quick --timeout 600 --eval -Q --quiet id_ed25519)
   end
 end
 

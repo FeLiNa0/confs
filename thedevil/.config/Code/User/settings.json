@@ -1,7 +1,6 @@
 {
     "window.title": "🐱 vc ${rootName} ${activeEditorShort}",
     "security.workspace.trust.untrustedFiles": "open",
-    "workbench.statusBar.visible": false,
     "editor.minimap.enabled": false,
     "editor.hideCursorInOverviewRuler": true,
     "editor.overviewRulerBorder": false,
@@ -13,9 +12,8 @@
     "explorer.decorations.colors": false,
     "editor.cursorBlinking": "phase",
     "editor.cursorSmoothCaretAnimation": "on",
-    "window.menuBarVisibility": "toggle",
     "workbench.layoutControl.type": "menu",
-    "workbench.activityBar.location": "hidden",
+    "workbench.activityBar.location": "top",
     "files.autoSave": "afterDelay",
     "workbench.colorTheme": "Solarized Dark",
     "editor.fontFamily": "'Mono Lisa Medium', 'Droid Sans Mono', 'monospace', monospace",
