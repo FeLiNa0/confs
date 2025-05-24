@@ -251,7 +251,7 @@ end
 
 if status is-interactive
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 100 42
+    xset r rate 88 42
     debug Set faster keyboard rate
   end
 

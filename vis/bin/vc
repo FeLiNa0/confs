@@ -1,6 +1,7 @@
 #!/bin/sh
 if [ -f "$1" ]; then
     cat "$1" | vis-clipboard --copy
+    echo "copied" >&2
 else
     exec vis-clipboard --copy
 fi
