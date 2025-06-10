@@ -121,7 +121,7 @@ abbr mc "cd ~/src/min*"
 abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
-abbr leet "cd ~/src/golf/notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
+abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
 abbr z zeditor # whoooooooooooooo new editor
 
 # Git shortcuts
