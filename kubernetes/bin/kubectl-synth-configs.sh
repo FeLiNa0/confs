@@ -5,15 +5,15 @@ set -x
 
 cd ~/.kube/
 omnictl config context dev
-# generate_kubeconfigs.sh '0007|1002|0137|1337|0007-58|0007-04|0007-13|0007-629-max|0001-31-leghorn|0007-25-nico'
+generate_kubeconfigs.sh '0007-05|0007-73|3030'
 
-# # stage not stg, thank you sidero/omni/etc
-# omnictl config context stg
-# generate_kubeconfigs.sh '0001-12|0007-629|0008-03|0137|9137'
+# stage not stg, thank you sidero/omni/etc
+omnictl config context stg
+generate_kubeconfigs.sh '0001-12|0001-13|0001-23|0001-33|0008-03'
 
 # prd
 omnictl config context prd
-generate_kubeconfigs.sh '0018|0060|0001|0008|0077|0117|0137|9137|0003'
+generate_kubeconfigs.sh '0018|0060|0001|0008|0077|0117|0137|0137|9137|0003'
 
 # This merges all .yaml files in ~/.kube into one single kubeconfig.
 # Switch configs with kubectx or with `kubectl config`.

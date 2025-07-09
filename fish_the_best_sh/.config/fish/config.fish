@@ -97,6 +97,7 @@ source_if_exists $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
+abbr ` ls
 abbr l 'ls -F -a'
 abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
@@ -106,6 +107,7 @@ abbr em 'emacs -nw'
 abbr emc 'emacsclient -nw --alternate-editor=""'
 abbr emacsc 'emacsclient --alternate-editor=""'
 abbr rsync 'rsync -rh --info=progress2'
+abbr pmake 'poetry run make'
 
 
 abbr k "rlwrap ngnk"  # The K language
@@ -122,7 +124,7 @@ abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
-abbr z zeditor # whoooooooooooooo new editor
+abbr z 'zeditor .'
 
 # Git shortcuts
 if command -v git > /dev/null
@@ -230,9 +232,9 @@ if command -v makeanywhere > /dev/null
     debug Setup makeanywhere alias
 end
 
-function pmake --wraps make --description "pma --wraps make pipenv run"
-    python -m pipenv run make $argv
-end
+# function pmake --wraps make --description "pma --wraps make pipenv run"
+#     python -m pipenv run make $argv
+# end
 
 # adjust PATH for a darwin OS with certain patches (MacOS)
 ## addpaths /usr/local/opt/gettext/bin

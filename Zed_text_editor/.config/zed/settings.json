@@ -14,8 +14,8 @@
   "assistant": {
     "default_model": {
       // use local ollama model for assistant
-      "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4"
     },
     "version": "2"
   },
