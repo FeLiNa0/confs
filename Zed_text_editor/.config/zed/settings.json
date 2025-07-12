@@ -9,9 +9,9 @@
 {
   "edit_predictions": {
     "mode": "eager",
-    "enabled_in_assistant": false
+    "enabled_in_text_threads": false
   },
-  "assistant": {
+  "agent": {
     "default_model": {
       // use local ollama model for assistant
       "provider": "zed.dev",
@@ -29,7 +29,7 @@
     // use zed's local Zeta LLM for edit predictions
     "edit_prediction_provider": "zed"
   },
-  "theme": "macOS Classic Dark2",
+  "theme": "Fleet Dark Purple",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
