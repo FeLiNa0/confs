@@ -128,6 +128,8 @@ abbr z 'zeditor .'
 
 # Git shortcuts
 if command -v git > /dev/null
+    # When I retire, I'll switch to mercurial or someshit
+    abbr GP 'echo u-sure-homie && read && gp -f && gh pr create -f'
     abbr ga 'git add'
     abbr gr 'git rebase'
     abbr gc 'git commit'

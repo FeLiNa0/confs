@@ -16,8 +16,7 @@
       // use local ollama model for assistant
       "provider": "zed.dev",
       "model": "claude-sonnet-4-thinking"
-    },
-    "version": "2"
+    }
   },
   "languages": {
     "Org": {
@@ -29,7 +28,7 @@
     // use zed's local Zeta LLM for edit predictions
     "edit_prediction_provider": "zed"
   },
-  "theme": "Fleet Dark Purple",
+  "theme": "Neovim default accented light",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -43,20 +42,6 @@
     "use_smartcase_find": true,
     "highlight_on_yank_duration": 5000
   },
-  "ui_font_size": 16,
-  "lsp": {
-    "basedpyright": {
-        "python": {
-          "pythonPath": ".venv/bin/python"
-        }
-      }
-    },
-    "pyright": {
-      "settings": {
-        "python": {
-          "pythonPath": ".venv/bin/python"
-        }
-      }
-    },
-  "buffer_font_size": 16
+  "ui_font_size": 13,
+  "buffer_font_size": 15
 }

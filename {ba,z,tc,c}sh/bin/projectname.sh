@@ -10,7 +10,7 @@ if [ "$ROOT_STATUS_CODE" != 0 ]; then
 else
   # Replace common prefixes
   PROJECTNAME="$(basename "$ROOTDIR" |
-      sed "s/^pfc_\|powerflex_edge_\|powerflex_cloud_\|powerflex_//"
+      sed "s/^powerflex_edge_\|powerflex_cloud_\|powerflex_//"
     )"
   if [ "$PROJECTNAME_PRINT_PWD" != "true" ] && [ "$PROJECTNAME" = "$(basename $PWD)" ]; then
     echo "$PROJECTNAME"
