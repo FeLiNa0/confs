@@ -1,0 +1,9 @@
+[
+  {
+    "bindings": {
+      "ctrl-f": "workspace::ToggleZoom",
+      "ctrl-alt-a": "workspace::ToggleLeftDock",
+      "ctrl-alt-b": "workspace::ToggleRightDock"
+    }
+  }
+]

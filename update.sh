@@ -374,7 +374,7 @@ copy_confs_for xfce4_and_xubuntu \
 
 copy_confs_for discord .config/config/settings.json
 
-copy_confs_for Zed_text_editor .config/zed/settings.json
+copy_confs_for Zed_text_editor .config/zed/settings.json .config/zed/keymap.json
 
 # TODO copy to Code - OSS config too, symlink like my vim/nvim configs
 copy_confs_for thedevil bin/thedevil.sh bin/code-notoss.sh .config/Code/User/settings.json
