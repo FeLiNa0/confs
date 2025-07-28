@@ -3,6 +3,8 @@
 # 2025/07: smollm (135M to 1.7B), deepseek-r1:8b (8B)
 # see here for more https://ollama.com/library
 
+# startup command: kitty -e bash -c 'echo -ne "\\033]ollama serve\\007" ; ollama serve' 
+
 #OUT_BASE="$HOME/ollama-logs"
 
 # Configuration
