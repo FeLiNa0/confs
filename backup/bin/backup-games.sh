@@ -14,8 +14,9 @@ rsync $RSYNC_OPTS \
   $HOME/.steam/steam/steamapps/compatdata/3146520/pfx/drive_c/users/steamuser/AppData/ \
   $ROOT/game-backups
 
+if [ -f "$HOME/.steam/steam/steamapps/common/Call of Duty\ 2/main/players/" ] ; then
 echo BACKUP CALL OF DUTY 2 2005
 rsync $RSYNC_OPTS \
   "$HOME/.steam/steam/steamapps/common/Call of Duty\ 2/main/players/" \
   $ROOT/game-backups
-
+fi

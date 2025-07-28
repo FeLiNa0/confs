@@ -363,6 +363,7 @@ copy_confs_for kubernetes \
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh
 
+# Good startup command: kitty -e bash -c 'backup.sh ; fish'
 copy_confs_for xfce4_and_xubuntu \
     .xscreensaver \
     .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml \

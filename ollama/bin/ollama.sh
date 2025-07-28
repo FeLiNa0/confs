@@ -1,5 +1,6 @@
 #!/bin/sh
 # try these models: codellama llama2 mistral mixtral mistral-small3.1 mistral-large
+# 2025/07: smollm (135M to 1.7B), deepseek-r1:8b (8B)
 # see here for more https://ollama.com/library
 
 #OUT_BASE="$HOME/ollama-logs"
@@ -7,7 +8,7 @@
 # Configuration
 OUT_BASE="$HOME/Dropbox/sync/technical/ollama-logs"
 OUT="$OUT_BASE/ollama-$(date +%Y-%m-%d_%H-%M-%S).txt"
-set -x
+# set -x
 
 # Record total time
 START_TIME="$(date +%s.%N)"
