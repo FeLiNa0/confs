@@ -14,8 +14,21 @@
   "agent": {
     "default_model": {
       // use local ollama model for assistant
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-thinking"
+      "provider": "ollama",
+      "model": "mistral"
+    }
+  },
+  "language_models": {
+    "ollama": {
+      "available_models": [
+        {
+          "name": "mistral",
+          "display_name": "with tools spongebob with tools",
+          "keep_alive": "20m",
+          "max_tokens": 22000,
+          "supports_tools": true
+        }
+      ]
     }
   },
   "languages": {
