@@ -2,6 +2,13 @@
 export PATH="$HOME/bin:$PATH:$HOME/.local/bin"
 export PATH="$HOME/.pyenv/bin:$PATH"
 
+export OLLAMA_KEEP_ALIVE="8h"
+export OLLAMA_MAX_LOADED_MODELS="3"
+export OLLAMA_NUM_PARALLEL="3"
+export OLAMA_ORIGINS="localhost"
+export OLLAMA_NOPRUNE=true # allow continuing downloads
+
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 

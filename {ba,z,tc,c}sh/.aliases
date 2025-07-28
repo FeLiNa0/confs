@@ -2,6 +2,9 @@
 # for example: `tryalias v vim vis nvim` will attempt to alias v to vim if it exists, vis, or nvim in that order.
 # tryalias is a custom function implemented in FISH and BASH.
 
+tryalias o 'ollama.sh run "$DEFAULT_OLLAMA_MODEL"'
+
+
 tryalias mv 'mv -i'
 tryalias cp 'cp -i'
 tryalias rm 'rm -i'

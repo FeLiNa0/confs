@@ -89,6 +89,15 @@ set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
 # Load some common python libraries
 set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
 
+# Configure ollama, also see .bashrc
+set_global DEFAULT_OLLAMA_MODEL "smollm:1.7b"    # keep this updated
+set_global OLLAMA_KEEP_ALIVE 8h
+set_global OLLAMA_MAX_LOADED_MODELS 3
+set_global OLLAMA_NUM_PARALLEL 3
+set_global OLAMA_ORIGINS localhost
+set_global OLLAMA_NOPRUNE true  # allow continuing downloads
+
+
 # Load aliases before abbreviations
 # I tried getting rid of tryalias with "alias tryalias alias", but it's actually
 # almost as fast as plain alias so I'll keep it.
@@ -98,6 +107,7 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr ` ls
+abbr o 'ollama.sh run "$DEFAULT_OLLAMA_MODEL"'
 abbr l 'ls -F -a'
 abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
