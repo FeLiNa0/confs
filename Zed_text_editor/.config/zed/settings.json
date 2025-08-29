@@ -12,10 +12,12 @@
     "enabled_in_text_threads": false
   },
   "agent": {
+    "always_allow_tool_actions": false,
+    "default_profile": "minimal",
     "default_model": {
       // use local ollama model for assistant
-      "provider": "ollama",
-      "model": "mistral"
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
     }
   },
   "language_models": {
@@ -23,9 +25,16 @@
       "available_models": [
         {
           "name": "mistral",
-          "display_name": "with tools spongebob with tools",
+          "display_name": "mistral with tools spongebob with tools",
           "keep_alive": "20m",
-          "max_tokens": 22000,
+          "max_tokens": 10000,
+          "supports_tools": true
+        },
+        {
+          "name": "qwen3:14b",
+          "display_name": "qwen3 with tools",
+          "keep_alive": "20m",
+          "max_tokens": 10000,
           "supports_tools": true
         }
       ]
@@ -41,7 +50,7 @@
     // use zed's local Zeta LLM for edit predictions
     "edit_prediction_provider": "zed"
   },
-  "theme": "Neovim default accented light",
+  "theme": "Xcode Low Key",
   "telemetry": {
     "diagnostics": false,
     "metrics": false

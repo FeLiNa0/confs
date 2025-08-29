@@ -108,8 +108,8 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr ` ls
-abbr o 'ollama.sh run "$DEFAULT_OLLAMA_MODEL" -- '
-abbr os 'ollama.sh run smollm -- '  # only 1.7B parameters!
+abbr o "ollama.sh run $DEFAULT_OLLAMA_MODEL --"
+abbr os 'ollama.sh run smollm --'  # only 1.7B parameters!
 abbr l 'ls -F -a'
 abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
@@ -119,7 +119,7 @@ abbr em 'emacs -nw'
 abbr emc 'emacsclient -nw --alternate-editor=""'
 abbr emacsc 'emacsclient --alternate-editor=""'
 abbr rsync 'rsync -rh --info=progress2'
-abbr pmake 'poetry run make'
+# abbr pmake 'poetry run make'
 
 
 abbr k "rlwrap ngnk"  # The K language
@@ -247,9 +247,9 @@ if command -v makeanywhere > /dev/null
     debug Setup makeanywhere alias
 end
 
-# function pmake --wraps make --description "pma --wraps make pipenv run"
-#     python -m pipenv run make $argv
-# end
+function pmake --wraps make --description "a wrapper for poetry run make ..."
+    poetry run make $argv
+end
 
 # adjust PATH for a darwin OS with certain patches (MacOS)
 ## addpaths /usr/local/opt/gettext/bin
