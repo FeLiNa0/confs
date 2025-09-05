@@ -45,7 +45,7 @@ function set_global
   debug Set variable $argv[1]
 end
 
-# source_if_exists $HOME/.config/fish/local_env.fish
+source_if_exists $HOME/.config/fish/local_env.fish
 # set_global FISH_LOGO 🐠
 
 # Common binary paths
@@ -125,6 +125,7 @@ abbr rsync 'rsync -rh --info=progress2'
 abbr k "rlwrap ngnk"  # The K language
 
 # Python and Scientific commands
+abbr p python3
 abbr py python3
 abbr ipy ipython3
 ## abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
