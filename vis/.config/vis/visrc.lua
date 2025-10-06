@@ -126,6 +126,7 @@ vis.events.subscribe(vis.events.INIT, function()
     backup.get_fname = backup.entire_path_with_double_percentage_signs_and_timestamp
 
 	lint.linters["yaml"] = {"yamllint -"}
+	lint.linters["go"] = {"go vet", "staticcheck"} -- These work on PWD, not stdin
 	lint.linters["python"] = {
 	   -- "black --check -", "isort --check -",
 	   "pylint --from-stdin visfile",

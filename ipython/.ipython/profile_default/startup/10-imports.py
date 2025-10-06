@@ -68,6 +68,7 @@ sys = imp("sys")
 threading = imp("threading")
 # time = imp("time")
 traceback = imp("traceback")
+subprocess = imp("subprocess")
 
 
 # Third party
@@ -106,3 +107,20 @@ if len(_preimported_modules) > 0:
 
     if _failed_preimported_modules_str:
         print("failed:", _failed_preimported_modules_str)
+
+try:
+    def paste_from_clipboard(as_bytes: bool=False) -> str | bytes:
+        import subprocess
+        result = subprocess.run("vis-clipboard --paste".split(), stdout=subprocess.PIPE)
+        result = result.stdout
+        return result if as_bytes else result.decode()
+    def copy_to_clipboard(contents: str | bytes, encoding="utf-8"):
+        import subprocess
+        contents = contents.encode(encoding=encoding) if isinstance(contents, str) else contents
+        result = subprocess.run("vis-clipboard --copy".split(), stdout=subprocess.PIPE, input=contents)
+        return result
+    vp = paste_from_clipboard
+    vc = copy_to_clipboard
+
+except Exception:
+    pass # boo hoo

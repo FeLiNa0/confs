@@ -142,7 +142,7 @@ abbr z 'zeditor .'
 # Git shortcuts
 if command -v git > /dev/null
     # When I retire, I'll switch to mercurial or someshit
-    abbr GP 'echo u-sure-homie && read && gp -f && gh pr create -f'
+    abbr GP 'echo "Push new branch and create github pull request with default values? Press ENTER to continue." && read && gp -f && gh pr create -f'
     abbr ga 'git add'
     abbr gr 'git rebase'
     abbr gc 'git commit'
@@ -207,7 +207,7 @@ if true
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr scale 'cd ~/pf && cd ~/pf/scale'
-    abbr passman 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
+    abbr scalepass 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
     abbr uploo 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
@@ -216,16 +216,23 @@ if true
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
+    abbr pay 'cd ~/pf && cd ~/pf/pfc_pay'
 end
 
 # Docker shortcuts
-if command -v docker > /dev/null
+if command -v podman > /dev/null
+    set_global PODMAN_COMPOSE_PROVIDER docker-compose
+    set_global PODMAN_COMPOSE_WARNING_LOGS false
+    # abbr docker podman
+    # abbr dck "podman container kill (podman container ls --format json | jq '.[] | .Id' | sed 's/\"//g')"
+    debug Setup Podman abbreviations
+end
+# Docker shortcuts
+if command -v podman > /dev/null || command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
     abbr dex 'docker exec'
-    abbr dck "docker container kill (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
-    abbr docker-norestart "docker update --restart=no (docker container ls --format json | jq 'select(.Networks != \"kind\") | .ID' | sed 's/\"//g')"
-    ## abbr dck-all 'docker container kill (docker ps -q)'
+    abbr dck "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
     debug Setup Docker abbreviations
 end
     
@@ -236,7 +243,7 @@ end
 set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
 if command -v makeanywhere > /dev/null
-    set -g MAKEANYWHERE (command -v makeanywhere)
+    set_global MAKEANYWHERE (command -v makeanywhere)
     function makeanywhere --wraps make --description "makeanywhere --wraps make $MAKEANYWHERE"
         "$MAKEANYWHERE" $argv
     end
@@ -245,7 +252,14 @@ if command -v makeanywhere > /dev/null
     end
     alias ma makeanywhere
 
-    debug Setup makeanywhere alias
+    debug Setup makeanywhere alias so that it wraps the make command
+end
+if command -v curl_device_manager.sh > /dev/null
+    set_global CUSTOM_CURL_WRAPPER (command -v curl_device_manager.sh)
+    function curl_device_manager.sh --wraps curl --description "makeanywhere --wraps make $CUSTOM_CURL_WRAPPER"
+        "$CUSTOM_CURL_WRAPPER" $argv
+    end
+    debug Setup curl wrapper alias so that it wraps the curl command
 end
 
 function pmake --wraps make --description "a wrapper for poetry run make ..."
