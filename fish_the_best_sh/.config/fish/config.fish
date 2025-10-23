@@ -129,7 +129,7 @@ abbr p python3
 abbr py python3
 abbr ipy ipython3
 ## abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
-abbr jwt_decode "python3 -c \"import jwt,json ; print(json.dumps(jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}), indent=2)) # Please run pip install PyJWT if this fails\""
+abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: datetime.datetime.fromtimestamp(v).isoformat() if k in 'iat exp' else v for k,v in jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}).items()}, indent=2)) # Please run pip install PyJWT if this fails\""
 
 # Common directories
 abbr mc "cd ~/src/min*"
@@ -142,7 +142,7 @@ abbr z 'zeditor .'
 # Git shortcuts
 if command -v git > /dev/null
     # When I retire, I'll switch to mercurial or someshit
-    abbr GP 'echo "Push new branch and create github pull request with default values? Press ENTER to continue." && read && gp -f && gh pr create -f'
+    abbr GP 'echo "Push new branch and create github pull request with default values? Press ENTER to continue." && read && gp -f && gh pr create -f && gh pr view -w'
     abbr ga 'git add'
     abbr gr 'git rebase'
     abbr gc 'git commit'
@@ -202,6 +202,7 @@ if command -v aws > /dev/null 2>&1
 end
 
 if true
+    abbr traffman 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
@@ -263,7 +264,11 @@ if command -v curl_device_manager.sh > /dev/null
 end
 
 function pmake --wraps make --description "a wrapper for poetry run make ..."
-    poetry run make $argv
+    if poetry env list
+        poetry run make $argv
+    else
+        make $argv
+    end
 end
 
 # adjust PATH for a darwin OS with certain patches (MacOS)

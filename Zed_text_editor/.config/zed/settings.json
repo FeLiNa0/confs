@@ -13,12 +13,12 @@
   },
   "agent": {
     "play_sound_when_agent_done": true,
-    "always_allow_tool_actions": false,
-    "default_profile": "ask",
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
     "default_model": {
       // use local ollama model for assistant
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-thinking"
+      "provider": "copilot_chat",
+      "model": "claude-3.7-sonnet"
     }
   },
   "language_models": {
