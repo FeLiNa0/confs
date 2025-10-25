@@ -155,6 +155,7 @@ if command -v git > /dev/null
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
+    abbr lox 'cd ~/src/clox/by-the-book/c'
 
 # Github-specific shortcuts
 if command -v gh > /dev/null
