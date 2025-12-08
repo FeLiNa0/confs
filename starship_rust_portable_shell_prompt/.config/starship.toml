@@ -183,8 +183,8 @@ style = "red underline bold"
 format = "[$symbol($version )]($style)"
 
 [haskell]
-style = "red underline bold"
-format = "[$symbol($version )]($style)"
+style = "red bold"
+format = "[$symbol]($style)"
 
 [lua]
 format = '[$symbol($version )]($style)'

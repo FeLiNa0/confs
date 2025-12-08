@@ -62,6 +62,7 @@
       <property name="&lt;Super&gt;d" type="string" value="launcher.sh run"/>
       <property name="&lt;Super&gt;Tab" type="string" value="launcher.sh window"/>
       <property name="&lt;Super&gt;z" type="string" value="zeditor"/>
+      <property name="&lt;Super&gt;f" type="string" value="launcher.sh recursivebrowser &quot;&quot;"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
