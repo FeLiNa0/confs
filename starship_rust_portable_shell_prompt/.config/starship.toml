@@ -179,7 +179,7 @@ format = "[$symbol($version )]($style)"
 format = "[$symbol($version )]($style)"
 
 [elm]
-style = "red underline bold"
+style = "red bold"
 format = "[$symbol($version )]($style)"
 
 [haskell]

@@ -8,6 +8,15 @@ export OLLAMA_NUM_PARALLEL="3"
 export OLAMA_ORIGINS="localhost"
 export OLLAMA_NOPRUNE=true # allow continuing downloads
 
+# Android
+if [ -d /opt/android-sdk ]; then
+    export ANDROID_HOME='/opt/android-sdk'
+    export PATH=${PATH}:"$ANDROID_HOME/tools/bin/"
+    export PATH=${PATH}:"$ANDROID_HOME/platform-tools/"
+    export PATH=${PATH}:"$ANDROID_HOME/cmdline-tools/latest/bin"
+    export PATH=${PATH}:"$ANDROID_HOME/emulator"
+fi
+
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

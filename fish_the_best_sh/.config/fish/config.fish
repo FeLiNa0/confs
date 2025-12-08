@@ -52,7 +52,7 @@ source_if_exists $HOME/.config/fish/local_env.fish
 addpaths $HOME/bin --verbose
 addpaths $HOME/.local/bin  --verbose
 # Lua
-# addpaths $HOME/.luarocks/bin  --verbose
+addpaths $HOME/.luarocks/bin  --verbose
 # Rust binaries
 addpaths $HOME/.cargo/bin
 # CUDA binaries
@@ -63,6 +63,12 @@ addpaths $HOME/.cargo/bin
 # addpaths /snap/bin
 # Google Gcloud
 # addpaths /opt/google-cloud-cli/bin/
+# Android
+set_global ANDROID_HOME "/opt/android-sdk"
+addpaths "$ANDROID_HOME/tools/bin/"
+addpaths "$ANDROID_HOME/platform-tools/"
+addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
+addpaths "$ANDROID_HOME/emulator"
 
 # still needed?
 # set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
@@ -107,6 +113,8 @@ source_if_exists $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
+abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
+abbr gdbb "gdb -ex run --args"
 abbr ` ls
 abbr o "ollama.sh run $DEFAULT_OLLAMA_MODEL --"
 abbr os 'ollama.sh run smollm --'  # only 1.7B parameters!
@@ -155,7 +163,7 @@ if command -v git > /dev/null
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
-    abbr lox 'cd ~/src/clox/by-the-book/c'
+    abbr lx 'cd ~/src/clox/by-the-book/c'
 
 # Github-specific shortcuts
 if command -v gh > /dev/null
