@@ -1,0 +1,10 @@
+[user]
+	email = felina.rivera@powerflex.com
+	name = Felina Rivera Calzadillas (ROGUH)
+	signingkey = 89D5C96826DAF8170BD944F8C8CC1B37BC723FB4
+[commit]
+	gpgsign = true
+[alias]
+    praise = blame
+[init]
+	defaultBranch = main
