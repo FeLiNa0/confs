@@ -163,7 +163,10 @@ if command -v git > /dev/null
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
-    abbr lx 'cd ~/src/clox/by-the-book/c'
+
+# Compilers, interpreters, transpilers, and their ilk
+abbr lx 'cd ~/src/clox/by-the-book/c'
+abbr "48" 'cd ~/src/haskelloni'
 
 # Github-specific shortcuts
 if command -v gh > /dev/null
@@ -335,9 +338,9 @@ if status is-interactive
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
-    # Timeout after 10 hours (600 minutes)
+    # Timeout after 14 hours (60*14 minutes)
     # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
-    eval (keychain --quick --timeout 600 --eval -Q --quiet id_ed25519)
+    eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519)
   end
 end
 
