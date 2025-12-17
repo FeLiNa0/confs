@@ -9,7 +9,7 @@ generate_kubeconfigs.sh '0007-05|0007-73|3030|0007-311'
 
 # stage not stg, thank you sidero/omni/etc
 omnictl config context stg
-generate_kubeconfigs.sh '0001-12|0001-13|0001-23|0001-33|0008-03'
+generate_kubeconfigs.sh '0001-12|0001-13|0001-73|0001-23|0001-33|0008-03'
 
 # prd
 omnictl config context prd

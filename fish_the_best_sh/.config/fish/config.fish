@@ -190,7 +190,7 @@ if command -v kubectl > /dev/null
     abbr kpf 'kubectl port-forward'
     # Emergency/local modifications. Prefer devops. Ensure correct cluster is targeted.
     ## abbr kdl 'correct-kubernetes-cluster.sh && kubectl delete'
-    abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
+    abbr krr 'bash -c "correct-kubernetes-cluster.sh && kubectl rollout restart"'
     ## abbr kubectl-stop-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
     ## abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
     debug Setup Kubernetes abbreviations

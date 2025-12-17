@@ -5,5 +5,23 @@
       "ctrl-alt-a": "workspace::ToggleLeftDock",
       "ctrl-alt-b": "workspace::ToggleRightDock"
     }
+  },
+  {
+    "context": "KeymapEditor",
+    "bindings": {
+      "ctrl-f": null
+    }
+  },
+  {
+    "context": "SettingsWindow",
+    "bindings": {
+      "ctrl-f": null
+    }
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "ctrl-f": null
+    }
   }
 ]
