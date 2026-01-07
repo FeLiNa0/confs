@@ -4,6 +4,7 @@
 
 tryalias o 'ollama.sh run "$DEFAULT_OLLAMA_MODEL"'
 
+tryalias z 'zeditor .'
 
 tryalias :q exit
 

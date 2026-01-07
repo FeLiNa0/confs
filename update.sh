@@ -232,6 +232,7 @@ copy_confs_for git \
 copy_confs_for utils \
   bin/cpufreq.sh bin/systemload.sh bin/mem.sh bin/screenshot.sh bin/screenshot-select.sh bin/pip-update-outdated.sh \
   .xsession \
+  bin/notification-sound.sh \
   bin/rsync-for-src.sh \
   bin/rsync-parallel.sh \
   bin/dropbox-status.sh \

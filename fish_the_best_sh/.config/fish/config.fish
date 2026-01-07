@@ -171,7 +171,7 @@ abbr "48" 'cd ~/src/haskelloni'
 # Github-specific shortcuts
 if command -v gh > /dev/null
     abbr ghch 'gh pr checkout'
-    ## abbr ghw 'gh pr checks --watch'
+    abbr ghw 'gh pr checks --watch && notification-sound.sh'
     ## abbr ghwm 'gh pr checks --watch && gh pr merge --delete-branch --merge'
 end
 
