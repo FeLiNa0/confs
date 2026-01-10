@@ -31,3 +31,10 @@ echo BACKUP LKBC 2005
 rsync $RSYNC_OPTS \
   "$LILKIT" $ROOT/game-backups/little_kitten_big_city
 fi
+
+VTMB="$HOME/Games/Heroic/VtMB/Unofficial_Patch/save/"
+if [ -d "$LILKIT" ] ; then
+echo "BACKUP Vampire the Masquerade Bloodlines (2004)"
+rsync $RSYNC_OPTS \
+  "$VTMB" $ROOT/game-backups/vtmb_2004
+fi
