@@ -27,5 +27,6 @@
     "vim.cursorStylePerMode.visualline": "line-thin",
     "vim.smartRelativeLine": true,
     "terminal.integrated.sendKeybindingsToShell": true,
-    "thunder-client.customLocation": "$HOME/pf/powerflex_api_collections"
+    "thunder-client.customLocation": "$HOME/pf/powerflex_api_collections",
+    "github.copilot.nextEditSuggestions.enabled": true
 }
