@@ -7,9 +7,26 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
   "edit_predictions": {
     "mode": "eager",
-    "enabled_in_text_threads": false
+    "enabled_in_text_threads": false,
   },
   "agent": {
     "play_sound_when_agent_done": true,
@@ -18,8 +35,8 @@
     "default_model": {
       // use local ollama model for assistant
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
-    }
+      "model": "claude-sonnet-4.5",
+    },
   },
   "language_models": {
     "ollama": {
@@ -29,32 +46,32 @@
           "display_name": "mistral with tools spongebob with tools",
           "keep_alive": "20m",
           "max_tokens": 10000,
-          "supports_tools": true
+          "supports_tools": true,
         },
         {
           "name": "qwen3:14b",
           "display_name": "qwen3 with tools",
           "keep_alive": "20m",
           "max_tokens": 10000,
-          "supports_tools": true
-        }
-      ]
-    }
+          "supports_tools": true,
+        },
+      ],
+    },
   },
   "languages": {
     "Org": {
-      "show_edit_predictions": false
-    }
+      "show_edit_predictions": false,
+    },
   },
   "show_edit_predictions": true,
   "features": {
     // use zed's local Zeta LLM for edit predictions
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "zed",
   },
-  "theme": "Xcode Low Key",
+  "theme": "Catppuccin Mocha",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "use_smartcase_search": true,
   "vim_mode": true,
@@ -63,8 +80,8 @@
     "toggle_relative_line_numbers": false,
     "use_system_clipboard": "always",
     "use_smartcase_find": true,
-    "highlight_on_yank_duration": 5000
+    "highlight_on_yank_duration": 5000,
   },
-  "ui_font_size": 13,
-  "buffer_font_size": 15
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
 }
