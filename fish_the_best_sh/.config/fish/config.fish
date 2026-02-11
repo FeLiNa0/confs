@@ -113,6 +113,7 @@ source_if_exists $HOME/.aliases --verbose
 # commacomma is defined as a fish function so should not be shared with other shells
 alias ,,=commacomma
 
+abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
 abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
 abbr gdbb "gdb -ex run --args"
 abbr ` ls
@@ -177,9 +178,9 @@ end
 
 # KUUUUUUUUUUUUUUUBBBBBBBBBBBBBBBBB
 if command -v kubectl > /dev/null
+    # Essential
     abbr k kubectl
     abbr kx kubectx
-    abbr kcp 'kubectl cp'
     # List and detail resources
     abbr kg 'kubectl get'
     abbr kgp 'kubectl get pods'
@@ -195,6 +196,7 @@ if command -v kubectl > /dev/null
     ## abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
     debug Setup Kubernetes abbreviations
     #### Rarely used:
+    ## abbr kcp 'kubectl cp'
     ## kubectl exec -it rfr-edge-redis-0 -n default -c redis -- redis-cli
     ## kubectl get apps -A | grep -v Synced 
     ## abbr kc 'kubectl config'
@@ -214,6 +216,7 @@ if command -v aws > /dev/null 2>&1
 end
 
 if true
+    abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
     abbr traffman 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
@@ -302,6 +305,12 @@ if status is-interactive
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
     xset r rate 88 42
     debug Set faster keyboard rate
+  end
+
+  if status is-interactive
+  and command -v tmux >/dev/null 2>&1
+  and not set -q TMUX
+    exec tmux
   end
 
   function fish_user_key_bindings
