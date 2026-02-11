@@ -232,6 +232,7 @@ if true
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
+    abbr public 'cd ~/pf && cd ~/pf/pfc_public_api/'
     abbr pay 'cd ~/pf && cd ~/pf/pfc_pay'
 end
 

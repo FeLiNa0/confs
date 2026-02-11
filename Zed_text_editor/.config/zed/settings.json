@@ -31,11 +31,11 @@
   "agent": {
     "play_sound_when_agent_done": true,
     "always_allow_tool_actions": true,
-    "default_profile": "write",
+    "default_profile": "ask",
     "default_model": {
       // use local ollama model for assistant
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5",
+      "model": "claude-sonnet-4",
     },
   },
   "language_models": {

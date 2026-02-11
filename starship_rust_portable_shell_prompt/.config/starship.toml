@@ -41,7 +41,7 @@ shell = "dash"
 # 1 file changed, 2 deletions(-)
 # 1 file changed, 2 insertions(+)
 command = "git diff main --shortstat | sed 's/.*file.* changed, // ; s/\\([0-9]*\\) insertion/\\1/ ; s/\\([0-9]*\\) deletion/\\1/ ; s/s\\|(\\|)\\|,//g'"
-format = " [$symbol($output)]($style)"
+format = "[$symbol($output)]($style)"
 style = "bold underline fg:blue"
 
 [directory]
@@ -52,18 +52,17 @@ truncation_symbol = ""
 "powerflex_edge_" = ""
 "powerflex_cloud_" = ""
 "powerflex_" = ""
-"central_system" = "CS"
+"central_system" = "cs"
 "traffic_manager" = "traffman"
 "storage_interface" = "storint"
 "storage_simulator" = "storsim"
 "edge_device_manager" = "devman"
 "presentations" = "pr"
-"2022_CognizantFullstackNanodegree_SessionLead" = "2022nd"
 
 [time]
 disabled = false
 style = "dimmed white"
-time_format = "%h %d %R%Z"
+time_format = "%R%Z"
 format = "[$time]($style) "
 
 [git_branch]
@@ -82,7 +81,7 @@ deleted_style = "bold underline fg:blue"
 
 [git_status]
 style = "bright-yellow"
-format = "([$all_status$ahead_behind]($style) )"
+format = "([$all_status$ahead_behind]($style)) "
 stashed = "S"
 
 [status]
@@ -91,7 +90,7 @@ disabled = false
 format = '[\[$status\]]($style) '
 
 [[battery.display]]
-threshold = 25
+threshold = 30
 
 [character]
 success_symbol = "[\\$](bold white)"
@@ -105,7 +104,7 @@ format = "[$duration]($style) "
 
 [kubernetes]
 disabled = false
-format = ' [ $context( \($namespace\))]($style)'
+format = '[ $context( \($namespace\))]($style)'
 style = "fg:#88ddff"
 contexts = [
  { context_pattern = "powerflex-((dev|stage|stg|prd)-)?(?P<name>.*)", context_alias = "$name", style = "bright-yellow" },
