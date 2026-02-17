@@ -308,11 +308,11 @@ if status is-interactive
     debug Set faster keyboard rate
   end
 
-  if status is-interactive
-  and command -v tmux >/dev/null 2>&1
-  and not set -q TMUX
-    exec tmux
-  end
+  # if status is-interactive
+  # and command -v tmux >/dev/null 2>&1
+  # and not set -q TMUX
+  #   exec tmux
+  # end
 
   function fish_user_key_bindings
     # Use fzf.fish to implement the famous ctrl-p binding for searching files
