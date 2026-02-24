@@ -114,6 +114,7 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
+abbr ssh 'TERM=xterm ssh'
 abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
 abbr gdbb "gdb -ex run --args"
 abbr ` ls
