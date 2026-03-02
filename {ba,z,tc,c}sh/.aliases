@@ -4,6 +4,7 @@
 
 tryalias ppass pass  # ;)
 tryalias youtube-dl yt-dl
+tryalias ag 'ag --hidden'   # Search every file except .git
 
 tryalias o 'ollama.sh run "$DEFAULT_OLLAMA_MODEL"'
 

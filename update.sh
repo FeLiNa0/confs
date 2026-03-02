@@ -238,6 +238,7 @@ copy_confs_for utils \
   bin/dropbox-status.sh \
   bin/speedtest-info.sh \
   bin/reset-rescan-thunderbolt.sh \
+  bin/sum.sh \
   bin/open-starlink.html
 
 copy_confs_for alacritty .config/alacritty/alacritty.yml bin/alacritty-cwd.sh

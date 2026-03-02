@@ -25,17 +25,18 @@
     }
   },
   "edit_predictions": {
+    "provider": "zed",
     "mode": "eager",
     "enabled_in_text_threads": false,
   },
   "agent": {
     "play_sound_when_agent_done": true,
     "always_allow_tool_actions": true,
-    "default_profile": "write",
+    "default_profile": "ask",
     "default_model": {
       // use local ollama model for assistant
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4",
+      "model": "claude-sonnet-4.6",
     },
   },
   "language_models": {
@@ -64,10 +65,6 @@
     },
   },
   "show_edit_predictions": true,
-  "features": {
-    // use zed's local Zeta LLM for edit predictions
-    "edit_prediction_provider": "zed",
-  },
   "theme": "Catppuccin Mocha",
   "telemetry": {
     "diagnostics": false,

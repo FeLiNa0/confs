@@ -220,6 +220,7 @@ if true
     abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
     abbr traffman 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
+    abbr snow 'cd ~/pf && cd ~/pf/snowflake_reporting'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
