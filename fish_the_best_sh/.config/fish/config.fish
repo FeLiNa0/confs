@@ -46,7 +46,7 @@ function set_global
 end
 
 source_if_exists $HOME/.config/fish/local_env.fish
-# set_global FISH_LOGO 🐠
+set_global FISH_LOGO 🐠
 
 # Common binary paths
 addpaths $HOME/bin --verbose
@@ -114,7 +114,6 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
-abbr ssh 'TERM=xterm ssh'
 abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
 abbr gdbb "gdb -ex run --args"
 abbr ` ls
@@ -226,9 +225,13 @@ if true
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
     abbr scale 'cd ~/pf && cd ~/pf/scale'
     abbr scalepass 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
+    abbr sites 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_sites'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
     abbr uploo 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
+    abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
+    abbr uplob2 'cd ~/pf && ~/pf/pfc_site_uploader2/site-uploader/'
+    abbr uploo2 'cd ~/pf && ~/pf/pfc_site_uploader2/site-uploader/'
     abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
     abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
@@ -309,6 +312,9 @@ if status is-interactive
     xset r rate 88 42
     debug Set faster keyboard rate
   end
+
+  max-mic.sh 2>&1 >/dev/null
+  debug Set audio profiles
 
   # if status is-interactive
   # and command -v tmux >/dev/null 2>&1
