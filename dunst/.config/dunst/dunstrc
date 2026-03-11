@@ -30,7 +30,7 @@
     height = 100
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = top-left
 
     # Offset from the origin
     offset = 10x50
@@ -163,7 +163,7 @@
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
-    vertical_alignment = center
+    vertical_alignment = top
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
@@ -209,7 +209,7 @@
     sticky_history = yes
 
     # Maximum amount of notifications kept in history
-    history_length = 500
+    history_length = 5000
 
     ### Misc/Advanced ###
 

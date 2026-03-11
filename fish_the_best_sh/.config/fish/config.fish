@@ -116,7 +116,9 @@ alias ,,=commacomma
 abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
 abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
 abbr gdbb "gdb -ex run --args"
-abbr ` ls
+abbr ~ journal.sh
+abbr ` journal_work.sh
+abbr jowo journal_work.sh
 abbr o "ollama.sh run $DEFAULT_OLLAMA_MODEL --"
 abbr os 'ollama.sh run smollm --'  # only 1.7B parameters!
 abbr l 'ls -F -a'
@@ -156,6 +158,7 @@ if command -v git > /dev/null
     abbr gr 'git rebase'
     abbr gc 'git commit'
     abbr gch 'git checkout'
+    abbr gchr 'git cherry-pick'
     abbr gs '_fzf_search_git_status || git status'
     abbr gst 'git stash push --'
     abbr gstp 'git stash pop'
