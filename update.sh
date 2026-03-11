@@ -395,6 +395,8 @@ HOST=qubes-fedora-37 copy_confs_for_host qubes-fedora-37 QubesIncoming/fedora-37
 # trizen -S docker-credential-pass-bin
 copy_confs_for DOCKER bin/docker-remove-images.sh bin/docker-remove-stopped-containers.sh
 
+copy_confs_for ai_but_actually_tho_and_in_a_woke_way GRUG.md bin/ttok-count-tokens.sh
+
 FAILURE=false
 FAILED_SECTIONS=""
 FAILURES=0
