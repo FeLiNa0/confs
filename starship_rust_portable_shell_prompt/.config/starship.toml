@@ -45,7 +45,8 @@ format = "[$symbol($output)]($style)"
 style = "bold underline fg:blue"
 
 [directory]
-style = "bright-white"
+style = "inverted bold underline bright-white"
+format = "[ $symbol($path) ]($style) "
 truncation_length = 1
 truncation_symbol = ""
 [directory.substitutions]
