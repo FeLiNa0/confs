@@ -69,6 +69,7 @@ addpaths "$ANDROID_HOME/tools/bin/"
 addpaths "$ANDROID_HOME/platform-tools/"
 addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
 addpaths "$ANDROID_HOME/emulator"
+addpaths $ANDROID_HOME/bin --verbose
 
 # still needed?
 # set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
@@ -140,7 +141,8 @@ abbr p python3
 abbr py python3
 abbr ipy ipython3
 ## abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
-abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: datetime.datetime.fromtimestamp(v).isoformat() if k in 'iat exp' else v for k,v in jwt.api_jwt.decode(input('token> '), options={'verify_signature': False}).items()}, indent=2)) # Please run pip install PyJWT if this fails\""
+abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: datetime.datetime.fromtimestamp(v).isoformat() if k in 'iat exp' else v for k,v in jwt.api_jwt.decode(input('token> ').replace('Bearer ', '').strip(), options={'verify_signature': False}).items()}, indent=2)) # Please run pip install PyJWT if this fails\""
+abbr msgpack_unpack "python3 -c 'import sys,msgpack;print(msgpack.unpack(open(0,\'rb\')))'"
 
 # Common directories
 abbr mc "cd ~/src/min*"
@@ -148,7 +150,7 @@ abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
-abbr z 'zeditor .'
+abbr z 'zeditor $(projectroot.sh)'
 
 # Git shortcuts
 if command -v git > /dev/null
@@ -161,7 +163,7 @@ if command -v git > /dev/null
     abbr gchr 'git cherry-pick'
     abbr gs '_fzf_search_git_status || git status'
     abbr gst 'git stash push --'
-    abbr gstp 'git stash pop'
+    abbr gstp 'git stash apply && git stash drop'
     abbr gd 'git diff'
     abbr gl '_fzf_search_git_log || git log'
     abbr gcl 'git clone'
@@ -201,7 +203,7 @@ if command -v kubectl > /dev/null
     #### Rarely used:
     ## abbr kcp 'kubectl cp'
     ## kubectl exec -it rfr-edge-redis-0 -n default -c redis -- redis-cli
-    ## kubectl get apps -A | grep -v Synced 
+    ## kubectl get apps -A | grep -v Synced
     ## abbr kc 'kubectl config'
     ## abbr kcc 'kubectl config current-context'
     ## abbr whereami 'kubectl config current-context'
@@ -222,7 +224,7 @@ if true
     abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
     abbr traffman 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
-    abbr app 'cd ~/pf && cd ~/pf/powerflex_client_app'
+    abbr app 'cd ~/pf && cd ~/pf/driver_experience'
     abbr snow 'cd ~/pf && cd ~/pf/snowflake_reporting'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
@@ -261,7 +263,7 @@ if command -v podman > /dev/null || command -v docker > /dev/null
     abbr dck "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
     debug Setup Docker abbreviations
 end
-    
+
 ## still needed? set_global BUILDKIT_PROGRESS plain
 ## still set_global DOCKER_BUILDKIT 1
 
@@ -313,7 +315,7 @@ end
 
 if status is-interactive
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 88 42
+    xset r rate 77 39
     debug Set faster keyboard rate
   end
 
@@ -341,7 +343,7 @@ if status is-interactive
   if command -v pyenv > /dev/null
     pyenv init - fish | source
   end
-  
+
   set_global fzf_preview_file_cmd cat
 
   if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null && command -v fzf 2>&1 >/dev/null
@@ -352,7 +354,7 @@ if status is-interactive
     echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
     fisher install PatrickF1/fzf.fish
   end
-  
+
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
   if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
     echo "$TOTAL_STARTUP_TIME"ms
@@ -395,3 +397,6 @@ function miniconda_fish_init
   debug Loaded miniconda and the $argv[1] environment
 end
 
+
+# Added by `rbenv init` on Mon Mar 16 10:28:15 AM MDT 2026
+status --is-interactive; and rbenv init - --no-rehash fish | source

@@ -36,7 +36,7 @@
     "default_model": {
       // use local ollama model for assistant
       "provider": "copilot_chat",
-      "model": "claude-opus-4.6",
+      "model": "claude-sonnet-4.6",
     },
   },
   "language_models": {
