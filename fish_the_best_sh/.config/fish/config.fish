@@ -245,6 +245,7 @@ if true
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
     abbr public 'cd ~/pf && cd ~/pf/pfc_public_api/'
     abbr pay 'cd ~/pf && cd ~/pf/pfc_pay'
+    abbr subs 'cd ~/pf && cd ~/pf/pfc_ev/subscription-manager'
 end
 
 # Docker shortcuts
