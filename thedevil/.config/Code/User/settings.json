@@ -15,7 +15,7 @@
     "workbench.layoutControl.type": "menu",
     "workbench.activityBar.location": "top",
     "files.autoSave": "afterDelay",
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Catppuccin Noctis Latte",
     "editor.fontFamily": "'Mono Lisa Medium', 'Droid Sans Mono', 'monospace', monospace",
     "editor.renderWhitespace": "boundary",
     "git.openRepositoryInParentFolders": "always",

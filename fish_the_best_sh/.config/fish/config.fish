@@ -400,4 +400,6 @@ end
 
 
 # Added by `rbenv init` on Mon Mar 16 10:28:15 AM MDT 2026
-status --is-interactive; and rbenv init - --no-rehash fish | source
+if command -v rbenv 2>&1 >/dev/null;
+    status --is-interactive; and rbenv init - --no-rehash fish | source
+end
