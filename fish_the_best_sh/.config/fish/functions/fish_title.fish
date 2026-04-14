@@ -1,6 +1,6 @@
 function title_get_project
   set PROJECTNAME (projectname.sh)
-  if test "$status" = 0 && test "$PROJECTNAME" != ""
+  if test "$PROJECTNAME" != ""
     printf "$PROJECTNAME"
   end
   printf " "

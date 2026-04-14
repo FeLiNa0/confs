@@ -5,7 +5,7 @@ PROJECTNAME_PRINT_PWD=true
 PATTERN='s#'"$ROOTDIR"'##'
 
 if [ "$ROOT_STATUS_CODE" != 0 ]; then
-  echo ""
+  echo "$(pwd | sed "s|^$HOME|~|")"
   exit "$ROOT_STATUS_CODE"
 else
   # Replace common prefixes

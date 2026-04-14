@@ -347,6 +347,7 @@ if status is-interactive
   end
 
   set_global fzf_preview_file_cmd cat
+  set fzf_fd_opts --hidden --exclude=.git  # list hidden files whhen searching with ctrl-p
 
   if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null && command -v fzf 2>&1 >/dev/null
     # Dependencies are:
