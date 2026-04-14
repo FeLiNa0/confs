@@ -178,6 +178,7 @@ abbr "48" 'cd ~/src/haskelloni'
 if command -v gh > /dev/null
     abbr ghch 'gh pr checkout'
     abbr ghw 'gh pr checks --watch && notification-sound.sh'
+    abbr ghl 'gh pr list'
     ## abbr ghwm 'gh pr checks --watch && gh pr merge --delete-branch --merge'
 end
 
@@ -243,7 +244,7 @@ if true
     abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
-    abbr public 'cd ~/pf && cd ~/pf/pfc_public_api/'
+    abbr pub 'cd ~/pf && cd ~/pf/pfc_public_api/'
     abbr pay 'cd ~/pf && cd ~/pf/pfc_pay'
     abbr subs 'cd ~/pf && cd ~/pf/pfc_ev/subscription-manager'
 end

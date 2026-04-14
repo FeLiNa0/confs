@@ -373,6 +373,7 @@ copy_confs_for xfce4_and_xubuntu \
     .config/autostart/dropbox.desktop \
     .config/autostart/dunst_notifs.desktop \
     .config/autostart/redshift.desktop \
+    .local/share/applications/dev.zed.Zed.desktop \
     .config/autostart/zeal.desktop
 
 copy_confs_for discord .config/config/settings.json
