@@ -115,17 +115,13 @@ source_if_exists $HOME/.aliases --verbose
 alias ,,=commacomma
 
 abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
-abbr gj "cd ~/src/haskelloni/practice/haskelloni48"
+abbr my 'make commitready'
 abbr gdbb "gdb -ex run --args"
-abbr ~ journal.sh
-abbr ` journal_work.sh
-abbr jowo journal_work.sh
 abbr o "ollama.sh run $DEFAULT_OLLAMA_MODEL --"
 abbr os 'ollama.sh run smollm --'  # only 1.7B parameters!
 abbr l 'ls -F -a'
 abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
-abbr feh viewnior
 abbr MONKEY 'echo MONKEY'
 abbr em 'emacs -nw'
 abbr emc 'emacsclient -nw --alternate-editor=""'
@@ -137,7 +133,6 @@ abbr rsync 'rsync -rh --info=progress2'
 abbr k "rlwrap ngnk"  # The K language
 
 # Python and Scientific commands
-abbr p python3
 abbr py python3
 abbr ipy ipython3
 ## abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
@@ -145,17 +140,17 @@ abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: da
 abbr msgpack_unpack "python3 -c 'import sys,msgpack;print(msgpack.unpack(open(0,\'rb\')))'"
 
 # Common directories
-abbr mc "cd ~/src/min*"
+abbr mc "cd ~/src/minecraft-server"  # Minecraft by Mojang
 abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
 abbr z 'zeditor $(projectroot.sh)'
+abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
 
 # Git shortcuts
 if command -v git > /dev/null
     # When I retire, I'll switch to mercurial or someshit
-    abbr GP 'echo "Push new branch and create github pull request with default values? Press ENTER to continue." && read && gp -f && gh pr create -f && gh pr view -w'
     abbr ga 'git add'
     abbr gr 'git rebase'
     abbr gc 'git commit'
@@ -169,10 +164,6 @@ if command -v git > /dev/null
     abbr gcl 'git clone'
     debug Setup Git abbreviations
 end
-
-# Compilers, interpreters, transpilers, and their ilk
-abbr lx 'cd ~/src/clox/by-the-book/c'
-abbr "48" 'cd ~/src/haskelloni'
 
 # Github-specific shortcuts
 if command -v gh > /dev/null
@@ -221,9 +212,8 @@ if command -v aws > /dev/null 2>&1
     abbr s3 'aws s3'
 end
 
-if true
-    abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
-    abbr traffman 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
+set still_working_at_powerflex true
+if $still_working_at_powerflex
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr app 'cd ~/pf && cd ~/pf/driver_experience'
     abbr snow 'cd ~/pf && cd ~/pf/snowflake_reporting'
@@ -235,13 +225,9 @@ if true
     abbr sites 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_sites'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
-    abbr uploo 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
     abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
-    abbr uplob2 'cd ~/pf && ~/pf/pfc_site_uploader2/site-uploader/'
-    abbr uploo2 'cd ~/pf && ~/pf/pfc_site_uploader2/site-uploader/'
     abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
     abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
-    abbr powerflex_api 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
     abbr pub 'cd ~/pf && cd ~/pf/pfc_public_api/'
@@ -262,7 +248,8 @@ if command -v podman > /dev/null || command -v docker > /dev/null
     abbr dcls 'docker container ls'
     abbr dl 'docker logs'
     abbr dex 'docker exec'
-    abbr dck "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
+    abbr dck "docker container stop --timeout 3 (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
+    abbr dckk "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
     debug Setup Docker abbreviations
 end
 

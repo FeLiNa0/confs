@@ -14,5 +14,5 @@ function ssh_info
 end
 
 function fish_title
-  printf "🐠 %s %s%s" (ssh_info) (title_get_project)
+  printf "><> %s %s%s" (ssh_info) (title_get_project)
 end
