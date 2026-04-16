@@ -4,67 +4,23 @@ set START_TIME (date +%s.%N)
 # Dependencies for fzf plugin are: fzf, fd, optional bat
 
 function debug
-  if status is-interactive && [ "$PWD" = "$HOME" ]
-    echo "$FISH_LOGO $(date +%s.%N) $argv"
-  end
+  status is-interactive && [ "$PWD" = "$HOME" ] && echo "$FISH_LOGO $(date +%s.%N) $argv"
 end
 
 function addpaths --argument-names 'path' --description "Add binary to $PATH"
-  if test -d "$path"
-    if not contains -- "$path" $fish_user_paths
-      # Without this check, fish becomes gradually slower to start as the variable keeps growing
-      set -U fish_user_paths $fish_user_paths "$path"
-      debug Added path "$path"
-    end
-  else
-    debug "WARNING: addpaths could not find $argv[1]"
-  end
+  test -d "$path" && not contains -- "$path" $fish_user_paths && set -U fish_user_paths $fish_user_paths "$path" && debug Added path "$path"
 end
 
 function source_if_exists --argument-names 'file'
-    if test -e "$file"
-      source "$file"
-      debug "Source $file"
-    else
-      debug "WARNING: File not found to load as fish script: $file"
-    end
+  test -e "$file" && source "$file" && debug "Source $file"
 end
 
 function set_global
-  set -gx $argv
-  debug "Set variable $argv[1]"
+  set -gx $argv && debug "Set variable $argv[1]"
 end
 
 source_if_exists $HOME/.config/fish/local_env.fish
 set_global FISH_LOGO 🐠
-
-addpaths $HOME/bin
-addpaths $HOME/.local/bin
-addpaths $HOME/.luarocks/bin
-addpaths $HOME/.cargo/bin
-
-set_global ANDROID_HOME "/opt/android-sdk"
-addpaths "$ANDROID_HOME/tools/bin/"
-addpaths "$ANDROID_HOME/platform-tools/"
-addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
-addpaths "$ANDROID_HOME/emulator"
-addpaths $ANDROID_HOME/bin
-
-source_if_exists /opt/asdf-vm/asdf.fish
-addpaths /opt/asdf-vm/bin  # from AUR
-
-set_global EDITOR vis
-
-# Caused bitsandbytes package from  oobabooga/text-generation-webui to crash as it scanned through all env vars in search of CUDA stuff
-set --unexport XDG_GREETER_DATA_DIR
-set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
-set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
-set_global DEFAULT_OLLAMA_MODEL "qwen3:14b"    # keep this updated
-set_global OLLAMA_KEEP_ALIVE 8h
-set_global OLLAMA_MAX_LOADED_MODELS 3
-set_global OLLAMA_NUM_PARALLEL 3
-set_global OLAMA_ORIGINS localhost
-set_global OLLAMA_NOPRUNE true  # allow continuing downloads
 
 # Load aliases before abbreviations: tryalias is almost as fast as fish's builtin alias so I'll keep it.
 source_if_exists $HOME/.aliases
@@ -84,8 +40,6 @@ abbr emc 'emacsclient -nw --alternate-editor=""'
 abbr z 'zeditor $(projectroot.sh)'
 abbr rsync 'rsync -rh --info=progress2'
 
-abbr k "rlwrap ngnk"  # The K language
-
 # Python and Scientific commands
 abbr py python3
 abbr ipy ipython3
@@ -101,94 +55,105 @@ abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_
 abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
 
 # Git shortcuts
-if command -v git > /dev/null
-    # When I retire, I'll switch to mercurial or somesuch
-    abbr ga 'git add'
-    abbr gr 'git rebase'
-    abbr gc 'git commit'
-    abbr gch 'git checkout'
-    abbr gchr 'git cherry-pick'
-    abbr gs '_fzf_search_git_status || git status'
-    abbr gst 'git stash push --'
-    abbr gstp 'git stash apply && git stash drop'
-    abbr gd 'git diff'
-    abbr gl '_fzf_search_git_log || git log'
-    abbr gcl 'git clone'
-    debug Setup Git abbreviations
-end
+# When I retire, I'll switch to mercurial or somesuch
+abbr ga 'git add'
+abbr gr 'git rebase'
+abbr gc 'git commit'
+abbr gch 'git checkout'
+abbr gchr 'git cherry-pick'
+abbr gs '_fzf_search_git_status || git status'
+abbr gst 'git stash push --'
+abbr gstp 'git stash apply && git stash drop'
+abbr gd 'git diff'
+abbr gl '_fzf_search_git_log || git log'
+abbr gcl 'git clone'
+abbr ghch 'gh pr checkout'
+abbr ghw 'gh pr checks --watch && notification-sound.sh'
+abbr ghl 'gh pr list'
 
-# Github-specific shortcuts
-if command -v gh > /dev/null
-    abbr ghch 'gh pr checkout'
-    abbr ghw 'gh pr checks --watch && notification-sound.sh'
-    abbr ghl 'gh pr list'
-end
-
-if command -v kubectl > /dev/null
-    # Essential
-    abbr k kubectl
-    # List and detail resources
-    abbr kg 'kubectl get'
-    abbr kgp 'kubectl get pods'
-    abbr kd 'kubectl describe'
-    # Debugging pods
-    abbr kl stern  ## Kubectl logs
-    abbr kex 'kubectl exec'
-    abbr kpf 'kubectl port-forward'
-    # Emergency/local modifications. Prefer devops. Ensure correct cluster is targeted.
-    abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
-    debug Setup Kubernetes abbreviations
-end
+abbr k kubectl
+abbr kg 'kubectl get'
+abbr kgp 'kubectl get pods'
+abbr kd 'kubectl describe'
+abbr kl stern  ## Kubectl logs
+abbr kex 'kubectl exec'
+abbr kpf 'kubectl port-forward'
+abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
 
 set still_working_at_powerflex true  # The economic realities of 2022-.
-if $still_working_at_powerflex
-    abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
-    abbr app 'cd ~/pf && cd ~/pf/driver_experience'
-    abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
-    abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
-    abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
-    abbr scale 'cd ~/pf && cd ~/pf/scale'
-    abbr scalepass 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
-    abbr sites 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_sites'
-    abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
-    abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
-    abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
-    abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
-    abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
-    abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
-    abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
-end
+abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
+abbr app 'cd ~/pf && cd ~/pf/driver_experience'
+abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
+abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
+abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
+abbr scale 'cd ~/pf && cd ~/pf/scale'
+abbr scalepass 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_password_management'
+abbr sites 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_sites'
+abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
+abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
+abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
+abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
+abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
+abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
+abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
 
 # Docker shortcuts
-if command -v podman > /dev/null || command -v docker > /dev/null
-    abbr dcls 'docker container ls'
-    abbr dl 'docker logs'
-    abbr dex 'docker exec'
-    abbr dck "docker container stop --timeout 3 (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
-    abbr dckk "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
-    debug Setup Docker abbreviations
-end
+abbr dcls 'docker container ls'
+abbr dl 'docker logs'
+abbr dex 'docker exec'
+abbr dck "docker container stop --timeout 3 (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
+abbr dckk "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
+debug "Setup abbreviations"
+
+
+addpaths $HOME/bin
+addpaths $HOME/.local/bin
+addpaths $HOME/.luarocks/bin
+addpaths $HOME/.cargo/bin
+
+set_global ANDROID_HOME "/opt/android-sdk"
+addpaths "$ANDROID_HOME/tools/bin/"
+addpaths "$ANDROID_HOME/platform-tools/"
+addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
+addpaths "$ANDROID_HOME/emulator"
+addpaths "$ANDROID_HOME/bin"
+
+source_if_exists /opt/asdf-vm/asdf.fish
+addpaths /opt/asdf-vm/bin  # from AUR
+
+set_global EDITOR vis
+
+# Caused bitsandbytes package from  oobabooga/text-generation-webui to crash as it scanned through all env vars in search of CUDA stuff
+set --unexport XDG_GREETER_DATA_DIR
+set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
+set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
+set_global DEFAULT_OLLAMA_MODEL qwen3:14b    # keep this updated
+set_global OLLAMA_KEEP_ALIVE 8h
+set_global OLLAMA_MAX_LOADED_MODELS 3
+set_global OLLAMA_NUM_PARALLEL 3
+set_global OLAMA_ORIGINS localhost
+set_global OLLAMA_NOPRUNE true  # allow continuing downloads
 
 # kubectl krew plugin manager
 set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
 abbr ma makeanywhere
 function makeanywhere --wraps make --description "makeanywhere --wraps make makeanywhere"
-    makeanywhere $argv
+  makeanywhere $argv
 end
 function pma --wraps make --description "pma --wraps make pipenv run makeanywhere"
-    python -m pipenv run makeanywhere $argv
+  python -m pipenv run makeanywhere $argv
 end
 
 set_global CUSTOM_CURL_WRAPPER (command -v curl_device_manager.sh)
 function curl_device_manager.sh --wraps curl --description "makeanywhere --wraps make $CUSTOM_CURL_WRAPPER"
-    "$CUSTOM_CURL_WRAPPER" $argv
+  "$CUSTOM_CURL_WRAPPER" $argv
 end
 
 function n --description "call nushell inline"
-    # TODO handle strings
-    # e.g. n open site-uploader/tests/sample_input_files/v003_integration_testing/djw8_3.xlsx \| get \'Site Information\'
-    nu -c "$argv"
+  # TODO handle strings
+  # e.g. n open site-uploader/tests/sample_input_files/v003_integration_testing/djw8_3.xlsx \| get \'Site Information\'
+  nu -c "$argv"
 end
 
 # Have fzf use ag to find files
@@ -199,47 +164,35 @@ set fzf_fd_opts --hidden --exclude=.git  # list hidden files when searching with
 debug Set fzf options
 
 if status is-interactive
-  if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
-    xset r rate 77 39
-    debug Set keyboard rate
-  end
-
-  max-mic.sh 2>&1 >/dev/null
-  debug Set audio profiles
+  [ -n "$DISPLAY" ] && xset r rate 77 39
+  debug Set keyboard rate
+  [ -n "$DISPLAY" ] && max-mic.sh 2>&1 >/dev/null &
+  debug Set audio
 
   function fish_user_key_bindings
-    # Use fzf.fish to implement the famous ctrl-p binding for searching files
-    command -v fzf 2>&1 >/dev/null && bind \cp _fzf_search_directory
-
-    # Ctrl-F is an essential fish command to autocomplete based on history
+    # ctrl-p to find files with fzf, ctrl-f to autocomplete a command with fish
+    bind \cp _fzf_search_directory
     bind \cf forward-char
   end
 
-  if command -v starship > /dev/null
-    starship init fish | source
-  end
+  command -v starship > /dev/null && starship init fish | source
 
-  if command -v pyenv > /dev/null
-    pyenv init - fish | source
-  end
+  command -v pyenv > /dev/null && pyenv init - fish | source
 
+  # Gold
   if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null && command -v fzf 2>&1 >/dev/null
-    echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
+    echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish'
     fisher install PatrickF1/fzf.fish
   end
 
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
   debug "Startup time: $TOTAL_STARTUP_TIME ms"
 
-  if command -v rbenv 2>&1 >/dev/null;
-    rbenv init - --no-rehash fish | source
-  end
+  command -v rbenv 2>&1 >/dev/null && rbenv init - --no-rehash fish | source
 
   # RUN LAST so user can ctrl-c
-  if command -v keychain > /dev/null 2>&1
-    # Timeout after 14 hours (60*14 minutes)
-    eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519)
-  end
+  # Timeout after 14 hours (60*14 minutes)
+  command -v keychain > /dev/null 2>&1 && eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519)
 end
 
 function install_plugin_manager
