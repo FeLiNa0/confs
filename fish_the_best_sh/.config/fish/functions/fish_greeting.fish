@@ -1,7 +1,5 @@
 function fish_greeting
-  # set MOTTO "Mater artium necessitas"
-  set MOTTO "Crescit Eundo"
-  if [ "$PWD" = "$HOME" ]
-    printf "%s %s\n" "$MOTTO $(uname -mnor)"
-  end
+  # echo "Mater artium necessitas"
+  echo "Crescit Eundo"
+  echo "Welcome to fish, the friendly interactive shell"
 end
