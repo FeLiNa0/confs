@@ -1,103 +1,64 @@
 # Felina A. Rivera's FISH config
-# Remember to run `install_plugins` once.
 set START_TIME (date +%s.%N)
-set FAST_STARTUP true
-set DEBUG_OUTPUT false
+
+# Dependencies for fzf plugin are: fzf, fd, optional bat
 
 function debug
-  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
-    set_color -i
+  if status is-interactive && [ "$PWD" = "$HOME" ]
     echo "$FISH_LOGO $(date +%s.%N) $argv"
-    set_color normal
   end
 end
 
-function addpaths --argument-names 'path' 'verbose' 'append'
-  # For adding to PATH
+function addpaths --argument-names 'path' --description "Add binary to $PATH"
   if test -d "$path"
     if not contains -- "$path" $fish_user_paths
-      # Must check if path is already added.
-      # Without this check, fish becomes gradually slower to start as it
-      # struggles to manage an enormous variable.
-      if [ "$append" = "no-append" ]
-          set -U fish_user_paths "$path" $fish_user_paths
-      else
-          set -U fish_user_paths $fish_user_paths "$path"
-      end
+      # Without this check, fish becomes gradually slower to start as the variable keeps growing
+      set -U fish_user_paths $fish_user_paths "$path"
       debug Added path "$path"
     end
-  else if [ "$verbose" = "verbose" ]
+  else
     debug "WARNING: addpaths could not find $argv[1]"
   end
 end
 
-function source_if_exists --argument-names 'file' 'verbose'
+function source_if_exists --argument-names 'file'
     if test -e "$file"
       source "$file"
       debug "Source $file"
-    else if ! [ "$verbose" = "" ]
+    else
       debug "WARNING: File not found to load as fish script: $file"
     end
 end
 
 function set_global
   set -gx $argv
-  debug Set variable $argv[1]
+  debug "Set variable $argv[1]"
 end
 
 source_if_exists $HOME/.config/fish/local_env.fish
 set_global FISH_LOGO 🐠
 
-# Common binary paths
-addpaths $HOME/bin --verbose
-addpaths $HOME/.local/bin  --verbose
-# Lua
-addpaths $HOME/.luarocks/bin  --verbose
-# Rust binaries
+addpaths $HOME/bin
+addpaths $HOME/.local/bin
+addpaths $HOME/.luarocks/bin
 addpaths $HOME/.cargo/bin
-# CUDA binaries
-# addpaths /opt/cuda/bin
-# Raku (Perl 6)
-# addpaths $HOME/.rakudo-moar-2024.01-01-linux-x86_64-gcc/bin/
-# Snap Linux binaries
-# addpaths /snap/bin
-# Google Gcloud
-# addpaths /opt/google-cloud-cli/bin/
-# Android
+
 set_global ANDROID_HOME "/opt/android-sdk"
 addpaths "$ANDROID_HOME/tools/bin/"
 addpaths "$ANDROID_HOME/platform-tools/"
 addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
 addpaths "$ANDROID_HOME/emulator"
-addpaths $ANDROID_HOME/bin --verbose
+addpaths $ANDROID_HOME/bin
 
-# still needed?
-# set_global MANPATH $MANPATH /usr/share/man /usr/local/share/man/
-
-# ASDF language version manager
 source_if_exists /opt/asdf-vm/asdf.fish
 addpaths /opt/asdf-vm/bin  # from AUR
 
 set_global EDITOR vis
 
-# Caused bitsandbytes package from  oobabooga/text-generation-webui
-# to crash as it scanned through all env vars in search of CUDA stuff
+# Caused bitsandbytes package from  oobabooga/text-generation-webui to crash as it scanned through all env vars in search of CUDA stuff
 set --unexport XDG_GREETER_DATA_DIR
 set_global CUDA_LIB /opt/cuda/targets/x86_64-linux/lib/
-
-# set_global DEVICE_MANAGER_FORCE_PASS true
-# For kubectl
-# still needed? set_global USE_GKE_GCLOUD_AUTH_PLUGIN True
-
-# Disable legacy algorithms in OpenSSL 3.0+
-# A fix when using the Python cryptography library.
-# still needed? set_global CRYPTOGRAPHY_OPENSSL_NO_LEGACY true
-
-# Load some common python libraries
 set_global PYTHONSTARTUP "$HOME/.ipython/profile_default/startup/10-imports.py"
-
-# Configure ollama, also see .bashrc
-# set_global DEFAULT_OLLAMA_MODEL "smollm:1.7b"    # keep this updated
 set_global DEFAULT_OLLAMA_MODEL "qwen3:14b"    # keep this updated
 set_global OLLAMA_KEEP_ALIVE 8h
 set_global OLLAMA_MAX_LOADED_MODELS 3
@@ -105,38 +66,30 @@ set_global OLLAMA_NUM_PARALLEL 3
 set_global OLAMA_ORIGINS localhost
 set_global OLLAMA_NOPRUNE true  # allow continuing downloads
 
+# Load aliases before abbreviations: tryalias is almost as fast as fish's builtin alias so I'll keep it.
+source_if_exists $HOME/.aliases
 
-# Load aliases before abbreviations
-# I tried getting rid of tryalias with "alias tryalias alias", but it's actually
-# almost as fast as plain alias so I'll keep it.
-source_if_exists $HOME/.aliases --verbose
+abbr ,, commacomma  # commacomma is defined as a fish function so should not be shared with other shells
 
-# commacomma is defined as a fish function so should not be shared with other shells
-alias ,,=commacomma
-
-abbr f "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
-abbr my 'make commitready'
+abbr site "cd ~/src/felina.art || git clone git@github.com:felina0/felina.art ~/src/felina.art"
+abbr mcr 'make commitready'
 abbr gdbb "gdb -ex run --args"
 abbr o "ollama.sh run $DEFAULT_OLLAMA_MODEL --"
-abbr os 'ollama.sh run smollm --'  # only 1.7B parameters!
 abbr l 'ls -F -a'
 abbr ll 'ls -F -a -l -h'
 abbr e evince   # alternatives: 'zathura --fork' mupdf mupdf-x11 qpdfview 'wine READER10.exe'
 abbr MONKEY 'echo MONKEY'
 abbr em 'emacs -nw'
 abbr emc 'emacsclient -nw --alternate-editor=""'
-abbr emacsc 'emacsclient --alternate-editor=""'
+abbr z 'zeditor $(projectroot.sh)'
 abbr rsync 'rsync -rh --info=progress2'
-# abbr pmake 'poetry run make'
-
 
 abbr k "rlwrap ngnk"  # The K language
 
 # Python and Scientific commands
 abbr py python3
 abbr ipy ipython3
-## abbr sci "ipython3 -i -c 'import numpy as np, scipy, sympy, astropy; from numba import jit'"
-abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: datetime.datetime.fromtimestamp(v).isoformat() if k in 'iat exp' else v for k,v in jwt.api_jwt.decode(input('token> ').replace('Bearer ', '').strip(), options={'verify_signature': False}).items()}, indent=2)) # Please run pip install PyJWT if this fails\""
+abbr jwt_decode "python3 -c \"import datetime,jwt,json ; print(json.dumps({k: datetime.datetime.fromtimestamp(v).isoformat() if k in 'iat exp' else v for k,v in jwt.api_jwt.decode(input('token> ').replace('Bearer ', '').strip(), options={'verify_signature': False}).items()}, indent=2))\""
 abbr msgpack_unpack "python3 -c 'import sys,msgpack;print(msgpack.unpack(open(0,\'rb\')))'"
 
 # Common directories
@@ -145,12 +98,11 @@ abbr art "cd ~/src/art/"
 abbr games "cd ~/src/games/"
 abbr golf "cd ~/src/golf/"
 abbr leet "cd ~/src/golf/0notgolf/speed/Fire_of_the_Phoenix/1/3/3/7/faang_likes_puzzles/leetcode"
-abbr z 'zeditor $(projectroot.sh)'
 abbr grugai "dragon-drop $HOME/sync/ai/GRUG.md"
 
 # Git shortcuts
 if command -v git > /dev/null
-    # When I retire, I'll switch to mercurial or someshit
+    # When I retire, I'll switch to mercurial or somesuch
     abbr ga 'git add'
     abbr gr 'git rebase'
     abbr gc 'git commit'
@@ -170,14 +122,11 @@ if command -v gh > /dev/null
     abbr ghch 'gh pr checkout'
     abbr ghw 'gh pr checks --watch && notification-sound.sh'
     abbr ghl 'gh pr list'
-    ## abbr ghwm 'gh pr checks --watch && gh pr merge --delete-branch --merge'
 end
 
-# KUUUUUUUUUUUUUUUBBBBBBBBBBBBBBBBB
 if command -v kubectl > /dev/null
     # Essential
     abbr k kubectl
-    abbr kx kubectx
     # List and detail resources
     abbr kg 'kubectl get'
     abbr kgp 'kubectl get pods'
@@ -187,36 +136,14 @@ if command -v kubectl > /dev/null
     abbr kex 'kubectl exec'
     abbr kpf 'kubectl port-forward'
     # Emergency/local modifications. Prefer devops. Ensure correct cluster is targeted.
-    ## abbr kdl 'correct-kubernetes-cluster.sh && kubectl delete'
-    abbr krr 'bash -c "correct-kubernetes-cluster.sh && kubectl rollout restart"'
-    ## abbr kubectl-stop-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":null}}"'
-    ## abbr kubectl-start-sync-app 'correct-kubernetes-cluster.sh && kubectl -n argocd patch --type=merge application -p "{\"spec\":{\"syncPolicy\":{\"automated\":{\"selfHeal\":true}}}}"'
+    abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
     debug Setup Kubernetes abbreviations
-    #### Rarely used:
-    ## abbr kcp 'kubectl cp'
-    ## kubectl exec -it rfr-edge-redis-0 -n default -c redis -- redis-cli
-    ## kubectl get apps -A | grep -v Synced
-    ## abbr kc 'kubectl config'
-    ## abbr kcc 'kubectl config current-context'
-    ## abbr whereami 'kubectl config current-context'
-    ## abbr kcn 'kubectl config set-context --current --namespace'
-    ## abbr kgs 'kubectl get services'
-    ## abbr kgcm 'kubectl get configmaps'
-    ## abbr kgi 'kubectl get ingress'
-    ## abbr ktop 'kubectl top'
 end
 
-if command -v aws > /dev/null 2>&1
-    # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
-    abbr a aws
-    abbr s3 'aws s3'
-end
-
-set still_working_at_powerflex true
+set still_working_at_powerflex true  # The economic realities of 2022-.
 if $still_working_at_powerflex
     abbr ff 'cd ~/pf && cd ~/pf/powerflex_edge_traffic_manager'
     abbr app 'cd ~/pf && cd ~/pf/driver_experience'
-    abbr snow 'cd ~/pf && cd ~/pf/snowflake_reporting'
     abbr cs 'cd ~/pf && cd ~/pf/powerflex_edge_ocpp_central_system'
     abbr ev 'cd ~/pf && cd ~/pf/pfc_ev'
     abbr devman 'cd ~/pf && cd ~/pf/powerflex_cloud_edge_device_manager'
@@ -225,24 +152,13 @@ if $still_working_at_powerflex
     abbr sites 'cd ~/pf && cd ~/pf/scale/powerflex_cloud_nexus_sites'
     abbr uplo 'cd ~/pf && ~/pf/pfc_site_uploader'
     abbr uplob 'cd ~/pf && ~/pf/pfc_site_uploader/site-uploader/'
-    abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
     abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
+    abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
     abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
     abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
     abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
-    abbr pub 'cd ~/pf && cd ~/pf/pfc_public_api/'
-    abbr pay 'cd ~/pf && cd ~/pf/pfc_pay'
-    abbr subs 'cd ~/pf && cd ~/pf/pfc_ev/subscription-manager'
 end
 
-# Docker shortcuts
-if command -v podman > /dev/null
-    set_global PODMAN_COMPOSE_PROVIDER docker-compose
-    set_global PODMAN_COMPOSE_WARNING_LOGS false
-    # abbr docker podman
-    # abbr dck "podman container kill (podman container ls --format json | jq '.[] | .Id' | sed 's/\"//g')"
-    debug Setup Podman abbreviations
-end
 # Docker shortcuts
 if command -v podman > /dev/null || command -v docker > /dev/null
     abbr dcls 'docker container ls'
@@ -253,69 +169,43 @@ if command -v podman > /dev/null || command -v docker > /dev/null
     debug Setup Docker abbreviations
 end
 
-## still needed? set_global BUILDKIT_PROGRESS plain
-## still set_global DOCKER_BUILDKIT 1
-
-# kubectl krew plugins
+# kubectl krew plugin manager
 set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
-if command -v makeanywhere > /dev/null
-    set_global MAKEANYWHERE (command -v makeanywhere)
-    function makeanywhere --wraps make --description "makeanywhere --wraps make $MAKEANYWHERE"
-        "$MAKEANYWHERE" $argv
-    end
-    function pma --wraps make --description "pma --wraps make pipenv run $MAKEANYWHERE"
-        python -m pipenv run "$MAKEANYWHERE" $argv
-    end
-    alias ma makeanywhere
-
-    debug Setup makeanywhere alias so that it wraps the make command
+abbr ma makeanywhere
+function makeanywhere --wraps make --description "makeanywhere --wraps make makeanywhere"
+    makeanywhere $argv
 end
-if command -v curl_device_manager.sh > /dev/null
-    set_global CUSTOM_CURL_WRAPPER (command -v curl_device_manager.sh)
-    function curl_device_manager.sh --wraps curl --description "makeanywhere --wraps make $CUSTOM_CURL_WRAPPER"
-        "$CUSTOM_CURL_WRAPPER" $argv
-    end
-    debug Setup curl wrapper alias so that it wraps the curl command
+function pma --wraps make --description "pma --wraps make pipenv run makeanywhere"
+    python -m pipenv run makeanywhere $argv
 end
 
-function pmake --wraps make --description "a wrapper for poetry run make ..."
-    if poetry env list
-        poetry run make $argv
-    else
-        make $argv
-    end
+set_global CUSTOM_CURL_WRAPPER (command -v curl_device_manager.sh)
+function curl_device_manager.sh --wraps curl --description "makeanywhere --wraps make $CUSTOM_CURL_WRAPPER"
+    "$CUSTOM_CURL_WRAPPER" $argv
 end
 
-# adjust PATH for a darwin OS with certain patches (MacOS)
-## addpaths /usr/local/opt/gettext/bin
-## addpaths /Library/Frameworks/Python.framework/Versions/3.7/bin
-## addpaths /usr/local/opt/openssl@1.1/bin
-## addpaths /usr/local/opt/openssl/bin
+function n --description "call nushell inline"
+    # TODO handle strings
+    # e.g. n open site-uploader/tests/sample_input_files/v003_integration_testing/djw8_3.xlsx \| get \'Site Information\'
+    nu -c "$argv"
+end
 
 # Have fzf use ag to find files
-if command -v ag > /dev/null 2>&1
-  if command -v fzf > /dev/null 2>&1
-    set_global FZF_DEFAULT_COMMAND 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
-    set_global FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-    debug fzf will now use the silver searcher ag
-  end
-end
+set_global FZF_DEFAULT_COMMAND 'ag -l --path-to-ignore .gitignore --nocolor --hidden -g ""'
+set_global FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set_global fzf_preview_file_cmd cat
+set fzf_fd_opts --hidden --exclude=.git  # list hidden files when searching with ctrl-p
+debug Set fzf options
 
 if status is-interactive
   if command -v xset > /dev/null 2>&1 && [ -n "$DISPLAY" ]
     xset r rate 77 39
-    debug Set faster keyboard rate
+    debug Set keyboard rate
   end
 
   max-mic.sh 2>&1 >/dev/null
   debug Set audio profiles
-
-  # if status is-interactive
-  # and command -v tmux >/dev/null 2>&1
-  # and not set -q TMUX
-  #   exec tmux
-  # end
 
   function fish_user_key_bindings
     # Use fzf.fish to implement the famous ctrl-p binding for searching files
@@ -333,27 +223,21 @@ if status is-interactive
     pyenv init - fish | source
   end
 
-  set_global fzf_preview_file_cmd cat
-  set fzf_fd_opts --hidden --exclude=.git  # list hidden files whhen searching with ctrl-p
-
   if ! grep PatrickF1/fzf.fish ~/.config/fish/fish_plugins >/dev/null && command -v fzf 2>&1 >/dev/null
-    # Dependencies are:
-    # fzf
-    # fd, find alternative https://github.com/sharkdp/fd (fd-find in fedora)
-    # optional bat, cat replacement
     echo 'Installing fzf.fish https://github.com/PatrickF1/fzf.fish for git log, git status, ctrl-p (file search), and ctrl-r (history)'
     fisher install PatrickF1/fzf.fish
   end
 
   set TOTAL_STARTUP_TIME (echo (date +%s.%N) "$START_TIME" | awk '{print ($1 - $2) * 1000}' || echo UNKNOWN)
-  if status is-interactive && [ "$DEBUG_OUTPUT" = true ]
-    echo "$TOTAL_STARTUP_TIME"ms
+  debug "Startup time: $TOTAL_STARTUP_TIME ms"
+
+  if command -v rbenv 2>&1 >/dev/null;
+    rbenv init - --no-rehash fish | source
   end
 
   # RUN LAST so user can ctrl-c
   if command -v keychain > /dev/null 2>&1
     # Timeout after 14 hours (60*14 minutes)
-    # -Q --quick If an ssh-agent process is running then use it.  Don't verify the list of keys, other than making sure it's non-empty.  This option avoids locking when possible so that multiple terminals can be opened simultaneously without waiting on each other.
     eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519)
   end
 end
@@ -364,7 +248,6 @@ end
 
 function install_plugins
   ########### Use this function on first run to install plugins
-  # Notification when commands finish
   fisher install franciscolourenco/done
   fisher install PatrickF1/fzf.fish
   fisher install evanlucas/fish-kubectl-completions
@@ -373,22 +256,7 @@ function install_plugins
 end
 
 function miniconda_fish_init
-  ########### Use this function to init miniconda (Anaconda distribution)
-  # If this function is overwriting your system's Python:
-  # conda config --set auto_activate_base false
-  # set --local CONDA_BIN "$HOME/miniconda3/bin/conda"
-  set --local CONDA_BIN "/opt/miniconda3/bin/conda"
-  # set --local CONDA_BIN "/usr/bin/conda"
-  if ! command -v "$CONDA_BIN" > /dev/null
-    return 1
-  end
-  eval "$CONDA_BIN" "shell.fish" "hook" | source
+  eval "/opt/miniconda3/bin/conda" "shell.fish" "hook" | source
   conda activate $argv[1]
-  debug Loaded miniconda and the $argv[1] environment
-end
-
-
-# Added by `rbenv init` on Mon Mar 16 10:28:15 AM MDT 2026
-if command -v rbenv 2>&1 >/dev/null;
-    status --is-interactive; and rbenv init - --no-rehash fish | source
+  echo Loaded miniconda and the $argv[1] environment
 end
