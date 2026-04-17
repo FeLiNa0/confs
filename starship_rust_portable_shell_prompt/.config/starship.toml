@@ -91,7 +91,7 @@ disabled = false
 format = '[\[$status\]]($style) '
 
 [[battery.display]]
-threshold = 30
+threshold = 32
 
 [character]
 success_symbol = "[\\$](bold white)"
