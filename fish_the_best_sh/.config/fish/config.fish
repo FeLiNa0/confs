@@ -71,11 +71,12 @@ abbr ghch 'gh pr checkout'
 abbr ghw 'gh pr checks --watch && notification-sound.sh'
 abbr ghl 'gh pr list'
 
+abbr kx kubectx  # Switch kube clusters
 abbr k kubectl
 abbr kg 'kubectl get'
 abbr kgp 'kubectl get pods'
 abbr kd 'kubectl describe'
-abbr kl stern  ## Kubectl logs
+abbr kl stern  # Kubectl logs
 abbr kex 'kubectl exec'
 abbr kpf 'kubectl port-forward'
 abbr krr 'correct-kubernetes-cluster.sh && kubectl rollout restart'
@@ -200,7 +201,7 @@ function install_plugin_manager
 end
 
 function install_plugins
-  ########### Use this function on first run to install plugins
+  # Use this function on first run to install plugins
   fisher install franciscolourenco/done
   fisher install PatrickF1/fzf.fish
   fisher install evanlucas/fish-kubectl-completions
