@@ -102,6 +102,7 @@ abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
 abbr dcls 'docker container ls'
 abbr dl 'docker logs'
 abbr dex 'docker exec'
+abbr dcrm 'docker container rm'
 abbr dck "docker container stop --timeout 3 (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
 abbr dckk "docker container kill (docker container ls --format json | jq '.ID' | sed 's/\"//g')"
 debug "Setup abbreviations"
