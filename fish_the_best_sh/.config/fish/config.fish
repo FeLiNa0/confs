@@ -114,6 +114,7 @@ addpaths $HOME/.luarocks/bin
 addpaths $HOME/.cargo/bin
 
 set_global ANDROID_HOME "/opt/android-sdk"
+set_global SILENT true
 addpaths "$ANDROID_HOME/tools/bin/"
 addpaths "$ANDROID_HOME/platform-tools/"
 addpaths "$ANDROID_HOME/cmdline-tools/latest/bin"
@@ -194,7 +195,7 @@ if status is-interactive
 
   # RUN LAST so user can ctrl-c
   # Timeout after 14 hours (60*14 minutes)
-  command -v keychain > /dev/null 2>&1 && eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519)
+  command -v keychain > /dev/null 2>&1 && eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519_felina0)
 end
 
 function install_plugin_manager
