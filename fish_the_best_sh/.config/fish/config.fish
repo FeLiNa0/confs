@@ -96,7 +96,7 @@ abbr uplof 'cd ~/pf && ~/pf/pfc_site_uploader/*front*/'
 abbr uplo2 'cd ~/pf && ~/pf/pfc_site_uploader2'
 abbr pfapi 'cd ~/pf && ~/pf/powerflex_api'
 abbr natsinfra 'cd ~/pf && cd ~/pf/pfc_nats_infrastructure/'
-abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal'
+abbr ax 'cd ~/pf && cd ~/pf/powerflex_cloud_customer_portal && nvm use lts'
 
 # Docker shortcuts
 abbr dcls 'docker container ls'
