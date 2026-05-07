@@ -1,0 +1,93 @@
+#+TITLE: Org Syntax Highlighting Demo
+#+AUTHOR: roguh
+#+OPTIONS: toc:nil num:nil
+
+* TODO write more org files [#A]                                       :work:
+** DONE install vis                                                    :done:
+** WAITING get feedback from team                                    :review:
+** NEXT write unit tests
+*** DELEGATED ask alice to review docs                                 :docs:
+**** CANCELLED old approach                                           :stale:
+***** HOLD blocked on infra
+****** deep nesting (h6 magenta)
+
+* Inline Formatting                                                 :markup:
+
+  Regular body text. *bold* and /italic/ and _underlined_ pop out.
+  Use +strikethrough+ for corrections, ~code~ for inline code.
+  =verbatim= renders like type but without markup interpretation.
+  [[https://orgmode.org][Org-mode docs]] and [[file:sample.org][this file]].
+
+  Priority examples: [#A] critical  [#B] normal  [#C] low
+
+* Tasks & Checkboxes                                                  :todo:
+
+  SCHEDULED: <2026-05-10 Sun>
+  DEADLINE: <2026-05-15 Fri>
+  CLOSED: [2026-05-01 Thu]
+
+  - [ ] draft proposal
+  - [-] research alternatives (in progress)
+  - [x] set up repo
+  - [X] configure editor
+
+* Code Blocks (embedded highlighting)                                 :code:
+
+#+BEGIN_SRC python
+def greet(name: str) -> str:
+    # Python comment — #+BEGIN_SRC line above gets comment color here
+    return f"hello, {name}"
+#+END_SRC
+
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+# Shell comment
+for f in *.org; do
+    echo "processing $f"
+done
+#+END_SRC
+
+#+BEGIN_SRC javascript
+// JS comment
+const greet = (name) => `hello, ${name}`;
+console.log(greet("org-mode"));
+#+END_SRC
+
+#+BEGIN_SRC js
+// alias: js → javascript lexer
+fetch("/api").then(r => r.json()).then(console.log);
+#+END_SRC
+
+#+BEGIN_SRC lua
+-- Lua comment
+local function greet(name)
+    return "hello, " .. name
+end
+#+END_SRC
+
+* Block Delimiters                                                    :meta:
+
+#+BEGIN_COMMENT
+This whole block is a comment.
+*bold* /italic/ :tags: ~code~ — none highlighted inside.
+#+END_COMMENT
+
+#+BEGIN_EXAMPLE
+Example block — delimiters colored as preprocessor, content plain.
+#+END_EXAMPLE
+
+# Line comment (space required after #)
+
+* Agenda Dates (org-agenda view)                                     :dates:
+
+  Monday 05. May 2026|
+  Lunes 05. Mayo 2026|
+  Lundi 05. Juin 2026|
+
+* Rainbow Heading Level Test
+
+** h2 yellow
+*** h3 green
+**** h4 cyan
+***** h5 blue
+****** h6 magenta

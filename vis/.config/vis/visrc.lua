@@ -286,6 +286,39 @@ end
 vis.events.subscribe(vis.events.INIT, purty_colors_now)
 vis.events.subscribe(vis.events.WIN_OPEN, purty_colors_now)
 
+-- Register user lexer directory so vis finds ~/.config/vis/lexers/org.lua etc.
+vis.events.subscribe(vis.events.INIT, function()
+    local user_lexers = os.getenv('HOME') .. '/.config/vis/lexers'
+    local prop = vis.lexers.property
+    prop['scintillua.lexers'] = user_lexers .. ';' .. prop['scintillua.lexers']
+end)
+
+-- Org-mode styles missing from or overriding the default theme.
+vis.events.subscribe(vis.events.INIT, function()
+    local l = vis.lexers
+
+    -- Inline formatting
+    l.STYLE_UNDERLINE     = 'underlined'
+    l.STYLE_STRIKETHROUGH = 'fore:blue,italics'
+    l.STYLE_CODE          = 'fore:red,bold'
+
+    -- Rainbow headings: warm→cool hierarchy, bold+underlined per user preference.
+    -- h1 most urgent (red), descends to h6 (magenta).
+    l.STYLE_HEADING_H1 = 'fore:red,bold,underlined'
+    l.STYLE_HEADING_H2 = 'fore:yellow,bold,underlined'
+    l.STYLE_HEADING_H3 = 'fore:green,bold,underlined'
+    l.STYLE_HEADING_H4 = 'fore:cyan,bold,underlined'
+    l.STYLE_HEADING_H5 = 'fore:blue,bold,underlined'
+    l.STYLE_HEADING_H6 = 'fore:magenta,bold,underlined'
+
+    -- Leading stars before the last one: near-invisible on dark terminals
+    -- (fore:black = ANSI color 0, same as typical dark background).
+    l.STYLE_ORG_GHOST = 'fore:black,bold'
+
+    -- Completed tasks: italic+blue, deliberately quieter than TODO yellow.
+    l.STYLE_ORG_DONE = 'fore:blue,italics'
+end)
+
 -- https://gitlab.com/muhq/vis-lspc ? Might slow vis down too much
 
 -- Reminders:

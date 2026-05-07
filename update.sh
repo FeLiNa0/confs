@@ -198,6 +198,7 @@ copy_confs_for vim \
 copy_confs_for vis \
   .config/vis/visrc.lua \
   .config/vis/prep.sh \
+  .config/vis/lexers/org.lua \
   bin/vc \
   bin/vp
 
