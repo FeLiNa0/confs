@@ -7,6 +7,18 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "lsp": {
     "vtsls": {
       "settings": {
@@ -30,6 +42,7 @@
     "enabled_in_text_threads": false,
   },
   "agent": {
+    "dock": "right",
     "tool_permissions": {
       "default": "allow"
     },

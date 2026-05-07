@@ -217,7 +217,7 @@ copy_confs_for git \
     bin/git-show-commits-not-in-branch.sh bin/git-remove-branches-gone-in-remote.sh bin/git-push-new-branch.sh bin/gitdiff.sh .git-template/HEAD
 
 copy_confs_for utils \
-  bin/cpufreq.sh bin/systemload.sh bin/mem.sh bin/screenshot.sh bin/screenshot-select.sh bin/pip-update-outdated.sh \
+  bin/cpufreq.sh bin/systemload.sh bin/screenshot.sh bin/screenshot-select.sh bin/pip-update-outdated.sh \
   .xsession \
   bin/notification-sound.sh \
   bin/dropbox-status.sh \
@@ -283,8 +283,7 @@ copy_confs_for kubernetes \
     bin/generate_kubeconfigs.sh \
     bin/kubectl-get-argocd-ui-password.sh \
     bin/k9s.sh \
-    .config/k9s/plugin.yml \
-    bin/python-wget-curl-replacement.sh
+    .config/k9s/plugin.yml
 
 copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh GRUG.md bin/ttok-count-tokens.sh
 
