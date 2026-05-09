@@ -285,7 +285,7 @@ copy_confs_for kubernetes \
     bin/k9s.sh \
     .config/k9s/plugin.yml
 
-copy_confs_for ollama bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh GRUG.md bin/ttok-count-tokens.sh
+copy_confs_for LLMs_in_a_woke_way bin/ollama.sh bin/ollama-setup.sh bin/ollama-forward-7918.sh GRUG.md bin/ttok-count-tokens.sh .claude/set_terminal_title.sh .claude/settings.json
 
 # Good startup command: kitty -e bash -c 'backup.sh ; fish'
 copy_confs_for xfce4_and_xubuntu \
