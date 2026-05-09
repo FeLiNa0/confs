@@ -1,2 +1,10 @@
 #!/bin/sh
-exec vis-clipboard --paste "$@"
+set -euo pipefail
+PROCESSOR="cat"
+if command -v pv >/dev/null 2>&1; then
+    PROCESSOR="pv --bytes --timer"
+fi
+
+vis-clipboard --usable
+exec vis-clipboard --paste "$@" | $PROCESSOR
+echo "[$(date +%s.%N)] COPY-PASTA Phase 2 of 2 complete." >&2

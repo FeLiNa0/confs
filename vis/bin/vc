@@ -1,7 +1,14 @@
 #!/bin/sh
-if [ -f "$1" ]; then
-    cat "$1" | vis-clipboard --copy
-    echo "copied" >&2
-else
-    exec vis-clipboard --copy
+set -euo pipefail
+PROCESSOR="cat"
+if command -v pv >/dev/null 2>&1; then
+    PROCESSOR="pv --bytes --timer"
 fi
+
+vis-clipboard --usable
+if [ -f "${1:-}" ]; then
+    cat "${1:-}" | $PROCESSOR | vis-clipboard --copy
+else
+    $PROCESSOR | vis-clipboard --copy
+fi
+echo "[$(date +%s.%N)] COPY-PASTA Phase 1 of 2 complete." >&2
