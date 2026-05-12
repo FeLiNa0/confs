@@ -1,7 +1,8 @@
 {
-  "voiceEnabled": true,
   "statusLine": {
     "type": "command",
     "command": "$HOME/.claude/set_terminal_title.sh"
-  }
+  },
+  "voiceEnabled": true,
+  "model": "opus"
 }
