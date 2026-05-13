@@ -193,9 +193,8 @@ if status is-interactive
 
   command -v rbenv 2>&1 >/dev/null && rbenv init - --no-rehash fish | source
 
-  # RUN LAST so user can ctrl-c
-  # Timeout after 14 hours (60*14 minutes)
-  command -v keychain > /dev/null 2>&1 && eval (keychain --quick --timeout 840 --eval -Q --quiet id_ed25519_felina0)
+  # Load SSH keys last so user can ctrl-c, timeout after 14 hours
+  command -v keychain > /dev/null 2>&1 && eval (keychain --quick --timeout 840 --eval -Q --quiet (ls ~/.ssh/*.pub | sed s/.pub//g))
 end
 
 function install_plugin_manager
