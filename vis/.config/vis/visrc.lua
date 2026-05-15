@@ -66,11 +66,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     -- Per window configuration options.
     vis:command('set shell sh') -- a barebones shell that should have no extra config/outputs
     vis:command('set number')
-    -- relativenumber + number = hybrid number mode with current line number shown, all others are relative
-    -- TODO use absolute line numbers in insert mode, "smart hybrid mode"
-    -- vis:command('set rnu') -- same as vis:command('set relativenumber')
     vis:command('set autoindent')
-    vis:command('set layout v')
     vis:command('set cursorline on')
     -- TODO only ignore case if search string is all lowercase
     vis:command('set ignorecase on')
@@ -78,18 +74,6 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     -- vis:command('set show-newlines')
     vis:command('set show-tabs')
     vis:command('set show-eof')
-									-- tabs example
-                                    -- spaces example
---- lots of newlines
-
-
-
-
-
-
-
---- lots of newlines
-
     -- Python formatting settings
     vis:command('set colorcolumn 79')
     vis:command('set tabwidth 4')
